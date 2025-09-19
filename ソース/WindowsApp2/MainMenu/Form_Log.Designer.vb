@@ -23,7 +23,6 @@ Partial Class Form_Log
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.RealtimeConfirmation_Button = New System.Windows.Forms.Button()
-        Me.LogDisplayButton = New System.Windows.Forms.Button()
         Me.TitleLabel = New System.Windows.Forms.Label()
         Me.CloseButton = New System.Windows.Forms.Button()
         Me.SuspendLayout()
@@ -37,16 +36,6 @@ Partial Class Form_Log
         Me.RealtimeConfirmation_Button.TabIndex = 6
         Me.RealtimeConfirmation_Button.Text = "F1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "計量器通信"
         Me.RealtimeConfirmation_Button.UseVisualStyleBackColor = True
-        '
-        'LogDisplayButton
-        '
-        Me.LogDisplayButton.Font = New System.Drawing.Font("Segoe UI", 18.0!)
-        Me.LogDisplayButton.Location = New System.Drawing.Point(426, 72)
-        Me.LogDisplayButton.Name = "LogDisplayButton"
-        Me.LogDisplayButton.Size = New System.Drawing.Size(407, 79)
-        Me.LogDisplayButton.TabIndex = 7
-        Me.LogDisplayButton.Text = "F2" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "ログ一覧"
-        Me.LogDisplayButton.UseVisualStyleBackColor = True
         '
         'TitleLabel
         '
@@ -77,7 +66,6 @@ Partial Class Form_Log
         Me.Controls.Add(Me.CloseButton)
         Me.Controls.Add(Me.TitleLabel)
         Me.Controls.Add(Me.RealtimeConfirmation_Button)
-        Me.Controls.Add(Me.LogDisplayButton)
         Me.Name = "Form_Log"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "計量器管理"
@@ -87,7 +75,6 @@ Partial Class Form_Log
     End Sub
 
     Friend WithEvents RealtimeConfirmation_Button As Button
-    Friend WithEvents LogDisplayButton As Button
     Friend WithEvents TitleLabel As Label
     Friend WithEvents CloseButton As Button
 End Class

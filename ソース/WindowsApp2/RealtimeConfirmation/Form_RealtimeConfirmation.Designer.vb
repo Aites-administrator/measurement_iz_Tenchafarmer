@@ -22,16 +22,13 @@ Partial Class Form_RealtimeConfirmation
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TitleLabel = New System.Windows.Forms.Label()
         Me.ResultDetail = New System.Windows.Forms.DataGridView()
-        Me.SendButton = New System.Windows.Forms.Button()
-        Me.ReceiveButton = New System.Windows.Forms.Button()
         Me.CloseButton = New System.Windows.Forms.Button()
         Me.USB_ReceiveButton = New System.Windows.Forms.Button()
         Me.USB_SendButton = New System.Windows.Forms.Button()
-        Me.chkSendFreeMaster = New System.Windows.Forms.CheckBox()
         CType(Me.ResultDetail, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -47,55 +44,35 @@ Partial Class Form_RealtimeConfirmation
         '
         'ResultDetail
         '
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.ResultDetail.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.ResultDetail.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.ResultDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.ResultDetail.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.ResultDetail.DefaultCellStyle = DataGridViewCellStyle2
         Me.ResultDetail.Location = New System.Drawing.Point(18, 51)
         Me.ResultDetail.Name = "ResultDetail"
         Me.ResultDetail.ReadOnly = True
         Me.ResultDetail.RowTemplate.Height = 30
-        Me.ResultDetail.Size = New System.Drawing.Size(668, 368)
+        Me.ResultDetail.Size = New System.Drawing.Size(381, 230)
         Me.ResultDetail.TabIndex = 1
         Me.ResultDetail.TabStop = False
-        '
-        'SendButton
-        '
-        Me.SendButton.Font = New System.Drawing.Font("Segoe UI", 9.75!)
-        Me.SendButton.Location = New System.Drawing.Point(695, 107)
-        Me.SendButton.Name = "SendButton"
-        Me.SendButton.Size = New System.Drawing.Size(123, 50)
-        Me.SendButton.TabIndex = 3
-        Me.SendButton.Text = "F2" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "マスタ送信"
-        Me.SendButton.UseVisualStyleBackColor = True
-        '
-        'ReceiveButton
-        '
-        Me.ReceiveButton.Font = New System.Drawing.Font("Segoe UI", 9.75!)
-        Me.ReceiveButton.Location = New System.Drawing.Point(695, 51)
-        Me.ReceiveButton.Name = "ReceiveButton"
-        Me.ReceiveButton.Size = New System.Drawing.Size(123, 50)
-        Me.ReceiveButton.TabIndex = 2
-        Me.ReceiveButton.Text = "F1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "実績受信"
-        Me.ReceiveButton.UseVisualStyleBackColor = True
         '
         'CloseButton
         '
         Me.CloseButton.Font = New System.Drawing.Font("Segoe UI", 9.75!)
-        Me.CloseButton.Location = New System.Drawing.Point(695, 369)
+        Me.CloseButton.Location = New System.Drawing.Point(407, 231)
         Me.CloseButton.Name = "CloseButton"
         Me.CloseButton.Size = New System.Drawing.Size(123, 50)
         Me.CloseButton.TabIndex = 7
@@ -105,46 +82,32 @@ Partial Class Form_RealtimeConfirmation
         'USB_ReceiveButton
         '
         Me.USB_ReceiveButton.Font = New System.Drawing.Font("Segoe UI", 9.75!)
-        Me.USB_ReceiveButton.Location = New System.Drawing.Point(697, 213)
+        Me.USB_ReceiveButton.Location = New System.Drawing.Point(405, 51)
         Me.USB_ReceiveButton.Name = "USB_ReceiveButton"
         Me.USB_ReceiveButton.Size = New System.Drawing.Size(123, 50)
         Me.USB_ReceiveButton.TabIndex = 5
-        Me.USB_ReceiveButton.Text = "F3" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "実績受信(USB)"
+        Me.USB_ReceiveButton.Text = "F1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "実績受信"
         Me.USB_ReceiveButton.UseVisualStyleBackColor = True
         '
         'USB_SendButton
         '
         Me.USB_SendButton.Font = New System.Drawing.Font("Segoe UI", 9.75!)
-        Me.USB_SendButton.Location = New System.Drawing.Point(697, 269)
+        Me.USB_SendButton.Location = New System.Drawing.Point(405, 107)
         Me.USB_SendButton.Name = "USB_SendButton"
         Me.USB_SendButton.Size = New System.Drawing.Size(123, 50)
         Me.USB_SendButton.TabIndex = 6
-        Me.USB_SendButton.Text = "F4" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "マスタ送信(USB)"
+        Me.USB_SendButton.Text = "F2" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "マスタ送信"
         Me.USB_SendButton.UseVisualStyleBackColor = True
-        '
-        'chkSendFreeMaster
-        '
-        Me.chkSendFreeMaster.AutoSize = True
-        Me.chkSendFreeMaster.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkSendFreeMaster.Location = New System.Drawing.Point(697, 161)
-        Me.chkSendFreeMaster.Name = "chkSendFreeMaster"
-        Me.chkSendFreeMaster.Size = New System.Drawing.Size(95, 25)
-        Me.chkSendFreeMaster.TabIndex = 4
-        Me.chkSendFreeMaster.Text = "フリー含む"
-        Me.chkSendFreeMaster.UseVisualStyleBackColor = True
         '
         'Form_RealtimeConfirmation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(832, 431)
-        Me.Controls.Add(Me.chkSendFreeMaster)
+        Me.ClientSize = New System.Drawing.Size(540, 295)
         Me.Controls.Add(Me.USB_SendButton)
         Me.Controls.Add(Me.USB_ReceiveButton)
         Me.Controls.Add(Me.CloseButton)
-        Me.Controls.Add(Me.ReceiveButton)
         Me.Controls.Add(Me.ResultDetail)
-        Me.Controls.Add(Me.SendButton)
         Me.Controls.Add(Me.TitleLabel)
         Me.Name = "Form_RealtimeConfirmation"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -157,10 +120,7 @@ Partial Class Form_RealtimeConfirmation
 
     Friend WithEvents TitleLabel As Label
     Friend WithEvents ResultDetail As DataGridView
-    Friend WithEvents SendButton As Button
-    Friend WithEvents ReceiveButton As Button
     Friend WithEvents CloseButton As Button
     Friend WithEvents USB_ReceiveButton As Button
     Friend WithEvents USB_SendButton As Button
-    Friend WithEvents chkSendFreeMaster As CheckBox
 End Class

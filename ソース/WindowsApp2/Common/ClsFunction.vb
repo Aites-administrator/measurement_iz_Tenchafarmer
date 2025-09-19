@@ -224,19 +224,19 @@ Public Class ClsFunction
     System.Diagnostics.Process.Start(psi)
   End Sub
   Public Shared Function ReadMenuIniFile(strKey As String)
-    Dim strPath As String = "C:\KEIRYO_DX\INI\menu.ini"
+    Dim strPath As String = "C:\IZDigiDX_W\INI\menu.ini"
     Dim exeName As String = GetIniString(strKey, "EXE", strPath)
     Return exeName
   End Function
 
   Public Shared Function ReadSettingIniFile(strKey As String, keyName As String)
-    Dim strPath As String = "C:\KEIRYO_DX\INI\setting.ini"
+    Dim strPath As String = "C:\IZDigiDX_W\INI\setting.ini"
     Dim stringValue As String = GetIniString(strKey, keyName, strPath)
     Return stringValue
   End Function
 
   Public Shared Function ReadConnectIniFile(strKey As String, keyName As String)
-    Dim strPath As String = "C:\KEIRYO_DX\INI\connect.ini"
+    Dim strPath As String = "C:\IZDigiDX_W\INI\connect.ini"
     Dim stringValue As String = GetIniString(strKey, keyName, strPath)
     Return stringValue
   End Function

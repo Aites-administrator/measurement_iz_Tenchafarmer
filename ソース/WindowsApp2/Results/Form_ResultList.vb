@@ -5,12 +5,8 @@ Imports Microsoft.Office.Interop
 Imports System.Runtime.InteropServices
 Public Class Form_ResultList
   Private ReadOnly ItemDigits As Integer = ReadSettingIniFile("ITEM_DIGITS", "VALUE")
-  'Private ReadOnly ManufacturerDigits As Integer = ReadSettingIniFile("MANUFACTURER_DIGITS", "VALUE")
   Private ReadOnly StaffDigits As Integer = ReadSettingIniFile("STAFF_DIGITS", "VALUE")
   Private ReadOnly ResultCsvPath As String = ReadSettingIniFile("RESULT_CSV_PATH", "VALUE")
-
-  Private ReadOnly ReportMacro As String = ReadSettingIniFile("REPORTMACRO", "VALUE")
-
   Private ReadOnly tmpDb As New ClsSqlServer
 
   Dim tmpDt As New DataTable
@@ -50,9 +46,8 @@ Public Class Form_ResultList
     DateTimeTo.Text = New Date(dtNow.Year, dtNow.Month, 1).AddMonths(1).AddDays(-1)
 
     ' コンボボックスの選択肢を設定する関数を呼び出し
-    SetScaleNumberComboBox()
+
     SetItemCodeComboBox()
-    'SetManufacturerCodeComboBox()
     SetStaffNumberComboBox()
 
     ' ユーザーからのデータ追加を許可しない
@@ -199,33 +194,6 @@ Public Class Form_ResultList
     Form_ResultDetail.ShowDialog()
   End Sub
 
-  Private Sub SetScaleNumberComboBox()
-    Try
-      ' 計量マスタからデータを取得
-      Dim scaleData As DataTable = GetDataFromScaleNumber()
-
-      ' 計量マスタからデータが取得できなかった場合
-      If scaleData.Rows.Count = 0 Then
-        ' エラーメッセージを表示して終了
-        MessageBox.Show("計量マスタにデータが登録されていません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
-      Else
-        ' ComboBoxのアイテムをクリア
-        Scale_ComboBox.Items.Clear()
-
-        ' 空の項目をComboBoxに追加
-        Scale_ComboBox.Items.Add("")
-
-        ' 計量マスタから取得したデータをComboBoxに追加
-        For Each row As DataRow In scaleData.Rows
-          Scale_ComboBox.Items.Add(row(0).ToString())
-        Next
-      End If
-    Catch ex As Exception
-      ' エラーログを書き込んで例外をスロー
-      ComWriteErrLog(Me.GetType().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, ex.Message)
-      Throw New Exception(ex.Message)
-    End Try
-  End Sub
   Private Sub SetItemCodeComboBox()
     Try
       ' 計量マスタからデータを取得
@@ -326,29 +294,6 @@ Public Class Form_ResultList
     End Try
   End Sub
 
-  Private Function GetDataFromScaleNumber() As DataTable
-    ' データベース接続用の一時的なオブジェクトを作成
-    Dim tmpDb As New ClsSqlServer
-
-    ' データを格納するための一時的なデータテーブルを作成
-    Dim tmpDt As New DataTable
-
-    Try
-      ' SQLクエリを実行して、計量マスタからデータをデータテーブルに取得
-      SqlServer.GetResult(tmpDt, GetSelectScaleMaster)
-
-      ' 取得したデータテーブルを返す
-      Return tmpDt
-    Catch ex As Exception
-      ' エラーログを書き込んで例外をスロー
-      ComWriteErrLog(Me.GetType().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, ex.Message)
-      Throw New Exception(ex.Message)
-    Finally
-      ' 一時的なデータテーブルを解放
-      tmpDt.Dispose()
-    End Try
-  End Function
-
   Private Function GetDataItemCode() As DataTable
     ' データベース接続用の一時的なオブジェクトを作成
     Dim tmpDb As New ClsSqlServer
@@ -416,18 +361,6 @@ Public Class Form_ResultList
       ' 一時的なデータテーブルを解放
       tmpDt.Dispose()
     End Try
-  End Function
-
-
-  Private Function GetSelectScaleMaster() As String
-    Dim sql As String = String.Empty
-
-    sql &= " SELECT unit_number "
-    sql &= " FROM MST_SCALE "
-    sql &= " ORDER BY unit_number "
-
-    Call WriteExecuteLog(Me.GetType().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, sql)
-    Return sql
   End Function
 
   Private Function GetSelectItemMaster() As String
@@ -649,18 +582,8 @@ Public Class Form_ResultList
     sql &= "     TRN_Results "
     sql &= " WHERE "
     sql &= "    addition_date BETWEEN '" & wkFromDate & "' AND '" & wkToDate & "' "
-    If Scale_ComboBox.Text <> "" Then
-      sql &= "    AND terminal_number = " & Scale_ComboBox.Text
-    End If
     sql &= "    AND CAST(call_code AS INT)   BETWEEN  '" & wkFromItemCode & "' AND '" & wkToItemCode & "'"
     sql &= "    AND CAST(staff_number AS INT) BETWEEN '" & wkFromStaffCode & "' AND '" & wkToStaffCode & "'"
-    'sql &= "    AND manufacturer_code BETWEEN '" & wkFromManufacturerCode & "' AND '" & wkToManufacturerCode & "'"
-    If lot1TextBox.Text <> "" Then
-      sql &= " AND lot1 LIKE '%" & lot1TextBox.Text & "%'"
-    End If
-    If lot2TextBox.Text <> "" Then
-      sql &= " AND lot2 LIKE '%" & lot2TextBox.Text & "%'"
-    End If
     sql &= " ORDER BY "
     sql &= "     CAST(addition_date AS DATETIME) DESC, "
     sql &= "     CAST(addition_time AS DATETIME) DESC, "

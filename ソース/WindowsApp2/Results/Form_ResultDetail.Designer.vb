@@ -25,108 +25,72 @@ Partial Class Form_ResultDetail
     Me.TitleLabel = New System.Windows.Forms.Label()
     Me.GroupBox1 = New System.Windows.Forms.GroupBox()
     Me.callCodeComboBox = New System.Windows.Forms.ComboBox()
-    Me.terminalComboBox = New System.Windows.Forms.ComboBox()
-    Me.itemNameText = New System.Windows.Forms.TextBox()
-    Me.Label18 = New System.Windows.Forms.Label()
-    Me.Label19 = New System.Windows.Forms.Label()
-    Me.Label38 = New System.Windows.Forms.Label()
-    Me.itemNoText = New System.Windows.Forms.TextBox()
-    Me.weightText = New System.Windows.Forms.TextBox()
-    Me.Label20 = New System.Windows.Forms.Label()
-    Me.additionTimeText = New System.Windows.Forms.TextBox()
-    Me.Label37 = New System.Windows.Forms.Label()
-    Me.Label21 = New System.Windows.Forms.Label()
-    Me.Label22 = New System.Windows.Forms.Label()
-    Me.weightComboBox = New System.Windows.Forms.ComboBox()
-    Me.additionDateText = New System.Windows.Forms.TextBox()
-    Me.Label23 = New System.Windows.Forms.Label()
-    Me.staffNumberComboBox = New System.Windows.Forms.ComboBox()
-    Me.staffNameText = New System.Windows.Forms.TextBox()
-    Me.Label41 = New System.Windows.Forms.Label()
-    Me.Label40 = New System.Windows.Forms.Label()
-    Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-    Me.lot2TextValue = New System.Windows.Forms.TextBox()
-    Me.manufacturerNameTextValue = New System.Windows.Forms.TextBox()
-    Me.classificationTextValue = New System.Windows.Forms.TextBox()
-    Me.Label7 = New System.Windows.Forms.Label()
-    Me.lot1TextValue = New System.Windows.Forms.TextBox()
-    Me.Label9 = New System.Windows.Forms.Label()
-    Me.Label11 = New System.Windows.Forms.Label()
-    Me.Label15 = New System.Windows.Forms.Label()
-    Me.manufacturerCodeComboBox = New System.Windows.Forms.ComboBox()
-    Me.Label24 = New System.Windows.Forms.Label()
-    Me.GroupBox4 = New System.Windows.Forms.GroupBox()
-    Me.grossWeightUnitComboBox = New System.Windows.Forms.ComboBox()
-    Me.temperatureUnitComboBox = New System.Windows.Forms.ComboBox()
-    Me.detailNumberTextValue = New System.Windows.Forms.TextBox()
-    Me.temperatureText = New System.Windows.Forms.TextBox()
-    Me.effectiveTimeTextValue = New System.Windows.Forms.TextBox()
-    Me.processingTimeTextValue = New System.Windows.Forms.TextBox()
-    Me.workOrderNameTextValue = New System.Windows.Forms.TextBox()
-    Me.Label48 = New System.Windows.Forms.Label()
-    Me.actualQtyTextValue = New System.Windows.Forms.TextBox()
-    Me.Label47 = New System.Windows.Forms.Label()
-    Me.instructionQtyTextValue = New System.Windows.Forms.TextBox()
-    Me.Label8 = New System.Windows.Forms.Label()
-    Me.workOrderNumberTextValue = New System.Windows.Forms.TextBox()
-    Me.Label10 = New System.Windows.Forms.Label()
-    Me.Label12 = New System.Windows.Forms.Label()
-    Me.effectiveDateTextValue = New System.Windows.Forms.TextBox()
-    Me.Label13 = New System.Windows.Forms.Label()
-    Me.Label14 = New System.Windows.Forms.Label()
-    Me.processingDateTextValue = New System.Windows.Forms.TextBox()
-    Me.Label16 = New System.Windows.Forms.Label()
-    Me.Label17 = New System.Windows.Forms.Label()
-    Me.GroupBox6 = New System.Windows.Forms.GroupBox()
-    Me.free5NumberComboBox = New System.Windows.Forms.ComboBox()
-    Me.free4NumberComboBox = New System.Windows.Forms.ComboBox()
-    Me.free3NumberComboBox = New System.Windows.Forms.ComboBox()
-    Me.free2NumberComboBox = New System.Windows.Forms.ComboBox()
-    Me.free1NumberComboBox = New System.Windows.Forms.ComboBox()
-    Me.free3NameTextValue = New System.Windows.Forms.TextBox()
-    Me.free2NameTextValue = New System.Windows.Forms.TextBox()
-    Me.free1NameTextValue = New System.Windows.Forms.TextBox()
-    Me.free5NameTextValue = New System.Windows.Forms.TextBox()
-    Me.Label52 = New System.Windows.Forms.Label()
-    Me.Label51 = New System.Windows.Forms.Label()
-    Me.free4NameTextValue = New System.Windows.Forms.TextBox()
-    Me.Label50 = New System.Windows.Forms.Label()
-    Me.Label49 = New System.Windows.Forms.Label()
-    Me.Label31 = New System.Windows.Forms.Label()
-    Me.Label32 = New System.Windows.Forms.Label()
-    Me.Label33 = New System.Windows.Forms.Label()
-    Me.Label34 = New System.Windows.Forms.Label()
-    Me.Label35 = New System.Windows.Forms.Label()
-    Me.Label36 = New System.Windows.Forms.Label()
-    Me.CloseButton = New System.Windows.Forms.Button()
-    Me.OkButton = New System.Windows.Forms.Button()
-    Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-    Me.packingUnitText = New System.Windows.Forms.TextBox()
-    Me.packing2NumberComboBox = New System.Windows.Forms.ComboBox()
-    Me.packing1NumberComboBox = New System.Windows.Forms.ComboBox()
-    Me.packing2WeightUnitComboBox = New System.Windows.Forms.ComboBox()
-    Me.packing1WeightUnitComboBox = New System.Windows.Forms.ComboBox()
-    Me.packing1WeightText = New System.Windows.Forms.TextBox()
-    Me.packingComboBox = New System.Windows.Forms.ComboBox()
-    Me.packing2NameText = New System.Windows.Forms.TextBox()
-    Me.Label1 = New System.Windows.Forms.Label()
-    Me.Label2 = New System.Windows.Forms.Label()
-    Me.packing1NameText = New System.Windows.Forms.TextBox()
-    Me.Label3 = New System.Windows.Forms.Label()
-    Me.Label4 = New System.Windows.Forms.Label()
-    Me.packing2MultiplicationText = New System.Windows.Forms.TextBox()
-    Me.Label5 = New System.Windows.Forms.Label()
-    Me.Label6 = New System.Windows.Forms.Label()
-    Me.Label42 = New System.Windows.Forms.Label()
-    Me.packing2WeightText = New System.Windows.Forms.TextBox()
-    Me.Label43 = New System.Windows.Forms.Label()
-    Me.Label44 = New System.Windows.Forms.Label()
-    Me.Label45 = New System.Windows.Forms.Label()
-    Me.Label46 = New System.Windows.Forms.Label()
+        Me.itemNameText = New System.Windows.Forms.TextBox()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.Label38 = New System.Windows.Forms.Label()
+        Me.itemNoText = New System.Windows.Forms.TextBox()
+        Me.weightText = New System.Windows.Forms.TextBox()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.additionTimeText = New System.Windows.Forms.TextBox()
+        Me.Label37 = New System.Windows.Forms.Label()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.weightComboBox = New System.Windows.Forms.ComboBox()
+        Me.additionDateText = New System.Windows.Forms.TextBox()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.staffNumberComboBox = New System.Windows.Forms.ComboBox()
+        Me.staffNameText = New System.Windows.Forms.TextBox()
+        Me.Label41 = New System.Windows.Forms.Label()
+        Me.Label40 = New System.Windows.Forms.Label()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.grossWeightUnitComboBox = New System.Windows.Forms.ComboBox()
+        Me.temperatureUnitComboBox = New System.Windows.Forms.ComboBox()
+        Me.detailNumberTextValue = New System.Windows.Forms.TextBox()
+        Me.temperatureText = New System.Windows.Forms.TextBox()
+        Me.effectiveTimeTextValue = New System.Windows.Forms.TextBox()
+        Me.processingTimeTextValue = New System.Windows.Forms.TextBox()
+        Me.workOrderNameTextValue = New System.Windows.Forms.TextBox()
+        Me.Label48 = New System.Windows.Forms.Label()
+        Me.actualQtyTextValue = New System.Windows.Forms.TextBox()
+        Me.Label47 = New System.Windows.Forms.Label()
+        Me.instructionQtyTextValue = New System.Windows.Forms.TextBox()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.workOrderNumberTextValue = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.effectiveDateTextValue = New System.Windows.Forms.TextBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.processingDateTextValue = New System.Windows.Forms.TextBox()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.CloseButton = New System.Windows.Forms.Button()
+        Me.OkButton = New System.Windows.Forms.Button()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.packingUnitText = New System.Windows.Forms.TextBox()
+        Me.packing2NumberComboBox = New System.Windows.Forms.ComboBox()
+        Me.packing1NumberComboBox = New System.Windows.Forms.ComboBox()
+        Me.packing2WeightUnitComboBox = New System.Windows.Forms.ComboBox()
+        Me.packing1WeightUnitComboBox = New System.Windows.Forms.ComboBox()
+        Me.packing1WeightText = New System.Windows.Forms.TextBox()
+        Me.packingComboBox = New System.Windows.Forms.ComboBox()
+        Me.packing2NameText = New System.Windows.Forms.TextBox()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.packing1NameText = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.packing2MultiplicationText = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label42 = New System.Windows.Forms.Label()
+        Me.packing2WeightText = New System.Windows.Forms.TextBox()
+        Me.Label43 = New System.Windows.Forms.Label()
+        Me.Label44 = New System.Windows.Forms.Label()
+        Me.Label45 = New System.Windows.Forms.Label()
+        Me.Label46 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
-        Me.GroupBox6.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -142,10 +106,13 @@ Partial Class Form_ResultDetail
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.staffNumberComboBox)
         Me.GroupBox1.Controls.Add(Me.callCodeComboBox)
-        Me.GroupBox1.Controls.Add(Me.terminalComboBox)
+        Me.GroupBox1.Controls.Add(Me.staffNameText)
         Me.GroupBox1.Controls.Add(Me.itemNameText)
+        Me.GroupBox1.Controls.Add(Me.Label41)
         Me.GroupBox1.Controls.Add(Me.Label18)
+        Me.GroupBox1.Controls.Add(Me.Label40)
         Me.GroupBox1.Controls.Add(Me.Label19)
         Me.GroupBox1.Controls.Add(Me.Label38)
         Me.GroupBox1.Controls.Add(Me.itemNoText)
@@ -154,7 +121,6 @@ Partial Class Form_ResultDetail
         Me.GroupBox1.Controls.Add(Me.additionTimeText)
         Me.GroupBox1.Controls.Add(Me.Label37)
         Me.GroupBox1.Controls.Add(Me.Label21)
-        Me.GroupBox1.Controls.Add(Me.Label22)
         Me.GroupBox1.Controls.Add(Me.weightComboBox)
         Me.GroupBox1.Controls.Add(Me.additionDateText)
         Me.GroupBox1.Controls.Add(Me.Label23)
@@ -162,7 +128,7 @@ Partial Class Form_ResultDetail
         Me.GroupBox1.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Padding = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.GroupBox1.Size = New System.Drawing.Size(350, 500)
+        Me.GroupBox1.Size = New System.Drawing.Size(350, 395)
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
         '
@@ -171,27 +137,16 @@ Partial Class Form_ResultDetail
         Me.callCodeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.callCodeComboBox.Font = New System.Drawing.Font("Segoe UI", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.callCodeComboBox.FormattingEnabled = True
-        Me.callCodeComboBox.Location = New System.Drawing.Point(173, 144)
+        Me.callCodeComboBox.Location = New System.Drawing.Point(173, 103)
         Me.callCodeComboBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.callCodeComboBox.Name = "callCodeComboBox"
         Me.callCodeComboBox.Size = New System.Drawing.Size(171, 33)
         Me.callCodeComboBox.TabIndex = 7
         '
-        'terminalComboBox
-        '
-        Me.terminalComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.terminalComboBox.Font = New System.Drawing.Font("Segoe UI", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.terminalComboBox.FormattingEnabled = True
-        Me.terminalComboBox.Location = New System.Drawing.Point(173, 104)
-        Me.terminalComboBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.terminalComboBox.Name = "terminalComboBox"
-        Me.terminalComboBox.Size = New System.Drawing.Size(171, 33)
-        Me.terminalComboBox.TabIndex = 5
-        '
         'itemNameText
         '
         Me.itemNameText.Font = New System.Drawing.Font("Segoe UI", 14.25!)
-        Me.itemNameText.Location = New System.Drawing.Point(173, 224)
+        Me.itemNameText.Location = New System.Drawing.Point(173, 183)
         Me.itemNameText.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.itemNameText.MaxLength = 6
         Me.itemNameText.Name = "itemNameText"
@@ -202,7 +157,7 @@ Partial Class Form_ResultDetail
         '
         Me.Label18.AutoSize = True
         Me.Label18.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label18.Location = New System.Drawing.Point(6, 223)
+        Me.Label18.Location = New System.Drawing.Point(6, 182)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(57, 30)
         Me.Label18.TabIndex = 10
@@ -212,7 +167,7 @@ Partial Class Form_ResultDetail
         '
         Me.Label19.AutoSize = True
         Me.Label19.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label19.Location = New System.Drawing.Point(6, 147)
+        Me.Label19.Location = New System.Drawing.Point(6, 106)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(106, 30)
         Me.Label19.TabIndex = 6
@@ -222,7 +177,7 @@ Partial Class Form_ResultDetail
         '
         Me.Label38.AutoSize = True
         Me.Label38.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label38.Location = New System.Drawing.Point(6, 265)
+        Me.Label38.Location = New System.Drawing.Point(6, 224)
         Me.Label38.Name = "Label38"
         Me.Label38.Size = New System.Drawing.Size(57, 30)
         Me.Label38.TabIndex = 12
@@ -231,7 +186,7 @@ Partial Class Form_ResultDetail
         'itemNoText
         '
         Me.itemNoText.Font = New System.Drawing.Font("Segoe UI", 14.25!)
-        Me.itemNoText.Location = New System.Drawing.Point(173, 184)
+        Me.itemNoText.Location = New System.Drawing.Point(173, 143)
         Me.itemNoText.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.itemNoText.MaxLength = 6
         Me.itemNoText.Name = "itemNoText"
@@ -241,7 +196,7 @@ Partial Class Form_ResultDetail
         'weightText
         '
         Me.weightText.Font = New System.Drawing.Font("Segoe UI", 14.25!)
-        Me.weightText.Location = New System.Drawing.Point(173, 264)
+        Me.weightText.Location = New System.Drawing.Point(173, 223)
         Me.weightText.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.weightText.MaxLength = 6
         Me.weightText.Name = "weightText"
@@ -252,7 +207,7 @@ Partial Class Form_ResultDetail
         '
         Me.Label20.AutoSize = True
         Me.Label20.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label20.Location = New System.Drawing.Point(6, 187)
+        Me.Label20.Location = New System.Drawing.Point(6, 146)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(57, 30)
         Me.Label20.TabIndex = 8
@@ -272,7 +227,7 @@ Partial Class Form_ResultDetail
         '
         Me.Label37.AutoSize = True
         Me.Label37.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label37.Location = New System.Drawing.Point(6, 307)
+        Me.Label37.Location = New System.Drawing.Point(6, 266)
         Me.Label37.Name = "Label37"
         Me.Label37.Size = New System.Drawing.Size(101, 30)
         Me.Label37.TabIndex = 14
@@ -288,22 +243,12 @@ Partial Class Form_ResultDetail
         Me.Label21.TabIndex = 2
         Me.Label21.Text = "時刻"
         '
-        'Label22
-        '
-        Me.Label22.AutoSize = True
-        Me.Label22.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label22.Location = New System.Drawing.Point(6, 109)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(57, 30)
-        Me.Label22.TabIndex = 4
-        Me.Label22.Text = "号機"
-        '
         'weightComboBox
         '
         Me.weightComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.weightComboBox.Font = New System.Drawing.Font("Segoe UI", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.weightComboBox.FormattingEnabled = True
-        Me.weightComboBox.Location = New System.Drawing.Point(173, 304)
+        Me.weightComboBox.Location = New System.Drawing.Point(173, 263)
         Me.weightComboBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.weightComboBox.Name = "weightComboBox"
         Me.weightComboBox.Size = New System.Drawing.Size(171, 33)
@@ -334,7 +279,7 @@ Partial Class Form_ResultDetail
         Me.staffNumberComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.staffNumberComboBox.Font = New System.Drawing.Font("Segoe UI", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
         Me.staffNumberComboBox.FormattingEnabled = True
-        Me.staffNumberComboBox.Location = New System.Drawing.Point(173, 24)
+        Me.staffNumberComboBox.Location = New System.Drawing.Point(173, 302)
         Me.staffNumberComboBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.staffNumberComboBox.Name = "staffNumberComboBox"
         Me.staffNumberComboBox.Size = New System.Drawing.Size(171, 33)
@@ -343,7 +288,7 @@ Partial Class Form_ResultDetail
         'staffNameText
         '
         Me.staffNameText.Font = New System.Drawing.Font("Segoe UI", 14.25!)
-        Me.staffNameText.Location = New System.Drawing.Point(173, 66)
+        Me.staffNameText.Location = New System.Drawing.Point(173, 344)
         Me.staffNameText.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
         Me.staffNameText.MaxLength = 6
         Me.staffNameText.Name = "staffNameText"
@@ -354,7 +299,7 @@ Partial Class Form_ResultDetail
         '
         Me.Label41.AutoSize = True
         Me.Label41.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label41.Location = New System.Drawing.Point(6, 65)
+        Me.Label41.Location = New System.Drawing.Point(6, 343)
         Me.Label41.Name = "Label41"
         Me.Label41.Size = New System.Drawing.Size(101, 30)
         Me.Label41.TabIndex = 12
@@ -364,143 +309,11 @@ Partial Class Form_ResultDetail
         '
         Me.Label40.AutoSize = True
         Me.Label40.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label40.Location = New System.Drawing.Point(6, 27)
+        Me.Label40.Location = New System.Drawing.Point(6, 305)
         Me.Label40.Name = "Label40"
         Me.Label40.Size = New System.Drawing.Size(128, 30)
         Me.Label40.TabIndex = 10
         Me.Label40.Text = "担当者コード"
-        '
-        'GroupBox3
-        '
-        Me.GroupBox3.Controls.Add(Me.lot2TextValue)
-        Me.GroupBox3.Controls.Add(Me.manufacturerNameTextValue)
-        Me.GroupBox3.Controls.Add(Me.staffNumberComboBox)
-        Me.GroupBox3.Controls.Add(Me.classificationTextValue)
-        Me.GroupBox3.Controls.Add(Me.staffNameText)
-        Me.GroupBox3.Controls.Add(Me.Label7)
-        Me.GroupBox3.Controls.Add(Me.Label41)
-        Me.GroupBox3.Controls.Add(Me.lot1TextValue)
-        Me.GroupBox3.Controls.Add(Me.Label40)
-        Me.GroupBox3.Controls.Add(Me.Label9)
-        Me.GroupBox3.Controls.Add(Me.Label11)
-        Me.GroupBox3.Controls.Add(Me.Label15)
-        Me.GroupBox3.Controls.Add(Me.manufacturerCodeComboBox)
-        Me.GroupBox3.Controls.Add(Me.Label24)
-        Me.GroupBox3.Location = New System.Drawing.Point(397, 59)
-        Me.GroupBox3.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Padding = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.GroupBox3.Size = New System.Drawing.Size(350, 500)
-        Me.GroupBox3.TabIndex = 3
-        Me.GroupBox3.TabStop = False
-        '
-        'lot2TextValue
-        '
-        Me.lot2TextValue.Font = New System.Drawing.Font("Segoe UI", 14.25!)
-        Me.lot2TextValue.Location = New System.Drawing.Point(173, 146)
-        Me.lot2TextValue.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.lot2TextValue.MaxLength = 10
-        Me.lot2TextValue.Name = "lot2TextValue"
-        Me.lot2TextValue.Size = New System.Drawing.Size(171, 33)
-        Me.lot2TextValue.TabIndex = 7
-        '
-        'manufacturerNameTextValue
-        '
-        Me.manufacturerNameTextValue.Enabled = False
-        Me.manufacturerNameTextValue.Font = New System.Drawing.Font("Segoe UI", 14.25!)
-        Me.manufacturerNameTextValue.Location = New System.Drawing.Point(173, 266)
-        Me.manufacturerNameTextValue.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.manufacturerNameTextValue.MaxLength = 10
-        Me.manufacturerNameTextValue.Name = "manufacturerNameTextValue"
-        Me.manufacturerNameTextValue.Size = New System.Drawing.Size(171, 33)
-        Me.manufacturerNameTextValue.TabIndex = 3
-        Me.manufacturerNameTextValue.Visible = False
-        '
-        'classificationTextValue
-        '
-        Me.classificationTextValue.Font = New System.Drawing.Font("Segoe UI", 14.25!)
-        Me.classificationTextValue.Location = New System.Drawing.Point(173, 186)
-        Me.classificationTextValue.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.classificationTextValue.MaxLength = 10
-        Me.classificationTextValue.Name = "classificationTextValue"
-        Me.classificationTextValue.Size = New System.Drawing.Size(171, 33)
-        Me.classificationTextValue.TabIndex = 9
-        Me.classificationTextValue.Visible = False
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(6, 187)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(57, 30)
-        Me.Label7.TabIndex = 8
-        Me.Label7.Text = "区分"
-        Me.Label7.Visible = False
-        '
-        'lot1TextValue
-        '
-        Me.lot1TextValue.Font = New System.Drawing.Font("Segoe UI", 14.25!)
-        Me.lot1TextValue.Location = New System.Drawing.Point(173, 106)
-        Me.lot1TextValue.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.lot1TextValue.MaxLength = 10
-        Me.lot1TextValue.Name = "lot1TextValue"
-        Me.lot1TextValue.Size = New System.Drawing.Size(171, 33)
-        Me.lot1TextValue.TabIndex = 5
-        '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(6, 105)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(69, 30)
-        Me.Label9.TabIndex = 4
-        Me.Label9.Text = "ロット1"
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(6, 145)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(69, 30)
-        Me.Label11.TabIndex = 6
-        Me.Label11.Text = "ロット2"
-        '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label15.Location = New System.Drawing.Point(6, 229)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(128, 30)
-        Me.Label15.TabIndex = 0
-        Me.Label15.Text = "製造者コード"
-        Me.Label15.Visible = False
-        '
-        'manufacturerCodeComboBox
-        '
-        Me.manufacturerCodeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.manufacturerCodeComboBox.Font = New System.Drawing.Font("Segoe UI", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.manufacturerCodeComboBox.FormattingEnabled = True
-        Me.manufacturerCodeComboBox.Location = New System.Drawing.Point(173, 226)
-        Me.manufacturerCodeComboBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.manufacturerCodeComboBox.Name = "manufacturerCodeComboBox"
-        Me.manufacturerCodeComboBox.Size = New System.Drawing.Size(171, 33)
-        Me.manufacturerCodeComboBox.TabIndex = 1
-        Me.manufacturerCodeComboBox.Visible = False
-        '
-        'Label24
-        '
-        Me.Label24.AutoSize = True
-        Me.Label24.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label24.Location = New System.Drawing.Point(6, 265)
-        Me.Label24.Name = "Label24"
-        Me.Label24.Size = New System.Drawing.Size(101, 30)
-        Me.Label24.TabIndex = 2
-        Me.Label24.Text = "製造者名"
-        Me.Label24.Visible = False
         '
         'GroupBox4
         '
@@ -742,241 +555,6 @@ Partial Class Form_ResultDetail
         Me.Label17.Size = New System.Drawing.Size(101, 30)
         Me.Label17.TabIndex = 77
         Me.Label17.Text = "加工時刻"
-        '
-        'GroupBox6
-        '
-        Me.GroupBox6.Controls.Add(Me.free5NumberComboBox)
-        Me.GroupBox6.Controls.Add(Me.free4NumberComboBox)
-        Me.GroupBox6.Controls.Add(Me.free3NumberComboBox)
-        Me.GroupBox6.Controls.Add(Me.free2NumberComboBox)
-        Me.GroupBox6.Controls.Add(Me.free1NumberComboBox)
-        Me.GroupBox6.Controls.Add(Me.free3NameTextValue)
-        Me.GroupBox6.Controls.Add(Me.free2NameTextValue)
-        Me.GroupBox6.Controls.Add(Me.free1NameTextValue)
-        Me.GroupBox6.Controls.Add(Me.free5NameTextValue)
-        Me.GroupBox6.Controls.Add(Me.Label52)
-        Me.GroupBox6.Controls.Add(Me.Label51)
-        Me.GroupBox6.Controls.Add(Me.free4NameTextValue)
-        Me.GroupBox6.Controls.Add(Me.Label50)
-        Me.GroupBox6.Controls.Add(Me.Label49)
-        Me.GroupBox6.Controls.Add(Me.Label31)
-        Me.GroupBox6.Controls.Add(Me.Label32)
-        Me.GroupBox6.Controls.Add(Me.Label33)
-        Me.GroupBox6.Controls.Add(Me.Label34)
-        Me.GroupBox6.Controls.Add(Me.Label35)
-        Me.GroupBox6.Controls.Add(Me.Label36)
-        Me.GroupBox6.Location = New System.Drawing.Point(753, 59)
-        Me.GroupBox6.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.Padding = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.GroupBox6.Size = New System.Drawing.Size(350, 500)
-        Me.GroupBox6.TabIndex = 4
-        Me.GroupBox6.TabStop = False
-        '
-        'free5NumberComboBox
-        '
-        Me.free5NumberComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.free5NumberComboBox.Font = New System.Drawing.Font("Segoe UI", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.free5NumberComboBox.FormattingEnabled = True
-        Me.free5NumberComboBox.Location = New System.Drawing.Point(173, 344)
-        Me.free5NumberComboBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.free5NumberComboBox.Name = "free5NumberComboBox"
-        Me.free5NumberComboBox.Size = New System.Drawing.Size(171, 33)
-        Me.free5NumberComboBox.TabIndex = 17
-        '
-        'free4NumberComboBox
-        '
-        Me.free4NumberComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.free4NumberComboBox.Font = New System.Drawing.Font("Segoe UI", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.free4NumberComboBox.FormattingEnabled = True
-        Me.free4NumberComboBox.Location = New System.Drawing.Point(173, 264)
-        Me.free4NumberComboBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.free4NumberComboBox.Name = "free4NumberComboBox"
-        Me.free4NumberComboBox.Size = New System.Drawing.Size(171, 33)
-        Me.free4NumberComboBox.TabIndex = 13
-        '
-        'free3NumberComboBox
-        '
-        Me.free3NumberComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.free3NumberComboBox.Font = New System.Drawing.Font("Segoe UI", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.free3NumberComboBox.FormattingEnabled = True
-        Me.free3NumberComboBox.Location = New System.Drawing.Point(173, 184)
-        Me.free3NumberComboBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.free3NumberComboBox.Name = "free3NumberComboBox"
-        Me.free3NumberComboBox.Size = New System.Drawing.Size(171, 33)
-        Me.free3NumberComboBox.TabIndex = 9
-        '
-        'free2NumberComboBox
-        '
-        Me.free2NumberComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.free2NumberComboBox.Font = New System.Drawing.Font("Segoe UI", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.free2NumberComboBox.FormattingEnabled = True
-        Me.free2NumberComboBox.Location = New System.Drawing.Point(173, 104)
-        Me.free2NumberComboBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.free2NumberComboBox.Name = "free2NumberComboBox"
-        Me.free2NumberComboBox.Size = New System.Drawing.Size(171, 33)
-        Me.free2NumberComboBox.TabIndex = 5
-        '
-        'free1NumberComboBox
-        '
-        Me.free1NumberComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.free1NumberComboBox.Font = New System.Drawing.Font("Segoe UI", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.free1NumberComboBox.FormattingEnabled = True
-        Me.free1NumberComboBox.Location = New System.Drawing.Point(173, 24)
-        Me.free1NumberComboBox.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.free1NumberComboBox.Name = "free1NumberComboBox"
-        Me.free1NumberComboBox.Size = New System.Drawing.Size(171, 33)
-        Me.free1NumberComboBox.TabIndex = 1
-        '
-        'free3NameTextValue
-        '
-        Me.free3NameTextValue.Font = New System.Drawing.Font("Segoe UI", 14.25!)
-        Me.free3NameTextValue.Location = New System.Drawing.Point(173, 224)
-        Me.free3NameTextValue.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.free3NameTextValue.MaxLength = 10
-        Me.free3NameTextValue.Name = "free3NameTextValue"
-        Me.free3NameTextValue.Size = New System.Drawing.Size(171, 33)
-        Me.free3NameTextValue.TabIndex = 11
-        '
-        'free2NameTextValue
-        '
-        Me.free2NameTextValue.Font = New System.Drawing.Font("Segoe UI", 14.25!)
-        Me.free2NameTextValue.Location = New System.Drawing.Point(173, 144)
-        Me.free2NameTextValue.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.free2NameTextValue.MaxLength = 10
-        Me.free2NameTextValue.Name = "free2NameTextValue"
-        Me.free2NameTextValue.Size = New System.Drawing.Size(171, 33)
-        Me.free2NameTextValue.TabIndex = 7
-        '
-        'free1NameTextValue
-        '
-        Me.free1NameTextValue.Font = New System.Drawing.Font("Segoe UI", 14.25!)
-        Me.free1NameTextValue.Location = New System.Drawing.Point(173, 64)
-        Me.free1NameTextValue.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.free1NameTextValue.MaxLength = 10
-        Me.free1NameTextValue.Name = "free1NameTextValue"
-        Me.free1NameTextValue.Size = New System.Drawing.Size(171, 33)
-        Me.free1NameTextValue.TabIndex = 3
-        '
-        'free5NameTextValue
-        '
-        Me.free5NameTextValue.Font = New System.Drawing.Font("Segoe UI", 14.25!)
-        Me.free5NameTextValue.Location = New System.Drawing.Point(173, 384)
-        Me.free5NameTextValue.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.free5NameTextValue.MaxLength = 10
-        Me.free5NameTextValue.Name = "free5NameTextValue"
-        Me.free5NameTextValue.Size = New System.Drawing.Size(171, 33)
-        Me.free5NameTextValue.TabIndex = 19
-        '
-        'Label52
-        '
-        Me.Label52.AutoSize = True
-        Me.Label52.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label52.Location = New System.Drawing.Point(6, 383)
-        Me.Label52.Name = "Label52"
-        Me.Label52.Size = New System.Drawing.Size(125, 30)
-        Me.Label52.TabIndex = 18
-        Me.Label52.Text = "フリー５名称"
-        '
-        'Label51
-        '
-        Me.Label51.AutoSize = True
-        Me.Label51.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label51.Location = New System.Drawing.Point(6, 347)
-        Me.Label51.Name = "Label51"
-        Me.Label51.Size = New System.Drawing.Size(130, 30)
-        Me.Label51.TabIndex = 16
-        Me.Label51.Text = "フリー５コード"
-        '
-        'free4NameTextValue
-        '
-        Me.free4NameTextValue.Font = New System.Drawing.Font("Segoe UI", 14.25!)
-        Me.free4NameTextValue.Location = New System.Drawing.Point(174, 304)
-        Me.free4NameTextValue.Margin = New System.Windows.Forms.Padding(3, 4, 3, 4)
-        Me.free4NameTextValue.MaxLength = 10
-        Me.free4NameTextValue.Name = "free4NameTextValue"
-        Me.free4NameTextValue.Size = New System.Drawing.Size(171, 33)
-        Me.free4NameTextValue.TabIndex = 15
-        '
-        'Label50
-        '
-        Me.Label50.AutoSize = True
-        Me.Label50.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label50.Location = New System.Drawing.Point(6, 303)
-        Me.Label50.Name = "Label50"
-        Me.Label50.Size = New System.Drawing.Size(125, 30)
-        Me.Label50.TabIndex = 14
-        Me.Label50.Text = "フリー４名称"
-        '
-        'Label49
-        '
-        Me.Label49.AutoSize = True
-        Me.Label49.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label49.Location = New System.Drawing.Point(6, 267)
-        Me.Label49.Name = "Label49"
-        Me.Label49.Size = New System.Drawing.Size(130, 30)
-        Me.Label49.TabIndex = 12
-        Me.Label49.Text = "フリー４コード"
-        '
-        'Label31
-        '
-        Me.Label31.AutoSize = True
-        Me.Label31.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label31.Location = New System.Drawing.Point(6, 187)
-        Me.Label31.Name = "Label31"
-        Me.Label31.Size = New System.Drawing.Size(130, 30)
-        Me.Label31.TabIndex = 8
-        Me.Label31.Text = "フリー３コード"
-        '
-        'Label32
-        '
-        Me.Label32.AutoSize = True
-        Me.Label32.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label32.Location = New System.Drawing.Point(6, 226)
-        Me.Label32.Name = "Label32"
-        Me.Label32.Size = New System.Drawing.Size(125, 30)
-        Me.Label32.TabIndex = 10
-        Me.Label32.Text = "フリー３名称"
-        '
-        'Label33
-        '
-        Me.Label33.AutoSize = True
-        Me.Label33.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label33.Location = New System.Drawing.Point(6, 107)
-        Me.Label33.Name = "Label33"
-        Me.Label33.Size = New System.Drawing.Size(130, 30)
-        Me.Label33.TabIndex = 4
-        Me.Label33.Text = "フリー２コード"
-        '
-        'Label34
-        '
-        Me.Label34.AutoSize = True
-        Me.Label34.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label34.Location = New System.Drawing.Point(6, 143)
-        Me.Label34.Name = "Label34"
-        Me.Label34.Size = New System.Drawing.Size(125, 30)
-        Me.Label34.TabIndex = 6
-        Me.Label34.Text = "フリー２名称"
-        '
-        'Label35
-        '
-        Me.Label35.AutoSize = True
-        Me.Label35.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label35.Location = New System.Drawing.Point(6, 27)
-        Me.Label35.Name = "Label35"
-        Me.Label35.Size = New System.Drawing.Size(130, 30)
-        Me.Label35.TabIndex = 0
-        Me.Label35.Text = "フリー１コード"
-        '
-        'Label36
-        '
-        Me.Label36.AutoSize = True
-        Me.Label36.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label36.Location = New System.Drawing.Point(6, 65)
-        Me.Label36.Name = "Label36"
-        Me.Label36.Size = New System.Drawing.Size(125, 30)
-        Me.Label36.TabIndex = 2
-        Me.Label36.Text = "フリー１名称"
         '
         'CloseButton
         '
@@ -1269,8 +847,6 @@ Partial Class Form_ResultDetail
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.CloseButton)
         Me.Controls.Add(Me.OkButton)
-        Me.Controls.Add(Me.GroupBox6)
-        Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.TitleLabel)
         Me.Font = New System.Drawing.Font("Segoe UI", 9.75!)
@@ -1280,12 +856,8 @@ Partial Class Form_ResultDetail
         Me.Text = "Form2"
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
-        Me.GroupBox3.ResumeLayout(False)
-        Me.GroupBox3.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
-        Me.GroupBox6.ResumeLayout(False)
-        Me.GroupBox6.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
@@ -1302,18 +874,8 @@ Partial Class Form_ResultDetail
     Friend WithEvents Label20 As Label
     Friend WithEvents additionTimeText As TextBox
     Friend WithEvents Label21 As Label
-    Friend WithEvents Label22 As Label
     Friend WithEvents additionDateText As TextBox
     Friend WithEvents Label23 As Label
-    Friend WithEvents GroupBox3 As GroupBox
-    Friend WithEvents classificationTextValue As TextBox
-    Friend WithEvents Label7 As Label
-    Friend WithEvents lot1TextValue As TextBox
-    Friend WithEvents Label9 As Label
-    Friend WithEvents Label11 As Label
-    Friend WithEvents Label15 As Label
-    Friend WithEvents manufacturerCodeComboBox As ComboBox
-    Friend WithEvents Label24 As Label
     Friend WithEvents GroupBox4 As GroupBox
     Friend WithEvents workOrderNumberTextValue As TextBox
     Friend WithEvents Label10 As Label
@@ -1324,13 +886,6 @@ Partial Class Form_ResultDetail
     Friend WithEvents processingDateTextValue As TextBox
     Friend WithEvents Label16 As Label
     Friend WithEvents Label17 As Label
-    Friend WithEvents GroupBox6 As GroupBox
-    Friend WithEvents Label31 As Label
-    Friend WithEvents Label32 As Label
-    Friend WithEvents Label33 As Label
-    Friend WithEvents Label34 As Label
-    Friend WithEvents Label35 As Label
-    Friend WithEvents Label36 As Label
     Friend WithEvents CloseButton As Button
     Friend WithEvents OkButton As Button
     Friend WithEvents Label37 As Label
@@ -1341,7 +896,6 @@ Partial Class Form_ResultDetail
     Friend WithEvents Label41 As Label
     Friend WithEvents staffNumberComboBox As ComboBox
     Friend WithEvents weightComboBox As ComboBox
-    Friend WithEvents terminalComboBox As ComboBox
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents packing2NameText As TextBox
     Friend WithEvents Label1 As Label
@@ -1361,8 +915,6 @@ Partial Class Form_ResultDetail
     Friend WithEvents packing1WeightUnitComboBox As ComboBox
     Friend WithEvents packing1WeightText As TextBox
     Friend WithEvents packingComboBox As ComboBox
-    Friend WithEvents manufacturerNameTextValue As TextBox
-    Friend WithEvents lot2TextValue As TextBox
     Friend WithEvents workOrderNameTextValue As TextBox
     Friend WithEvents Label48 As Label
     Friend WithEvents actualQtyTextValue As TextBox
@@ -1372,20 +924,6 @@ Partial Class Form_ResultDetail
     Friend WithEvents detailNumberTextValue As TextBox
     Friend WithEvents effectiveTimeTextValue As TextBox
     Friend WithEvents processingTimeTextValue As TextBox
-    Friend WithEvents Label52 As Label
-    Friend WithEvents Label51 As Label
-    Friend WithEvents free4NameTextValue As TextBox
-    Friend WithEvents Label50 As Label
-    Friend WithEvents Label49 As Label
-    Friend WithEvents free3NameTextValue As TextBox
-    Friend WithEvents free2NameTextValue As TextBox
-    Friend WithEvents free1NameTextValue As TextBox
-    Friend WithEvents free5NameTextValue As TextBox
-    Friend WithEvents free5NumberComboBox As ComboBox
-    Friend WithEvents free4NumberComboBox As ComboBox
-    Friend WithEvents free3NumberComboBox As ComboBox
-    Friend WithEvents free2NumberComboBox As ComboBox
-    Friend WithEvents free1NumberComboBox As ComboBox
     Friend WithEvents packing2NumberComboBox As ComboBox
     Friend WithEvents packing1NumberComboBox As ComboBox
     Friend WithEvents packing1NameText As TextBox

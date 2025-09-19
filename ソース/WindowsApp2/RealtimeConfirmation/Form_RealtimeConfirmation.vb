@@ -7,13 +7,12 @@ Imports Microsoft.VisualBasic.FileIO
 
 Public Class Form_RealtimeConfirmation
   Dim CheckboxExistFlg As New Boolean
-  Dim Concat_ScaleNumber As String = String.Empty
   Dim PathName As String
   Dim TableName As String
   Dim DefText As String
 
   Private ReadOnly FileNameDigits As String = ReadSettingIniFile("FILENAME_DIGITS", "VALUE")
-  Private ReadOnly FtpBackupPath As String = ReadSettingIniFile("FTP_BACKUP_PATH", "VALUE")
+  Private ReadOnly BackupPath As String = ReadSettingIniFile("BACKUP_PATH", "VALUE")
 
   Private ReadOnly tmpDb As New ClsSqlServer
   Dim tmpDt As New DataTable
@@ -32,80 +31,13 @@ Public Class Form_RealtimeConfirmation
     MaximizeBox = False
     CheckboxExistFlg = True
     Dim updateTime As DateTime = System.IO.File.GetLastWriteTime(System.Reflection.Assembly.GetExecutingAssembly().Location)
-    Text = "通信結果" & " ( " & updateTime & " ) "
+    Text = "計量器通信" & " ( " & updateTime & " ) "
     Me.KeyPreview = True
-    ResultDetail.RowHeadersVisible = False
-    ResultDetail.AllowUserToAddRows = False
+
     MaximizeBox = False
     FormBorderStyle = FormBorderStyle.FixedSingle
-    Dim checkBox_Trans As New DataGridViewCheckBoxColumn
-    ResultDetail.Columns.Add(checkBox_Trans)
-    checkBox_Trans.Width = 65
-
-    ResultDetail.ColumnCount = 6
-
-    ResultDetail.Columns(0).HeaderText = "選択"
-    ResultDetail.Columns(1).HeaderText = "号機No"
-    ResultDetail.Columns(2).HeaderText = "実績受信"
-    ResultDetail.Columns(3).HeaderText = "結果"
-    ResultDetail.Columns(4).HeaderText = "マスタ送信"
-    ResultDetail.Columns(5).HeaderText = "結果"
-    'カラムの幅指定
-    ResultDetail.Columns(1).Width = 100
-    ResultDetail.Columns(2).Width = 160
-    ResultDetail.Columns(3).Width = 90
-    ResultDetail.Columns(4).Width = 160
-    ResultDetail.Columns(5).Width = 90
-
-    'ヘッダーの整列設定
-    For i As Integer = 0 To 5
-      ResultDetail.Columns(i).DefaultCellStyle.Alignment =
-   DataGridViewContentAlignment.MiddleCenter
-      ResultDetail.Columns(i).HeaderCell.Style.Alignment =
-  DataGridViewContentAlignment.MiddleCenter
-    Next
-
-    '選択モード設定(全カラム)
-    ResultDetail.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-
-    chkSendFreeMaster.Checked = False
-    '照会メソッド呼出し
-    SelectFtpResult()
-
-    CustomizeDataGridViewHeader() ' ヘッダーのデザイン変更
-
   End Sub
-  ' DataGridView のヘッダーのデザインを変更
-  Private Sub CustomizeDataGridViewHeader()
-    With ResultDetail
-      ' ヘッダーの背景色を変更
-      .EnableHeadersVisualStyles = False ' デフォルトの Windows スタイルを無効化
-      .ColumnHeadersDefaultCellStyle.BackColor = Color.LightGoldenrodYellow ' ヘッダーの背景色
-      .ColumnHeadersDefaultCellStyle.ForeColor = Color.Black ' ヘッダーの文字色
-      .ColumnHeadersDefaultCellStyle.Font = New Font("Meiryo", 10, FontStyle.Bold) ' フォント変更
-      .ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter ' ヘッダー中央寄せ
-    End With
-  End Sub
-  Private Sub ResultDetail_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles ResultDetail.CellClick
-    If e.RowIndex >= 0 Then
-      ' 左端（0セル目）がクリックされた時のみ
-      If e.ColumnIndex = 0 Then
-        ' 未チェック状態ならチェックに、逆なら未チェックに
-        If CBool(ResultDetail.CurrentRow.Cells(0).Value) Then
-          ResultDetail.CurrentRow.Cells(0).Value = False
-        Else
-          ResultDetail.CurrentRow.Cells(0).Value = True
-        End If
-      End If
-    End If
-  End Sub
-  Private Sub SendButton_Click(sender As Object, e As EventArgs) Handles SendButton.Click
-    If CheckSelectRow() = False Then
-      MessageBox.Show("行を選択して下さい。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
-    Else
-      CallProcess("Upload", SetConcat_ScaleNumber)
-    End If
-  End Sub
+
   Private Sub CloseButton_Click(sender As Object, e As EventArgs) Handles CloseButton.Click
     Close()
   End Sub
@@ -124,7 +56,7 @@ Public Class Form_RealtimeConfirmation
       End With
     Catch ex As Exception
       Call ComWriteErrLog([GetType]().Name,
-                        System.Reflection.MethodBase.GetCurrentMethod().Name, ex.Message)
+                  System.Reflection.MethodBase.GetCurrentMethod().Name, ex.Message)
       Throw New Exception(ex.Message)
     Finally
       tmpDt.Dispose()
@@ -150,7 +82,6 @@ Public Class Form_RealtimeConfirmation
   Private Sub USB_SendButton_Click(sender As Object, e As EventArgs) Handles USB_SendButton.Click
     Dim ScaleNumber As String
     Dim UsbPath As String = GetUsbDriveRootPath() ' USBメモリのパスを取得
-    Dim isFreeMaster As Boolean = chkSendFreeMaster.Checked
 
     If String.IsNullOrEmpty(UsbPath) Then
       MessageBox.Show("USBメモリが見つかりません。USBメモリを挿入してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -165,38 +96,20 @@ Public Class Form_RealtimeConfirmation
       Directory.CreateDirectory(UsbPath)
     End If
 
-    If ResultDetail.Rows.Count > 0 Then
-
-      For i As Integer = 0 To ResultDetail.Rows.Count - 1
-        ScaleNumber = ResultDetail.Rows(i).Cells(1).Value
+    ScaleNumber = "01"
 
         ' ファイルの保存処理
-        If isFreeMaster Then
-          CreateItemMasterCSV(ScaleNumber, UsbPath)
-          CreateManufacturerMasterCSV(ScaleNumber, UsbPath)
-          CreatePackingMasterCSV(ScaleNumber, UsbPath)
-          CreateStaffMasterCSV(ScaleNumber, UsbPath)
-          CreateFree1MasterCSV(ScaleNumber, UsbPath)
-          CreateFree2MasterCSV(ScaleNumber, UsbPath)
-          CreateFree3MasterCSV(ScaleNumber, UsbPath)
-          CreateFree4MasterCSV(ScaleNumber, UsbPath)
-          CreateFree5MasterCSV(ScaleNumber, UsbPath)
-        Else
-          CreateItemMasterCSV(ScaleNumber, UsbPath)
-          CreateManufacturerMasterCSV(ScaleNumber, UsbPath)
-          CreatePackingMasterCSV(ScaleNumber, UsbPath)
-          CreateStaffMasterCSV(ScaleNumber, UsbPath)
-        End If
-      Next
+        CreateItemMasterCSV(ScaleNumber, UsbPath)
+        CreateStaffMasterCSV(ScaleNumber, UsbPath)
 
-      ' エクスプローラーでフォルダを開く
-      Try
+    ' エクスプローラーでフォルダを開く
+    Try
         Process.Start("explorer.exe", UsbPath)
         MessageBox.Show("データを保存しました。" & vbCrLf & "保存先: " & UsbPath, "完了", MessageBoxButtons.OK, MessageBoxIcon.Information)
       Catch ex As Exception
         MessageBox.Show("フォルダを開く際にエラーが発生しました。")
       End Try
-    End If
+
 
   End Sub
 
@@ -213,171 +126,6 @@ Public Class Form_RealtimeConfirmation
     Return String.Empty ' USBが見つからない場合
   End Function
 
-  Public Sub SelectFtpResult()
-    Dim sql As String = String.Empty
-    sql = GetResultSelectSql()
-    Try
-      With tmpDb
-        SqlServer.GetResult(tmpDt, sql)
-        If tmpDt.Rows.Count = 0 Then
-          MessageBox.Show("計量器マスタにデータが登録されていません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        Else
-          WriteDetail(tmpDt, ResultDetail, CheckboxExistFlg)
-          SetAutomaticCheck()
-        End If
-      End With
-    Catch ex As Exception
-      Call ComWriteErrLog([GetType]().Name,
-                        System.Reflection.MethodBase.GetCurrentMethod().Name, ex.Message)
-      Throw New Exception(ex.Message)
-    Finally
-      tmpDt.Dispose()
-    End Try
-  End Sub
-  Public Sub SetAutomaticCheck()
-    For i As Integer = 0 To ResultDetail.Rows.Count - 1
-      If ResultDetail.Rows(i).Cells(3).Value = "NG" Then
-        ResultDetail(3, i).Style.BackColor = Color.DarkRed
-        ResultDetail(3, i).Style.SelectionBackColor = Color.DarkRed
-      End If
-
-      If ResultDetail.Rows(i).Cells(5).Value = "NG" Then
-        ResultDetail(5, i).Style.BackColor = Color.DarkRed
-        ResultDetail(5, i).Style.SelectionBackColor = Color.DarkRed
-      End If
-
-      ResultDetail.Rows(i).Cells(0).Value = True
-    Next
-  End Sub
-  Private Function GetResultSelectSql() As String
-
-    Dim sql As String = String.Empty
-
-    sql &= " WITH AC_TRN_LOG AS("
-    sql &= "     SELECT"
-    sql &= "         MACHINE_NO,"
-    sql &= "         PROCESS_DATE,"
-    sql &= "         ACHIEVEMENT_RECEIVE_TIME,"
-    sql &= "         ACHIEVEMENT_RESULT"
-    sql &= "     FROM"
-    sql &= "         TRN_LOG A"
-    sql &= "     WHERE"
-    sql &= "         ACHIEVEMENT_RECEIVE_TIME = ("
-    sql &= "             SELECT"
-    sql &= "                 MAX(ACHIEVEMENT_RECEIVE_TIME)"
-    sql &= "             FROM"
-    sql &= "                 TRN_LOG AS B"
-    sql &= "             WHERE"
-    sql &= "                 A.MACHINE_NO = B.MACHINE_NO"
-    sql &= "             And B.ACHIEVEMENT_RESULT In ('OK', 'NG') "
-    sql &= "         )"
-    sql &= " 		AND ACHIEVEMENT_RESULT IN ('OK', 'NG') "
-    sql &= " ),"
-    sql &= " MST_TRN_LOG As("
-    sql &= "     SELECT"
-    sql &= "         MACHINE_NO,"
-    sql &= "         PROCESS_DATE,"
-    sql &= "         MASTER_SEND_TIME,"
-    sql &= "         MASTER_RESULT"
-    sql &= "     FROM"
-    sql &= "         TRN_LOG A"
-    sql &= "     WHERE"
-    sql &= "         MASTER_SEND_TIME = ("
-    sql &= "             SELECT"
-    sql &= "                 MAX(MASTER_SEND_TIME)"
-    sql &= "             FROM"
-    sql &= "                 TRN_LOG AS B"
-    sql &= "             WHERE"
-    sql &= "                 A.MACHINE_NO = B.MACHINE_NO"
-    sql &= "             AND B.MASTER_RESULT IN ('OK', 'NG') "
-    sql &= "         )"
-    sql &= " 		AND MASTER_RESULT IN ('OK', 'NG') "
-    sql &= " )"
-    sql &= " SELECT"
-    sql &= "     UNIT_NUMBER As 号機番号,"
-    sql &= "     SUBSTRING(ACHIEVEMENT_RECEIVE_TIME, 1, 19) As 実績受信日時,"
-    sql &= "     ACHIEVEMENT_RESULT AS 実績受信結果,"
-    sql &= "     SUBSTRING(MASTER_SEND_TIME, 1, 19) As マスタ送信日時,"
-    sql &= "     MASTER_RESULT As マスタ送信結果"
-    sql &= " FROM"
-    sql &= "     MST_SCALE"
-    sql &= "     LEFT JOIN"
-    sql &= "         AC_TRN_LOG"
-    sql &= "     ON  MST_SCALE.UNIT_NUMBER = AC_TRN_LOG.MACHINE_NO"
-    sql &= "     LEFT JOIN"
-    sql &= "         MST_TRN_LOG"
-    sql &= "     ON  MST_SCALE.UNIT_NUMBER = MST_TRN_LOG.MACHINE_NO"
-    sql &= " ORDER BY"
-    sql &= "     MST_SCALE.UNIT_NUMBER"
-    Call WriteExecuteLog([GetType]().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, sql)
-    Return sql
-  End Function
-  Private Sub ReceiveButton_Click(sender As Object, e As EventArgs) Handles ReceiveButton.Click
-    If CheckSelectRow() = False Then
-      MessageBox.Show("行を選択して下さい。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
-    Else
-      CallProcess("DownLoad", SetConcat_ScaleNumber)
-    End If
-  End Sub
-  Function CheckSelectRow() As Boolean
-    Dim result As Boolean = False
-    For i As Integer = 0 To ResultDetail.Rows.Count - 1
-      If ResultDetail.Rows(i).Cells(0).Value = True Then
-        result = True
-        Exit For
-      End If
-    Next
-    Return result
-  End Function
-
-  Function SetConcat_ScaleNumber() As String
-    Dim InitialCheckFlg = True
-    For i As Integer = 0 To ResultDetail.Rows.Count - 1
-      If ResultDetail.Rows(i).Cells(0).Value = True Then
-        If InitialCheckFlg Then
-          Concat_ScaleNumber = ResultDetail.Rows(i).Cells(1).Value
-          InitialCheckFlg = False
-        Else
-          Concat_ScaleNumber = Concat_ScaleNumber + " " + ResultDetail.Rows(i).Cells(1).Value
-        End If
-      End If
-    Next
-    Return Concat_ScaleNumber
-  End Function
-  Private Sub CallProcess(ProcessMode As String, Concat_ScaleNumber As String)
-
-    Dim DownloadPath As String = ReadSettingIniFile("DOWNLOAD_PATH", "VALUE")
-    Dim UploadPath As String = ReadSettingIniFile("UPLOAD_PATH", "VALUE")
-    Dim isFreeMaster As Boolean = chkSendFreeMaster.Checked
-
-    Select Case ProcessMode
-      Case "DownLoad"
-        Dim DownloadExe As New ProcessStartInfo With {
-        .FileName = DownloadPath,
-        .Arguments = Concat_ScaleNumber,
-            .UseShellExecute = False
-        }
-        Dim p As System.Diagnostics.Process = System.Diagnostics.Process.Start(DownloadExe)
-        p.WaitForExit()
-        MessageBox.Show("実績受信終了しました。" & vbCrLf & "処理結果をご確認下さい。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        SelectFtpResult()
-      Case "Upload"
-        ' isFreeMaster を引数として追加
-        ' 🟠 スケール番号と isFreeMaster を 「|」で区切る
-        Dim arguments As String = $"{Concat_ScaleNumber}|{isFreeMaster.ToString().ToLower()}"
-
-        Dim UploadExe As New ProcessStartInfo With {
-            .FileName = UploadPath,
-           .Arguments = arguments,
-           .UseShellExecute = False
-        }
-        'ファイルを開いて終了まで待機する
-        Dim p As System.Diagnostics.Process = System.Diagnostics.Process.Start(UploadExe)
-        p.WaitForExit()
-        MessageBox.Show("マスタ送信終了しました。" & vbCrLf & "処理結果をご確認下さい。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Information)
-        SelectFtpResult()
-    End Select
-  End Sub
   Function GetInsertSql(columnNames() As String, dr As DataRow) As String
     Dim sql As String = "INSERT INTO TRN_Results ("
     Dim values As String = "VALUES ("
@@ -402,7 +150,7 @@ Public Class Form_RealtimeConfirmation
     Next
 
     sql &= ") " & values & ")"
-    Call WriteExecuteLog("Module_Download", System.Reflection.MethodBase.GetCurrentMethod().Name, sql)
+    Call WriteExecuteLog("Form_RealtimeConfirmation", System.Reflection.MethodBase.GetCurrentMethod().Name, sql)
     Return sql
   End Function
 
@@ -412,19 +160,7 @@ Public Class Form_RealtimeConfirmation
     DefText = "呼出コード:40001,品番:40002,風袋:40007,風袋単位:40008,上限値:40009,上限値単位:40010,基準値:40011,基準値単位:40012,下限値:40013,下限値単位:40014,小計目標値:40028,小計目標値単位:40029,小計目標回数:40030,品名:40031"
     CreateCsv(PathName, TableName, DefText, ScaleNumber, UsbPath)
   End Sub
-  Private Sub CreateManufacturerMasterCSV(ScaleNumber As String, UsbPath As String)
-    PathName = "40MAS2"
-    TableName = "MST_Manufacturer"
-    DefText = "製造者コード:40051,製造者名:40052"
-    CreateCsv(PathName, TableName, DefText, ScaleNumber, UsbPath)
-  End Sub
 
-  Private Sub CreatePackingMasterCSV(ScaleNumber As String, UsbPath As String)
-    PathName = "40TARE"
-    TableName = "MST_Packing"
-    DefText = "風袋№:40371,風袋重量:40372,風袋重量単位:40373,風袋名称:40374"
-    CreateCsv(PathName, TableName, DefText, ScaleNumber, UsbPath)
-  End Sub
   Private Sub CreateStaffMasterCSV(ScaleNumber As String, UsbPath As String)
     PathName = "40OPTR"
     TableName = "MST_Staff"
@@ -432,41 +168,6 @@ Public Class Form_RealtimeConfirmation
     CreateCsv(PathName, TableName, DefText, ScaleNumber, UsbPath)
   End Sub
 
-  Private Sub CreateFree1MasterCSV(ScaleNumber As String, UsbPath As String)
-    PathName = "40FRE1"
-    TableName = "MST_Free1"
-    DefText = "フリー１№:40311,フリー１名称:40312"
-    CreateCsv(PathName, TableName, DefText, ScaleNumber, UsbPath)
-  End Sub
-
-  Private Sub CreateFree2MasterCSV(ScaleNumber As String, UsbPath As String)
-    PathName = "40FRE2"
-    TableName = "MST_Free2"
-    DefText = "フリー２№:40321,フリー２名称:40322"
-    CreateCsv(PathName, TableName, DefText, ScaleNumber, UsbPath)
-  End Sub
-
-  Private Sub CreateFree3MasterCSV(ScaleNumber As String, UsbPath As String)
-    PathName = "40FRE3"
-    TableName = "MST_Free3"
-    DefText = "フリー３№:40331,フリー３名称:40332
-"
-    CreateCsv(PathName, TableName, DefText, ScaleNumber, UsbPath)
-  End Sub
-
-  Private Sub CreateFree4MasterCSV(ScaleNumber As String, UsbPath As String)
-    PathName = "40FRE4"
-    TableName = "MST_Free4"
-    DefText = "フリー４№:40341,フリー４名称:40342"
-    CreateCsv(PathName, TableName, DefText, ScaleNumber, UsbPath)
-  End Sub
-
-  Private Sub CreateFree5MasterCSV(ScaleNumber As String, UsbPath As String)
-    PathName = "40FRE5"
-    TableName = "MST_Free5"
-    DefText = "フリー５№:40351,フリー５名称:40352"
-    CreateCsv(PathName, TableName, DefText, ScaleNumber, UsbPath)
-  End Sub
   Private Sub CreateCsv(PathName As String, TableName As String, DefText As String, ScaleNumber As String, UsbPath As String)
     Dim CsvPath As String
     Dim DefPath As String
@@ -489,22 +190,8 @@ Public Class Form_RealtimeConfirmation
     Select Case TableName
       Case "MST_Item"
         sql = GetItemMasterSelectSql()
-      Case "MST_Manufacturer"
-        sql = GetManufacturerMasterSelectSql()
-      Case "MST_Packing"
-        sql = GetPackingMasterSelectSql()
       Case "MST_Staff"
         sql = GetStaffMasterSelectSql()
-      Case "MST_Free1"
-        sql = GetFree1MasterSelectSql()
-      Case "MST_Free2"
-        sql = GetFree2MasterSelectSql()
-      Case "MST_Free3"
-        sql = GetFree3MasterSelectSql()
-      Case "MST_Free4"
-        sql = GetFree4MasterSelectSql()
-      Case "MST_Free5"
-        sql = GetFree5MasterSelectSql()
     End Select
 
     Try
@@ -514,22 +201,8 @@ Public Class Form_RealtimeConfirmation
           Select Case TableName
             Case "MST_Item"
               MessageBox.Show("商品マスタのデータがありません。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Case "MST_Manufacturer"
-              MessageBox.Show("製造者マスタのデータがありません。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Case "MST_Packing"
-              MessageBox.Show("風袋マスタのデータがありません。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Case "MST_Staff"
               MessageBox.Show("担当者マスタのデータがありません。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Case "MST_Free1"
-              MessageBox.Show("フリー1マスタのデータがありません。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Case "MST_Free2"
-              MessageBox.Show("フリー2マスタのデータがありません。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Case "MST_Free3"
-              MessageBox.Show("フリー3マスタのデータがありません。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Case "MST_Free4"
-              MessageBox.Show("フリー4マスタのデータがありません。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Case "MST_Free5"
-              MessageBox.Show("フリー5マスタのデータがありません。", "確認", MessageBoxButtons.OK, MessageBoxIcon.Error)
           End Select
         Else
           Dim colCount As Integer = OutputDt.Columns.Count
@@ -605,16 +278,6 @@ Public Class Form_RealtimeConfirmation
     Call WriteExecuteLog([GetType]().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, sql)
     Return sql
   End Function
-  Private Function GetManufacturerMasterSelectSql() As String
-    Dim sql As String = String.Empty
-    sql &= " SELECT"
-    sql &= "     Manufacturer_Code As 製造者コード,"
-    sql &= "     Manufacturer_Name As 製造者名"
-    sql &= " FROM"
-    sql &= "     MST_Manufacturer"
-    Call WriteExecuteLog([GetType]().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, sql)
-    Return sql
-  End Function
 
   Private Function GetStaffMasterSelectSql() As String
     Dim sql As String = String.Empty
@@ -623,78 +286,6 @@ Public Class Form_RealtimeConfirmation
     sql &= "     Staff_Name As [担当者名称]"
     sql &= " FROM"
     sql &= "     MST_Staff"
-    Call WriteExecuteLog([GetType]().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, sql)
-    Return sql
-  End Function
-
-  Private Function GetPackingMasterSelectSql() As String
-    Dim sql As String = String.Empty
-    sql &= " SELECT"
-    sql &= "     PackingNo As [風袋№],"
-    sql &= "     PackingWeight As [風袋重量],"
-    sql &= "     PackingWeightUnit As [風袋重量単位],"
-    sql &= "     PackingName As [風袋名称]"
-    sql &= " FROM"
-    sql &= "     MST_Packing"
-    Call WriteExecuteLog([GetType]().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, sql)
-    Return sql
-  End Function
-
-  Private Function GetFree1MasterSelectSql() As String
-    Dim sql As String = String.Empty
-    sql &= " SELECT"
-    sql &= "     free1_number AS [フリー１№],"
-    sql &= "     free1_name AS [フリー１名称]"
-    sql &= " FROM"
-    sql &= "     MST_Free1"
-    Call WriteExecuteLog([GetType]().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, sql)
-    Return sql
-  End Function
-
-  ' フリー2マスター取得
-  Private Function GetFree2MasterSelectSql() As String
-    Dim sql As String = String.Empty
-    sql &= " SELECT"
-    sql &= "     free2_number AS [フリー２№],"
-    sql &= "     free2_name AS [フリー２名称]"
-    sql &= " FROM"
-    sql &= "     MST_Free2"
-    Call WriteExecuteLog([GetType]().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, sql)
-    Return sql
-  End Function
-
-  ' フリー3マスター取得
-  Private Function GetFree3MasterSelectSql() As String
-    Dim sql As String = String.Empty
-    sql &= " SELECT"
-    sql &= "     free3_number AS [フリー３№],"
-    sql &= "     free3_name AS [フリー３名称]"
-    sql &= " FROM"
-    sql &= "     MST_Free3"
-    Call WriteExecuteLog([GetType]().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, sql)
-    Return sql
-  End Function
-
-  ' フリー4マスター取得
-  Private Function GetFree4MasterSelectSql() As String
-    Dim sql As String = String.Empty
-    sql &= " SELECT"
-    sql &= "     free4_number AS [フリー４№],"
-    sql &= "     free4_name AS [フリー４名称]"
-    sql &= " FROM"
-    sql &= "     MST_Free4"
-    Call WriteExecuteLog([GetType]().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, sql)
-    Return sql
-  End Function
-
-  ' フリー5マスター取得
-  Private Function GetFree5MasterSelectSql() As String
-    Dim sql As String = String.Empty
-    sql &= " SELECT"
-    sql &= "     free5_number AS [フリー５№],"
-    sql &= "     free5_name AS [フリー５名称]"
-    sql &= " FROM"
-    sql &= "     MST_Free5"
     Call WriteExecuteLog([GetType]().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, sql)
     Return sql
   End Function
@@ -711,9 +302,9 @@ Public Class Form_RealtimeConfirmation
       Exit Sub
     End If
 
-    ' FTP バックアップパスを取得（フォルダが存在しない場合、バックアップフォルダ作成）
-    If String.IsNullOrEmpty(FtpBackupPath) Then
-      Directory.CreateDirectory(FtpBackupPath)
+    ' バックアップパスを取得（フォルダが存在しない場合、バックアップフォルダ作成）
+    If String.IsNullOrEmpty(BackupPath) Then
+      Directory.CreateDirectory(BackupPath)
     End If
 
     ' 確認ダイアログ
@@ -757,7 +348,6 @@ Public Class Form_RealtimeConfirmation
           "work_instruction_name", "product_temperature", "product_temperature_unit",
           "create_date", "update_date"
       }
-
         ' データテーブルにカラム追加
         For Each columnName As String In columnNames
           dt.Columns.Add(New DataColumn(columnName, GetType(String)))
@@ -846,7 +436,7 @@ Public Class Form_RealtimeConfirmation
         End If
 
         ' ----------------------------------------------------
-        ' 取り込みが完了した CSVファイルをFTP バックアップ用に
+        ' 取り込みが完了した CSVファイルをバックアップ用に
         ' タイムスタンプ付きファイル名に変更しコピー → USB 上の元ファイル削除
         ' ----------------------------------------------------
         If dt.Rows.Count > 0 Then
@@ -854,11 +444,11 @@ Public Class Form_RealtimeConfirmation
             ' 新しいファイル名作成（例: 40TRAN999_20250227142801.CSV）
             Dim timeStamp As String = DateTime.Now.ToString("yyyyMMddHHmmss")
             Dim newFileName As String = Path.GetFileNameWithoutExtension(filePath) & "_" & timeStamp & Path.GetExtension(filePath)
-            Dim newFilePath As String = Path.Combine(FtpBackupPath, newFileName)
+            Dim newFilePath As String = Path.Combine(BackupPath, newFileName)
 
             ' コピー先のディレクトリが存在しない場合は作成
-            If Not Directory.Exists(FtpBackupPath) Then
-              Directory.CreateDirectory(FtpBackupPath)
+            If Not Directory.Exists(BackupPath) Then
+              Directory.CreateDirectory(BackupPath)
             End If
 
             ' ファイルをコピーして、コピーできたら USB のファイルを削除
@@ -872,7 +462,6 @@ Public Class Form_RealtimeConfirmation
               MessageBox.Show("コピー検証に失敗しました。元ファイルは削除されません。", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             End If
 
-            'File.Delete(filePath)
 
           Catch ex As Exception
             MessageBox.Show("バックアップファイルの処理に失敗しました：" & ex.Message, "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -884,34 +473,12 @@ Public Class Form_RealtimeConfirmation
     End Try
   End Sub
 
-  Private Sub ResultDetail_CurrentCellDirtyStateChanged(sender As Object, e As EventArgs) Handles ResultDetail.CurrentCellDirtyStateChanged
-    If TypeOf ResultDetail.CurrentCell Is DataGridViewCheckBoxCell Then
-      ResultDetail.CommitEdit(DataGridViewDataErrorContexts.Commit)
-    End If
-  End Sub
-
-  Private Sub ResultDetail_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles ResultDetail.CellValueChanged
-    If e.ColumnIndex = 0 AndAlso e.RowIndex >= 0 Then
-      Dim isChecked As Boolean = Convert.ToBoolean(ResultDetail.Rows(e.RowIndex).Cells(e.ColumnIndex).Value)
-
-      ' チェック状態に応じて背景色を変更
-      If isChecked Then
-        ResultDetail.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.LightGoldenrodYellow
-      Else
-        ResultDetail.Rows(e.RowIndex).DefaultCellStyle.BackColor = Color.White
-      End If
-    End If
-  End Sub
 
   Private Sub Form_RealtimeConfirmation_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
     Select Case e.KeyCode
       Case Keys.F1
-        ReceiveButton.PerformClick()
-      Case Keys.F2
-        SendButton.PerformClick()
-      Case Keys.F3
         USB_ReceiveButton.PerformClick()
-      Case Keys.F4
+      Case Keys.F2
         USB_SendButton.PerformClick()
       Case Keys.Escape
         Me.Close()

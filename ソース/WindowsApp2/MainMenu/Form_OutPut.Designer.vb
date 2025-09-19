@@ -23,10 +23,9 @@ Partial Class Form_OutPut
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.MonthlyReportOutputButton = New System.Windows.Forms.Button()
-        Me.DetailOutputButton = New System.Windows.Forms.Button()
         Me.TitleLabel = New System.Windows.Forms.Label()
         Me.CloseButton = New System.Windows.Forms.Button()
-        Me.WeightCheckButton = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'MonthlyReportOutputButton
@@ -36,19 +35,8 @@ Partial Class Form_OutPut
         Me.MonthlyReportOutputButton.Name = "MonthlyReportOutputButton"
         Me.MonthlyReportOutputButton.Size = New System.Drawing.Size(407, 79)
         Me.MonthlyReportOutputButton.TabIndex = 5
-        Me.MonthlyReportOutputButton.Text = "F1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "月報出力"
+        Me.MonthlyReportOutputButton.Text = "F1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "茶摘日報（個人別）"
         Me.MonthlyReportOutputButton.UseVisualStyleBackColor = True
-        '
-        'DetailOutputButton
-        '
-        Me.DetailOutputButton.Font = New System.Drawing.Font("Segoe UI", 20.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DetailOutputButton.Location = New System.Drawing.Point(12, 260)
-        Me.DetailOutputButton.Name = "DetailOutputButton"
-        Me.DetailOutputButton.Size = New System.Drawing.Size(407, 79)
-        Me.DetailOutputButton.TabIndex = 4
-        Me.DetailOutputButton.Text = "明細出力"
-        Me.DetailOutputButton.UseVisualStyleBackColor = True
-        Me.DetailOutputButton.Visible = False
         '
         'TitleLabel
         '
@@ -71,27 +59,25 @@ Partial Class Form_OutPut
         Me.CloseButton.Text = "ESC" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "終了"
         Me.CloseButton.UseVisualStyleBackColor = True
         '
-        'WeightCheckButton
+        'Button1
         '
-        Me.WeightCheckButton.Font = New System.Drawing.Font("Segoe UI", 18.0!)
-        Me.WeightCheckButton.Location = New System.Drawing.Point(426, 72)
-        Me.WeightCheckButton.Name = "WeightCheckButton"
-        Me.WeightCheckButton.Size = New System.Drawing.Size(407, 79)
-        Me.WeightCheckButton.TabIndex = 17
-        Me.WeightCheckButton.Text = "F2" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "重量検査一覧表出力"
-        Me.WeightCheckButton.UseVisualStyleBackColor = True
-        Me.WeightCheckButton.Visible = False
+        Me.Button1.Font = New System.Drawing.Font("Segoe UI", 18.0!)
+        Me.Button1.Location = New System.Drawing.Point(425, 72)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(407, 79)
+        Me.Button1.TabIndex = 17
+        Me.Button1.Text = "F2" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "茶摘報酬集計表"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'Form_OutPut
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(845, 648)
-        Me.Controls.Add(Me.WeightCheckButton)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.CloseButton)
         Me.Controls.Add(Me.TitleLabel)
         Me.Controls.Add(Me.MonthlyReportOutputButton)
-        Me.Controls.Add(Me.DetailOutputButton)
         Me.Name = "Form_OutPut"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "累計データ管理"
@@ -100,8 +86,7 @@ Partial Class Form_OutPut
 
     End Sub
     Friend WithEvents MonthlyReportOutputButton As Button
-    Friend WithEvents DetailOutputButton As Button
     Friend WithEvents TitleLabel As Label
     Friend WithEvents CloseButton As Button
-    Friend WithEvents WeightCheckButton As Button
+    Friend WithEvents Button1 As Button
 End Class

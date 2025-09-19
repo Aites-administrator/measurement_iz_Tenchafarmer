@@ -27,48 +27,24 @@ Public Class Form_ItemList
     FormBorderStyle = FormBorderStyle.FixedSingle
     ItemDetail.AllowUserToAddRows = False
 
-    ItemDetail.ColumnCount = 14
+    ItemDetail.ColumnCount = 3
     ' 残りのヘッダーテキストを設定
     ItemDetail.Columns(0).HeaderText = "呼出ｺｰﾄﾞ"
     ItemDetail.Columns(1).HeaderText = "品番"
     ItemDetail.Columns(2).HeaderText = "品名"
-    ItemDetail.Columns(3).HeaderText = "風袋"
-    ItemDetail.Columns(4).HeaderText = "風袋単位"
-    ItemDetail.Columns(5).HeaderText = "上限値"
-    ItemDetail.Columns(6).HeaderText = "上限値単位"
-    ItemDetail.Columns(7).HeaderText = "基準値"
-    ItemDetail.Columns(8).HeaderText = "基準値単位"
-    ItemDetail.Columns(9).HeaderText = "下限値"
-    ItemDetail.Columns(10).HeaderText = "下限値単位"
-    ItemDetail.Columns(11).HeaderText = "小計目標値"
-    ItemDetail.Columns(12).HeaderText = "小計目標値単位"
-    ItemDetail.Columns(13).HeaderText = "小計目標回数"
-
-    ' 削除フラグの列を非表示にする
-    ItemDetail.Columns(3).Visible = False
-    ItemDetail.Columns(4).Visible = False
-    ItemDetail.Columns(5).Visible = False
-    ItemDetail.Columns(6).Visible = False
-    ItemDetail.Columns(7).Visible = False
-    ItemDetail.Columns(8).Visible = False
-    ItemDetail.Columns(9).Visible = False
-    ItemDetail.Columns(10).Visible = False
-    ItemDetail.Columns(11).Visible = False
-    ItemDetail.Columns(12).Visible = False
-    ItemDetail.Columns(13).Visible = False
 
     'カラムの幅指定
     ItemDetail.Columns(0).Width = 100
     ItemDetail.Columns(1).Width = 80
     ItemDetail.Columns(2).Width = 250
     'カラムの整列設定
-    For i As Integer = 0 To 13
+    For i As Integer = 0 To 2
       ItemDetail.Columns(i).DefaultCellStyle.Alignment =
       DataGridViewContentAlignment.MiddleCenter
     Next
 
     'ヘッダーの整列設定
-    For i As Integer = 0 To 13
+    For i As Integer = 0 To 2
       ItemDetail.Columns(i).HeaderCell.Style.Alignment =
       DataGridViewContentAlignment.MiddleCenter
     Next
@@ -119,8 +95,6 @@ Public Class Form_ItemList
       tmpDt.Dispose()
     End Try
 
-    'DisPlayDeleteRow(AllRowDisplayFlg)
-
     '検索結果が存在する場合、先頭行選択
     If ItemDetail.Rows.Count > 0 Then
       ItemDetail.CurrentCell = ItemDetail.Rows(0).Cells(0)
@@ -136,17 +110,6 @@ Public Class Form_ItemList
     sql &= "     call_code"
     sql &= "    ,item_number "
     sql &= "    ,item_name "
-    sql &= "    ,packing_bag "
-    sql &= "    ,packing_bag_unit "
-    sql &= "    ,upper_limit "
-    sql &= "    ,upper_limit_unit "
-    sql &= "    ,reference_value "
-    sql &= "    ,reference_value_unit "
-    sql &= "    ,lower_limit "
-    sql &= "    ,lower_limit_unit "
-    sql &= "    ,subtotal_target_value "
-    sql &= "    ,subtotal_target_value_unit "
-    sql &= "    ,subtotal_target_count "
     sql &= " FROM"
     sql &= "     MST_Item"
     sql &= " ORDER BY"
@@ -172,17 +135,6 @@ Public Class Form_ItemList
     Form_ItemDetail.CallCodeTextValue = ItemDetail.Rows(i).Cells(0).Value
     Form_ItemDetail.ItemNoTextValue = ItemDetail.Rows(i).Cells(1).Value
     Form_ItemDetail.ItemNameTextValue = ItemDetail.Rows(i).Cells(2).Value
-    Form_ItemDetail.PackingTextValue = ItemDetail.Rows(i).Cells(3).Value
-    Form_ItemDetail.PackingUnitTextValue = ItemDetail.Rows(i).Cells(4).Value
-    Form_ItemDetail.UpperWeightTextValue = ItemDetail.Rows(i).Cells(5).Value
-    Form_ItemDetail.UpperWeightUnitTextValue = ItemDetail.Rows(i).Cells(6).Value
-    Form_ItemDetail.WeightTextValue = ItemDetail.Rows(i).Cells(7).Value
-    Form_ItemDetail.WeightUnitTextValue = ItemDetail.Rows(i).Cells(8).Value
-    Form_ItemDetail.LowerWeightTextValue = ItemDetail.Rows(i).Cells(9).Value
-    Form_ItemDetail.LowerWeightUnitTextValue = ItemDetail.Rows(i).Cells(10).Value
-    Form_ItemDetail.SubtotalTargetQtyTextValue = ItemDetail.Rows(i).Cells(11).Value
-    Form_ItemDetail.SubtotalTargetUnitTextValue = ItemDetail.Rows(i).Cells(12).Value
-    Form_ItemDetail.SubtotalTargetCntTextValue = ItemDetail.Rows(i).Cells(13).Value
   End Sub
 
   Private Sub CloseButton_Click(sender As Object, e As EventArgs) Handles CloseButton.Click

@@ -33,8 +33,6 @@ Partial Class Form_ResultList
         Me.ToItemCode_ComboBox = New System.Windows.Forms.ComboBox()
         Me.FromItemCode_ComboBox = New System.Windows.Forms.ComboBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.Scale_ComboBox = New System.Windows.Forms.ComboBox()
-        Me.ScaleLabel = New System.Windows.Forms.Label()
         Me.PeriodLabel = New System.Windows.Forms.Label()
         Me.SearchButton = New System.Windows.Forms.Button()
         Me.TitleLabel = New System.Windows.Forms.Label()
@@ -43,10 +41,6 @@ Partial Class Form_ResultList
         Me.UpdateButton = New System.Windows.Forms.Button()
         Me.ResultDetail = New System.Windows.Forms.DataGridView()
         Me.CsvExportButton = New System.Windows.Forms.Button()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.lot1TextBox = New System.Windows.Forms.TextBox()
-        Me.lot2TextBox = New System.Windows.Forms.TextBox()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.ToStaffCode_ComboBox = New System.Windows.Forms.ComboBox()
         Me.FromStaffCode_ComboBox = New System.Windows.Forms.ComboBox()
@@ -133,26 +127,6 @@ Partial Class Form_ResultList
         Me.Label1.Size = New System.Drawing.Size(123, 30)
         Me.Label1.TabIndex = 5
         Me.Label1.Text = "呼出ｺｰﾄﾞ："
-        '
-        'Scale_ComboBox
-        '
-        Me.Scale_ComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.Scale_ComboBox.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.Scale_ComboBox.FormattingEnabled = True
-        Me.Scale_ComboBox.Location = New System.Drawing.Point(605, 47)
-        Me.Scale_ComboBox.Name = "Scale_ComboBox"
-        Me.Scale_ComboBox.Size = New System.Drawing.Size(160, 33)
-        Me.Scale_ComboBox.TabIndex = 14
-        '
-        'ScaleLabel
-        '
-        Me.ScaleLabel.AutoSize = True
-        Me.ScaleLabel.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(128, Byte))
-        Me.ScaleLabel.Location = New System.Drawing.Point(520, 50)
-        Me.ScaleLabel.Name = "ScaleLabel"
-        Me.ScaleLabel.Size = New System.Drawing.Size(94, 30)
-        Me.ScaleLabel.TabIndex = 13
-        Me.ScaleLabel.Text = "号　機："
         '
         'PeriodLabel
         '
@@ -263,44 +237,6 @@ Partial Class Form_ResultList
         Me.CsvExportButton.Text = "F2" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "CSV出力"
         Me.CsvExportButton.UseVisualStyleBackColor = True
         '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(520, 89)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(92, 25)
-        Me.Label6.TabIndex = 15
-        Me.Label6.Text = "ロット１："
-        '
-        'Label7
-        '
-        Me.Label7.AutoSize = True
-        Me.Label7.Font = New System.Drawing.Font("Segoe UI", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(520, 128)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(92, 25)
-        Me.Label7.TabIndex = 17
-        Me.Label7.Text = "ロット２："
-        '
-        'lot1TextBox
-        '
-        Me.lot1TextBox.Font = New System.Drawing.Font("Segoe UI", 14.25!)
-        Me.lot1TextBox.Location = New System.Drawing.Point(605, 86)
-        Me.lot1TextBox.MaxLength = 20
-        Me.lot1TextBox.Name = "lot1TextBox"
-        Me.lot1TextBox.Size = New System.Drawing.Size(160, 33)
-        Me.lot1TextBox.TabIndex = 16
-        '
-        'lot2TextBox
-        '
-        Me.lot2TextBox.Font = New System.Drawing.Font("Segoe UI", 14.25!)
-        Me.lot2TextBox.Location = New System.Drawing.Point(605, 125)
-        Me.lot2TextBox.MaxLength = 20
-        Me.lot2TextBox.Name = "lot2TextBox"
-        Me.lot2TextBox.Size = New System.Drawing.Size(160, 33)
-        Me.lot2TextBox.TabIndex = 18
-        '
         'Label8
         '
         Me.Label8.AutoSize = True
@@ -350,10 +286,6 @@ Partial Class Form_ResultList
         Me.Controls.Add(Me.ToStaffCode_ComboBox)
         Me.Controls.Add(Me.FromStaffCode_ComboBox)
         Me.Controls.Add(Me.Label9)
-        Me.Controls.Add(Me.lot2TextBox)
-        Me.Controls.Add(Me.lot1TextBox)
-        Me.Controls.Add(Me.Label7)
-        Me.Controls.Add(Me.Label6)
         Me.Controls.Add(Me.CsvExportButton)
         Me.Controls.Add(Me.ResultDetail)
         Me.Controls.Add(Me.CloseButton)
@@ -366,8 +298,6 @@ Partial Class Form_ResultList
         Me.Controls.Add(Me.ToItemCode_ComboBox)
         Me.Controls.Add(Me.FromItemCode_ComboBox)
         Me.Controls.Add(Me.Label1)
-        Me.Controls.Add(Me.Scale_ComboBox)
-        Me.Controls.Add(Me.ScaleLabel)
         Me.Controls.Add(Me.PeriodLabel)
         Me.Controls.Add(Me.SearchButton)
         Me.Controls.Add(Me.TitleLabel)
@@ -389,8 +319,6 @@ Partial Class Form_ResultList
     Friend WithEvents ToItemCode_ComboBox As ComboBox
     Friend WithEvents FromItemCode_ComboBox As ComboBox
     Friend WithEvents Label1 As Label
-    Friend WithEvents Scale_ComboBox As ComboBox
-    Friend WithEvents ScaleLabel As Label
     Friend WithEvents PeriodLabel As Label
     Friend WithEvents SearchButton As Button
     Friend WithEvents TitleLabel As Label
@@ -399,10 +327,6 @@ Partial Class Form_ResultList
     Friend WithEvents UpdateButton As Button
     Friend WithEvents ResultDetail As DataGridView
     Friend WithEvents CsvExportButton As Button
-    Friend WithEvents Label6 As Label
-    Friend WithEvents Label7 As Label
-    Friend WithEvents lot1TextBox As TextBox
-    Friend WithEvents lot2TextBox As TextBox
     Friend WithEvents Label8 As Label
     Friend WithEvents ToStaffCode_ComboBox As ComboBox
     Friend WithEvents FromStaffCode_ComboBox As ComboBox

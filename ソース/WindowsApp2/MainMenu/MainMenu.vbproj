@@ -21,7 +21,7 @@
     <DebugType>full</DebugType>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
-    <OutputPath>C:\KEIRYO_DX\exe\</OutputPath>
+    <OutputPath>C:\IZDigiDX_W\exe\</OutputPath>
     <DocumentationFile>MainMenu.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
@@ -92,7 +92,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Form_Results.Designer.vb">
-    
       <DependentUpon>Form_Results.vb</DependentUpon>
     </Compile>
     <Compile Include="Form_Results.vb">
@@ -197,22 +196,6 @@
     <ProjectReference Include="..\Common\Common.vbproj">
       <Project>{287fca5a-50af-4701-b638-a6ed611d147a}</Project>
       <Name>Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LogDisplay\LogDisplay.vbproj">
-      <Project>{88ee1559-37c7-4e53-98d8-fecac77409e9}</Project>
-      <Name>LogDisplay</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MonthlyReportOutput\MonthlyReportOutput.vbproj">
-      <Project>{52668874-07b9-4d6d-8c32-6ef2734a4a74}</Project>
-      <Name>MonthlyReportOutput</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\PackingMaster\PackingMaster.vbproj">
-      <Project>{07ac9cde-ee96-466e-8ff9-58d470285070}</Project>
-      <Name>PackingMaster</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ScaleMaster\ScaleMaster.vbproj">
-      <Project>{55873954-24e9-42d2-b26f-f126438ba79a}</Project>
-      <Name>ScaleMaster</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -149,16 +149,7 @@ Public Class Form_ResultDetail
 
   Private Sub SetMstComboBox()
     callCodeComboBox.Items.Clear()
-    packingComboBox.Items.Clear()
-    terminalComboBox.Items.Clear()
-    manufacturerCodeComboBox.Items.Clear()
     staffNumberComboBox.Items.Clear()
-    free1NumberComboBox.Items.Clear()
-    free2NumberComboBox.Items.Clear()
-    free3NumberComboBox.Items.Clear()
-    free4NumberComboBox.Items.Clear()
-    free5NumberComboBox.Items.Clear()
-
     ' 商品マスタ
     Dim ItemData As DataTable = GetMasterData("SELECT call_code FROM MST_Item ORDER BY call_code")
     If ItemData.Rows.Count = 0 Then
@@ -169,37 +160,7 @@ Public Class Form_ResultDetail
       Next
     End If
 
-    ' 風袋
-    Dim PackingData As DataTable = GetMasterData("SELECT PackingWeight FROM MST_Packing ORDER BY PackingNo")
-    If PackingData.Rows.Count = 0 Then
-      MessageBox.Show("風袋マスタにデータが登録されていません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
-    Else
-      For Each row As DataRow In PackingData.Rows
-        packingComboBox.Items.Add(row(0))
-      Next
-    End If
-
-    ' 号機番号
-    Dim TerminalData As DataTable = GetMasterData("SELECT unit_number FROM MST_Scale ORDER BY unit_number")
-    If TerminalData.Rows.Count = 0 Then
-      MessageBox.Show("計量器マスタにデータが登録されていません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
-    Else
-      For Each row As DataRow In TerminalData.Rows
-        terminalComboBox.Items.Add(row(0))
-      Next
-    End If
-
-    ' 製造者
-    Dim manufacturerData As DataTable = GetMasterData("SELECT Manufacturer_Code FROM MST_Manufacturer ORDER BY Manufacturer_Code")
-    If manufacturerData.Rows.Count = 0 Then
-      MessageBox.Show("製造者マスタにデータが登録されていません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
-    Else
-      For Each row As DataRow In manufacturerData.Rows
-        manufacturerCodeComboBox.Items.Add(row(0))
-      Next
-    End If
-
-    ' 製造者
+    ' 担当者
     Dim staffData As DataTable = GetMasterData("SELECT staff_number FROM MST_Staff ORDER BY staff_number")
     If staffData.Rows.Count = 0 Then
       MessageBox.Show("担当者マスタにデータが登録されていません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -208,21 +169,6 @@ Public Class Form_ResultDetail
         staffNumberComboBox.Items.Add(row(0))
       Next
     End If
-
-    ' フリー
-    Dim comboBoxes() As ComboBox = {free1NumberComboBox, free2NumberComboBox, free3NumberComboBox, free4NumberComboBox, free5NumberComboBox}
-    Dim tableNames() As String = {"MST_Free1", "MST_Free2", "MST_Free3", "MST_Free4", "MST_Free5"}
-
-    For i As Integer = 0 To comboBoxes.Length - 1
-      Dim freedata As DataTable = GetMasterData($"SELECT free{i + 1}_number FROM {tableNames(i)} ORDER BY free{i + 1}_number")
-      If freedata.Rows.Count = 0 Then
-        MessageBox.Show($"フリー{i + 1}マスタにデータが登録されていません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
-      Else
-        For Each row As DataRow In freedata.Rows
-          comboBoxes(i).Items.Add(row(0))
-        Next
-      End If
-    Next
   End Sub
 
   Private Function GetMasterData(query As String) As DataTable
@@ -236,75 +182,6 @@ Public Class Form_ResultDetail
     Return data
   End Function
 
-  'Private Sub SetMstComboBox()
-  '    Dim PackingData As DataTable = GetPackingMasterData()
-
-  '    packingComboBox.Items.Clear()
-
-  '    If PackingData.Rows.Count = 0 Then
-  '        MessageBox.Show("風袋マスタにデータが登録されていません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
-  '    Else
-  '        For Each row As DataRow In PackingData.Rows
-  '            packingComboBox.Items.Add(row(0))
-  '        Next
-  '    End If
-
-  '    Dim terminalData As DataTable = GetScaleMasterData()
-
-  '    terminalComboBox.Items.Clear()
-
-  '    If terminalData.Rows.Count = 0 Then
-  '        MessageBox.Show("計量器マスタにデータが登録されていません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
-  '    Else
-  '        For Each row As DataRow In terminalData.Rows
-  '            terminalComboBox.Items.Add(row(0))
-  '        Next
-  '    End If
-  'End Sub
-  'Private Function GetPackingMasterData() As DataTable
-  '    Dim PackingData As New DataTable
-  '    Try
-  '        With tmpDb
-  '            SqlServer.GetResult(PackingData, GetSelectPackingMaster)
-  '        End With
-  '    Catch ex As Exception
-  '        Call ComWriteErrLog([GetType]().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, ex.Message)
-  '        Throw New Exception(ex.Message)
-  '    End Try
-
-  '    Return PackingData
-  'End Function
-  'Private Function GetSelectPackingMaster() As String
-  '    Dim sql As String = String.Empty
-  '    sql &= " SELECT PackingWeight"
-  '    sql &= " FROM MST_Packing "
-  '    sql &= " ORDER BY PackingNo"
-  '    Call WriteExecuteLog([GetType]().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, sql)
-  '    Return sql
-  'End Function
-
-  'Private Function GetScaleMasterData() As DataTable
-  '    Dim ScaleData As New DataTable
-  '    Try
-  '        With tmpDb
-  '            SqlServer.GetResult(ScaleData, GetSelectScaleMaster)
-  '        End With
-  '    Catch ex As Exception
-  '        Call ComWriteErrLog([GetType]().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, ex.Message)
-  '        Throw New Exception(ex.Message)
-  '    End Try
-
-  '    Return ScaleData
-  'End Function
-  'Private Function GetSelectScaleMaster() As String
-  '    Dim sql As String = String.Empty
-  '    sql &= " SELECT unit_number"
-  '    sql &= " FROM MST_Scale "
-  '    sql &= " ORDER BY unit_number"
-  '    Call WriteExecuteLog([GetType]().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, sql)
-  '    Return sql
-  'End Function
-
 
   Private Sub SetUnitComboBox()
     ' 共通のアイテムリスト
@@ -312,22 +189,10 @@ Public Class Form_ResultDetail
 
     ' コンボボックスのアイテムをクリア
     weightComboBox.Items.Clear()
-    packing1WeightUnitComboBox.Items.Clear()
-    packing2WeightUnitComboBox.Items.Clear()
-    grossWeightUnitComboBox.Items.Clear()
-    'unitWeightUnitComboBox.Items.Clear()
-    'upperWeightLimitUnitComboBox.Items.Clear()
-    'lowerWeightLimitUnitComboBox.Items.Clear()
 
     ' アイテムをコンボボックスに追加
     For Each item As String In items
       weightComboBox.Items.Add(item)
-      packing1WeightUnitComboBox.Items.Add(item)
-      packing2WeightUnitComboBox.Items.Add(item)
-      grossWeightUnitComboBox.Items.Add(item)
-      'unitWeightUnitComboBox.Items.Add(item)
-      'upperWeightLimitUnitComboBox.Items.Add(item)
-      'lowerWeightLimitUnitComboBox.Items.Add(item)
     Next
   End Sub
   Private Sub SetPackingComboBox()
@@ -339,20 +204,15 @@ Public Class Form_ResultDetail
         ClearTextBox(Me)
         additionDateText.Enabled = True
         additionTimeText.Enabled = True
-        terminalComboBox.Enabled = True
         callCodeComboBox.Enabled = True
       Case 2
         additionDateText.Enabled = False
         additionTimeText.Enabled = False
-        terminalComboBox.Enabled = False
-        'callCodeComboBox.Enabled = False
-
         weightText.Enabled = False
         weightComboBox.Enabled = False
 
         additionDateText.Text = additionDateTxTValue
         additionTimeText.Text = additionTimeTxTValue
-        terminalComboBox.SelectedItem = terminalNumberTxTValue
         callCodeComboBox.SelectedItem = callCodeTxTValue
         itemNoText.Text = itemNoTxTValue
         itemNameText.Text = itemNameTxTValue
@@ -360,41 +220,8 @@ Public Class Form_ResultDetail
         weightComboBox.SelectedItem = weightUnitTxTValue
         staffNumberComboBox.SelectedItem = staffNumberTxTValue
         staffNameText.Text = staffNameTxTValue
-        packingComboBox.SelectedItem = packingTxTValue.ToString()
-        packingUnitText.Text = packingUnitTxTValue
-        packing1WeightText.Text = packing1WeightTxTValue.ToString()
-        packing1WeightUnitComboBox.SelectedItem = packing1WeightUnitTxTValue
-        packing2WeightText.Text = packing2WeightTxTValue.ToString()
-        packing2WeightUnitComboBox.SelectedItem = packing2WeightUnitTxTValue
-        packing2MultiplicationText.Text = packing2MultiplicationTxTValue.ToString()
-        packing1NumberComboBox.SelectedItem = packing1NumberTxTValue
-        packing1NameText.Text = packing1NameTxTValue
-        packing2NumberComboBox.SelectedItem = packing2NumberTxTValue
-        packing2NameText.Text = packing2NameTxTValue
-        free1NumberComboBox.SelectedItem = free1NumberTxTValue
-        free1NameTextValue.Text = free1NameTxTValue
-        free2NumberComboBox.SelectedItem = free2NumberTxTValue
-        free2NameTextValue.Text = free2NameTxTValue
-        free3NumberComboBox.SelectedItem = free3NumberTxTValue
-        free3NameTextValue.Text = free3NameTxTValue
-        free4NumberComboBox.SelectedItem = free4NumberTxTValue
-        free4NameTextValue.Text = free4NameTxTValue
-        free5NumberComboBox.SelectedItem = free5NumberTxTValue
-        free5NameTextValue.Text = free5NameTxTValue
-        manufacturerCodeComboBox.SelectedItem = manufacturerCodeTxTValue.ToString()
-        manufacturerNameTextValue.Text = manufacturerNameTxTValue
-        lot1TextValue.Text = lot1TxTValue
-        lot2TextValue.Text = lot2TxTValue
-        classificationTextValue.Text = classificationTxTValue
-        processingDateTextValue.Text = processingDateTxTValue
-        processingTimeTextValue.Text = processingTimeTxTValue
-        effectiveDateTextValue.Text = effectiveDateTxTValue
-        effectiveTimeTextValue.Text = effectiveTimeTxTValue
-        workOrderNumberTextValue.Text = workOrderNumberTxTValue
-        detailNumberTextValue.Text = detailNumberTxTValue
-        instructionQtyTextValue.Text = instructionQtyTxTValue.ToString()
-        actualQtyTextValue.Text = actualQtyTxTValue.ToString()
-        workOrderNameTextValue.Text = workOrderNameTxTValue
+
+
 
     End Select
   End Sub
@@ -433,72 +260,6 @@ Public Class Form_ResultDetail
     sql &= " SELECT staff_name "
     sql &= " FROM MST_Staff "
     sql &= " WHERE staff_number = '" & selectedOption & "'"
-    Call WriteExecuteLog([GetType]().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, sql)
-    Return sql
-  End Function
-
-  Private Sub freeNumberComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles free1NumberComboBox.SelectedIndexChanged, free2NumberComboBox.SelectedIndexChanged, free3NumberComboBox.SelectedIndexChanged, free4NumberComboBox.SelectedIndexChanged, free5NumberComboBox.SelectedIndexChanged
-    Dim selectedOption As Integer = CInt(DirectCast(sender, ComboBox).SelectedItem)
-    Dim freeType As Integer
-
-    Select Case sender.Name
-      Case "free1NumberComboBox"
-        freeType = 1
-      Case "free2NumberComboBox"
-        freeType = 2
-      Case "free3NumberComboBox"
-        freeType = 3
-      Case "free4NumberComboBox"
-        freeType = 4
-      Case "free5NumberComboBox"
-        freeType = 5
-    End Select
-
-    SetFreeName(freeType, selectedOption)
-  End Sub
-
-  Private Sub SetFreeName(freeType As Integer, selectedOption As Integer)
-    Dim freeData As DataTable = GetFreeName(freeType, selectedOption)
-    Dim freeNameTextValue As TextBox = New TextBox()
-
-    Select Case freeType
-      Case 1
-        freeNameTextValue = free1NameTextValue
-      Case 2
-        freeNameTextValue = free2NameTextValue
-      Case 3
-        freeNameTextValue = free3NameTextValue
-      Case 4
-        freeNameTextValue = free4NameTextValue
-      Case 5
-        freeNameTextValue = free5NameTextValue
-    End Select
-
-    If freeData.Rows.Count = 0 Then
-      MessageBox.Show($"フリー{freeType}マスタにデータが登録されていません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
-    Else
-      Dim freeName As String = freeData.Rows(0)($"free{freeType}_name").ToString()
-      freeNameTextValue.Text = freeName
-    End If
-  End Sub
-
-  Private Function GetFreeName(freeType As Integer, selectedOption As Integer) As DataTable
-    Dim freeData As New DataTable
-    Try
-      SqlServer.GetResult(freeData, GetSelectFreeNameQuery(freeType, selectedOption))
-    Catch ex As Exception
-      Call ComWriteErrLog([GetType]().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, ex.Message)
-      Throw New Exception(ex.Message)
-    End Try
-
-    Return freeData
-  End Function
-
-  Private Function GetSelectFreeNameQuery(freeType As Integer, selectedOption As Integer) As String
-    Dim sql As String = String.Empty
-    sql &= $" SELECT free{freeType}_name "
-    sql &= $" FROM MST_Free{freeType} "
-    sql &= $" WHERE free{freeType}_number = {selectedOption} "
     Call WriteExecuteLog([GetType]().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, sql)
     Return sql
   End Function
@@ -545,107 +306,24 @@ Public Class Form_ResultDetail
     sql &= "    call_code,"
     sql &= "    item_number,"
     sql &= "    item_name,"
-    sql &= "    packing,"
-    sql &= "    packing_unit,"
     sql &= "    weight,"
     sql &= "    weight_unit,"
-    sql &= "    manufacturer_code,"
-    sql &= "    manufacturer_name,"
-    sql &= "    lot1,"
-    sql &= "    lot2,"
-    sql &= "    category,"
-    sql &= "    gross_weight,"
-    sql &= "    gross_weight_unit,"
-    sql &= "    packing1_weight,"
-    sql &= "    packing1_weight_unit,"
-    sql &= "    packing2_weight,"
-    sql &= "    packing2_weight_unit,"
-    sql &= "    packing2_multiplier,"
-    sql &= "    packing1_number,"
-    sql &= "    packing1_name,"
-    sql &= "    packing2_number,"
-    sql &= "    packing2_name,"
     sql &= "    staff_number,"
     sql &= "    staff_name,"
-    sql &= "    free1_number,"
-    sql &= "    free1_name,"
-    sql &= "    free2_number,"
-    sql &= "    free2_name,"
-    sql &= "    free3_number,"
-    sql &= "    free3_name,"
-    sql &= "    free4_number,"
-    sql &= "    free4_name,"
-    sql &= "    free5_number,"
-    sql &= "    free5_name,"
-    sql &= "    processing_date,"
-    sql &= "    processing_time,"
-    sql &= "    valid_date,"
-    sql &= "    valid_time,"
-    sql &= "    work_instruction_number,"
-    sql &= "    detail_number,"
-    sql &= "    instruction_quantity,"
-    sql &= "    actual_quantity,"
-    sql &= "    work_instruction_name,"
-    sql &= "    product_temperature,"
-    sql &= "    product_temperature_unit,"
     sql &= "    create_date,"
     sql &= "    update_date"
     sql &= ")"
     sql &= "VALUES("
     sql &= "    '" & additionDateText.Text & "',"
     sql &= "    '" & additionTimeText.Text & "',"
-    sql &= "    '" & terminalComboBox.SelectedItem & "',"
+    sql &= "    '" & "01" & "',"
     sql &= "    '" & callCodeComboBox.SelectedItem & "',"
     sql &= "    '" & itemNoText.Text & "',"
     sql &= "    '" & itemNameText.Text & "',"
-    sql &= "    '" & packingComboBox.SelectedItem & "',"
-    sql &= "    '" & packingUnitText.Text & "',"
     sql &= "    " & weightText.Text & ","
     sql &= "    '" & weightComboBox.SelectedItem & "',"
-    sql &= "    '" & manufacturerCodeComboBox.SelectedItem & "',"
-    sql &= "    '" & manufacturerNameTextValue.Text & "',"
-    sql &= "    '" & lot1TextValue.Text & "',"
-    sql &= "    '" & lot2TextValue.Text & "',"
-    sql &= "    '" & classificationTextValue.Text & "',"
-    'sql &= "    " & grossWeightText.Text & ","
-    sql &= "    " & 0 & ","
-    sql &= "    '" & grossWeightUnitComboBox.SelectedItem & "',"
-    'sql &= "    " & packing1WeightText.Text & ","
-    sql &= "    " & 0 & ","
-    sql &= "    '" & packing1WeightUnitComboBox.SelectedItem & "',"
-    'sql &= "    " & packing2WeightText.Text & ","
-    sql &= "    " & 0 & ","
-    sql &= "    '" & packing2WeightUnitComboBox.SelectedItem & "',"
-    sql &= "    '" & packing2MultiplicationText.Text & "',"
-    sql &= "    '" & packing1NumberComboBox.SelectedItem & "',"
-    sql &= "    '" & packing1NameText.Text & "',"
-    sql &= "    '" & packing2NumberComboBox.SelectedItem & "',"
-    sql &= "    '" & packing2NameText.Text & "',"
     sql &= "    '" & staffNumberComboBox.SelectedItem & "',"
     sql &= "    '" & staffNameText.Text & "',"
-    sql &= "    '" & free1NumberComboBox.SelectedItem & "',"
-    sql &= "    '" & free1NameTextValue.Text & "',"
-    sql &= "    '" & free2NumberComboBox.SelectedItem & "',"
-    sql &= "    '" & free2NameTextValue.Text & "',"
-    sql &= "    '" & free3NumberComboBox.SelectedItem & "',"
-    sql &= "    '" & free3NameTextValue.Text & "',"
-    sql &= "    '" & free4NumberComboBox.SelectedItem & "',"
-    sql &= "    '" & free4NameTextValue.Text & "',"
-    sql &= "    '" & free5NumberComboBox.SelectedItem & "',"
-    sql &= "    '" & free5NameTextValue.Text & "',"
-    sql &= "    '" & processingDateTextValue.Text & "',"
-    sql &= "    '" & processingTimeTextValue.Text & "',"
-    sql &= "    '" & effectiveDateTextValue.Text & "',"
-    sql &= "    '" & effectiveTimeTextValue.Text & "',"
-    sql &= "    '" & workOrderNumberTextValue.Text & "',"
-    sql &= "    '" & detailNumberTextValue.Text & "',"
-    'sql &= "    " & instructionQtyTextValue.Text & ","
-    sql &= "    " & 0 & ","
-    'sql &= "    " & actualQtyTextValue.Text & ","
-    sql &= "    " & 0 & ","
-    sql &= "    '" & workOrderNameTextValue.Text & "',"
-    sql &= "    '" & temperatureText.Text & "',"
-    sql &= "    '" & temperatureUnitComboBox.SelectedItem & "',"
     sql &= "    '" & Tmpdate & "',"
     sql &= "    '" & Tmpdate & "'"
     sql &= ")"
@@ -690,27 +368,11 @@ Public Class Form_ResultDetail
     sql &= "  SET "
     sql &= "      weight = '" & weightText.Text & "'"
     sql &= "     ,weight_unit = '" & weightComboBox.Text & "'"
-    sql &= "     ,manufacturer_code = '" & manufacturerCodeComboBox.Text & "'"
-    sql &= "     ,manufacturer_name = '" & manufacturerNameTextValue.Text & "'"
     sql &= "     ,staff_number = '" & staffNumberComboBox.Text & "'"
     sql &= "     ,staff_name = '" & staffNameText.Text & "'"
-    sql &= "     ,lot1 = '" & lot1TextValue.Text & "'"
-    sql &= "     ,lot2 = '" & lot2TextValue.Text & "'"
-    sql &= "     ,category = '" & classificationTextValue.Text & "'"
-    sql &= "     ,free1_number = '" & free1NumberComboBox.SelectedItem & "'"
-    sql &= "     ,free1_name = '" & free1NameTextValue.Text & "'"
-    sql &= "     ,free2_number = '" & free2NumberComboBox.SelectedItem & "'"
-    sql &= "     ,free2_name = '" & free2NameTextValue.Text & "'"
-    sql &= "     ,free3_number = '" & free3NumberComboBox.SelectedItem & "'"
-    sql &= "     ,free3_name = '" & free3NameTextValue.Text & "'"
-    sql &= "     ,free4_number = '" & free4NumberComboBox.SelectedItem & "'"
-    sql &= "     ,free4_name = '" & free4NameTextValue.Text & "'"
-    sql &= "     ,free5_number = '" & free5NumberComboBox.SelectedItem & "'"
-    sql &= "     ,free5_name = '" & free5NameTextValue.Text & "'"
     sql &= "  WHERE "
     sql &= "      addition_date = '" & additionDateText.Text & "'"
     sql &= "      AND addition_time = '" & additionTimeText.Text & "'"
-    sql &= "      AND terminal_number = '" & terminalComboBox.Text & "'"
     sql &= "      AND call_code = '" & callCodeComboBox.Text & "'"
 
     Call WriteExecuteLog([GetType]().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, sql)
@@ -744,13 +406,6 @@ Public Class Form_ResultDetail
     If String.IsNullOrWhiteSpace(additionTimeText.Text) Then
       MessageBox.Show("時刻を入力してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
       additionTimeText.Focus()
-      isValid = False
-    End If
-
-    ' 端末機№チェック
-    If terminalComboBox.SelectedIndex = -1 Then
-      MessageBox.Show("端末機№を選択してください。", "入力エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
-      terminalComboBox.Focus()
       isValid = False
     End If
 
@@ -804,42 +459,6 @@ Public Class Form_ResultDetail
     Return sql
   End Function
 
-  Private Sub manufacturerCodeComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles manufacturerCodeComboBox.SelectedIndexChanged
-    Dim selectedOption As String = DirectCast(sender, ComboBox).SelectedItem
-
-    SetManufacturerName(selectedOption)
-  End Sub
-  Private Sub SetManufacturerName(selectedOption As String)
-    Dim ManufacturerData As DataTable = GetManufacturerName(selectedOption)
-
-    If ManufacturerData.Rows.Count = 0 Then
-      MessageBox.Show("製造者マスタにデータが登録されていません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
-    Else
-      Dim ManufacturerName As String = ManufacturerData.Rows(0)("Manufacturer_Name").ToString()
-      manufacturerNameTextValue.Text = ManufacturerName
-    End If
-  End Sub
-  Private Function GetManufacturerName(selectedOption As String) As DataTable
-    Dim freeData As New DataTable
-    Try
-      SqlServer.GetResult(freeData, GetSelectManufacturerQuery(selectedOption))
-    Catch ex As Exception
-      Call ComWriteErrLog([GetType]().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, ex.Message)
-      Throw New Exception(ex.Message)
-    End Try
-
-    Return freeData
-  End Function
-
-  Private Function GetSelectManufacturerQuery(selectedOption As String) As String
-    Dim sql As String = String.Empty
-    sql &= " SELECT Manufacturer_Name "
-    sql &= " FROM MST_Manufacturer "
-    sql &= " WHERE Manufacturer_Code = '" & selectedOption & "'"
-    Call WriteExecuteLog([GetType]().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, sql)
-    Return sql
-  End Function
-
   Private Sub Form_ResultDetail_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
     Select Case e.KeyCode
       Case Keys.F5
@@ -848,45 +467,4 @@ Public Class Form_ResultDetail
         Me.Close()
     End Select
   End Sub
-
-  'Private Sub packingComboBox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles packingComboBox.SelectedIndexChanged
-  '    Dim selectedOption As Integer = CInt(packingComboBox.SelectedItem)
-  '    SetPackingUnit(selectedOption)
-  'End Sub
-
-  'Function SetPackingUnit(selectedOption As Integer)
-  '    Dim PackingData As DataTable = PackingUnit(selectedOption)
-
-  '    If PackingData.Rows.Count = 0 Then
-  '        MessageBox.Show("計量器マスタにデータが登録されていません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
-  '        Return String.Empty
-  '    Else
-  '        Dim packingUnit As String = PackingData.Rows(0)("UNIT_NUMBER").ToString()
-
-  '        packingUnitText.Text = packingUnit
-  '        Return packingUnit
-  '    End If
-  'End Function
-  'Private Function PackingUnit(selectedOption As Integer) As DataTable
-  '    Dim scaleData As New DataTable
-  '    Try
-  '        With tmpDb
-  '            SqlServer.GetResult(scaleData, GetSelectPackingUnit(selectedOption))
-  '        End With
-  '    Catch ex As Exception
-  '        Call ComWriteErrLog([GetType]().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, ex.Message)
-  '        Throw New Exception(ex.Message)
-  '    End Try
-
-  '    Return scaleData
-  'End Function
-
-  'Private Function GetSelectPackingUnit(selectedOption As Integer) As String
-  '    Dim sql As String = String.Empty
-  '    sql &= " SELECT PackingWeightUnit "
-  '    sql &= " FROM MST_Packing "
-  '    sql &= " ORDER BY UNIT_NUMBER"
-  '    Call WriteExecuteLog([GetType]().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, sql)
-  '    Return sql
-  'End Function
 End Class

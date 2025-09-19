@@ -243,9 +243,9 @@ Partial Class Form_Top
         Me.Label3.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.Location = New System.Drawing.Point(355, 53)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(95, 32)
+        Me.Label3.Size = New System.Drawing.Size(209, 32)
         Me.Label3.TabIndex = 2
-        Me.Label3.Text = "【重量】"
+        Me.Label3.Text = "【重量_碾茶農家】"
         '
         'Form_Top
         '
