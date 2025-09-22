@@ -22,21 +22,21 @@ Partial Class Form_OutPut
     'コード エディターを使って変更しないでください。
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.MonthlyReportOutputButton = New System.Windows.Forms.Button()
+        Me.PersonalExportButton = New System.Windows.Forms.Button()
         Me.TitleLabel = New System.Windows.Forms.Label()
         Me.CloseButton = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.SummaryExportButton = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
-        'MonthlyReportOutputButton
+        'PersonalExportButton
         '
-        Me.MonthlyReportOutputButton.Font = New System.Drawing.Font("Segoe UI", 18.0!)
-        Me.MonthlyReportOutputButton.Location = New System.Drawing.Point(12, 72)
-        Me.MonthlyReportOutputButton.Name = "MonthlyReportOutputButton"
-        Me.MonthlyReportOutputButton.Size = New System.Drawing.Size(407, 79)
-        Me.MonthlyReportOutputButton.TabIndex = 5
-        Me.MonthlyReportOutputButton.Text = "F1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "茶摘日報（個人別）"
-        Me.MonthlyReportOutputButton.UseVisualStyleBackColor = True
+        Me.PersonalExportButton.Font = New System.Drawing.Font("Segoe UI", 18.0!)
+        Me.PersonalExportButton.Location = New System.Drawing.Point(12, 72)
+        Me.PersonalExportButton.Name = "PersonalExportButton"
+        Me.PersonalExportButton.Size = New System.Drawing.Size(407, 79)
+        Me.PersonalExportButton.TabIndex = 5
+        Me.PersonalExportButton.Text = "F1" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "茶摘日報（個人別）"
+        Me.PersonalExportButton.UseVisualStyleBackColor = True
         '
         'TitleLabel
         '
@@ -59,25 +59,25 @@ Partial Class Form_OutPut
         Me.CloseButton.Text = "ESC" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "終了"
         Me.CloseButton.UseVisualStyleBackColor = True
         '
-        'Button1
+        'SummaryExportButton
         '
-        Me.Button1.Font = New System.Drawing.Font("Segoe UI", 18.0!)
-        Me.Button1.Location = New System.Drawing.Point(425, 72)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(407, 79)
-        Me.Button1.TabIndex = 17
-        Me.Button1.Text = "F2" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "茶摘報酬集計表"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.SummaryExportButton.Font = New System.Drawing.Font("Segoe UI", 18.0!)
+        Me.SummaryExportButton.Location = New System.Drawing.Point(425, 72)
+        Me.SummaryExportButton.Name = "SummaryExportButton"
+        Me.SummaryExportButton.Size = New System.Drawing.Size(407, 79)
+        Me.SummaryExportButton.TabIndex = 17
+        Me.SummaryExportButton.Text = "F2" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "茶摘報酬集計表"
+        Me.SummaryExportButton.UseVisualStyleBackColor = True
         '
         'Form_OutPut
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(845, 648)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.SummaryExportButton)
         Me.Controls.Add(Me.CloseButton)
         Me.Controls.Add(Me.TitleLabel)
-        Me.Controls.Add(Me.MonthlyReportOutputButton)
+        Me.Controls.Add(Me.PersonalExportButton)
         Me.Name = "Form_OutPut"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "累計データ管理"
@@ -85,8 +85,8 @@ Partial Class Form_OutPut
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents MonthlyReportOutputButton As Button
+    Friend WithEvents PersonalExportButton As Button
     Friend WithEvents TitleLabel As Label
     Friend WithEvents CloseButton As Button
-    Friend WithEvents Button1 As Button
+    Friend WithEvents SummaryExportButton As Button
 End Class

@@ -27,7 +27,7 @@ Partial Class Form_MasterMente
         Me.CloseButton = New System.Windows.Forms.Button()
         Me.StaffMasterButton = New System.Windows.Forms.Button()
         Me.PeriodUnitPriceMasterButton = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.RainDayButton = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'ItemMasterButton
@@ -81,22 +81,22 @@ Partial Class Form_MasterMente
         Me.PeriodUnitPriceMasterButton.Text = "F3" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "期間別単価"
         Me.PeriodUnitPriceMasterButton.UseVisualStyleBackColor = True
         '
-        'Button1
+        'RainDayButton
         '
-        Me.Button1.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(426, 157)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(407, 79)
-        Me.Button1.TabIndex = 13
-        Me.Button1.Text = "F4" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "休日（雨休み）"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.RainDayButton.Font = New System.Drawing.Font("Segoe UI", 18.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RainDayButton.Location = New System.Drawing.Point(426, 157)
+        Me.RainDayButton.Name = "RainDayButton"
+        Me.RainDayButton.Size = New System.Drawing.Size(407, 79)
+        Me.RainDayButton.TabIndex = 13
+        Me.RainDayButton.Text = "F4" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "休日（雨休み）"
+        Me.RainDayButton.UseVisualStyleBackColor = True
         '
         'Form_MasterMente
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(845, 648)
-        Me.Controls.Add(Me.Button1)
+        Me.Controls.Add(Me.RainDayButton)
         Me.Controls.Add(Me.PeriodUnitPriceMasterButton)
         Me.Controls.Add(Me.StaffMasterButton)
         Me.Controls.Add(Me.CloseButton)
@@ -115,5 +115,5 @@ Partial Class Form_MasterMente
     Friend WithEvents CloseButton As Button
     Friend WithEvents StaffMasterButton As Button
     Friend WithEvents PeriodUnitPriceMasterButton As Button
-    Friend WithEvents Button1 As Button
+    Friend WithEvents RainDayButton As Button
 End Class

@@ -113,7 +113,6 @@ C:\IZDigiDX_W\exe\RealtimeConfirmation.exe.config
 C:\IZDigiDX_W\exe\RealtimeConfirmation.exe
 C:\IZDigiDX_W\exe\RealtimeConfirmation.pdb
 C:\IZDigiDX_W\exe\RealtimeConfirmation.xml
-D:\remote-repo\measurement_iz_Tenchafarmer\ソース\WindowsApp2\RealtimeConfirmation\obj\Debug\RealtimeConfirmation.vbproj.AssemblyReference.cache
 D:\remote-repo\measurement_iz_Tenchafarmer\ソース\WindowsApp2\RealtimeConfirmation\obj\Debug\RealtimeConfirmation.Form_RealtimeConfirmation.resources
 D:\remote-repo\measurement_iz_Tenchafarmer\ソース\WindowsApp2\RealtimeConfirmation\obj\Debug\RealtimeConfirmation.Resources.resources
 D:\remote-repo\measurement_iz_Tenchafarmer\ソース\WindowsApp2\RealtimeConfirmation\obj\Debug\RealtimeConfirmation.vbproj.GenerateResource.cache

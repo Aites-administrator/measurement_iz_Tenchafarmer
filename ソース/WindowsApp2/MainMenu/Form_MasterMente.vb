@@ -12,12 +12,17 @@ Public Class Form_MasterMente
   End Sub
 
   Private Sub StaffMasterButton_Click(sender As Object, e As EventArgs) Handles StaffMasterButton.Click
-    OpenForm("M03")
+    OpenForm("M02")
   End Sub
 
   Private Sub PeriodUnitPriceMasterButton_Click(sender As Object, e As EventArgs) Handles PeriodUnitPriceMasterButton.Click
-    OpenForm("M12")
+    OpenForm("M03")
   End Sub
+
+  Private Sub RainDayButton_Click(sender As Object, e As EventArgs) Handles RainDayButton.Click
+    OpenForm("M04")
+  End Sub
+
   Private Sub CloseButton_Click(sender As Object, e As EventArgs) Handles CloseButton.Click
     Close()
   End Sub
@@ -34,4 +39,5 @@ Public Class Form_MasterMente
         Me.Close()
     End Select
   End Sub
+
 End Class

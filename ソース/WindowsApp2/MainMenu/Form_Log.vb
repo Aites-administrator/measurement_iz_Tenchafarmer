@@ -6,12 +6,9 @@ Public Class Form_Log
     ' キーイベントをフォーム全体で受け取るようにする
     Me.KeyPreview = True
   End Sub
-  Private Sub LogDisplayButton_Click(sender As Object, e As EventArgs)
-    OpenForm("OTH04")
-  End Sub
 
   Private Sub RealtimeConfirmation_Button_Click(sender As Object, e As EventArgs) Handles RealtimeConfirmation_Button.Click
-    OpenForm("OTH05")
+    OpenForm("OTH01")
   End Sub
 
   Private Sub CloseButton_Click(sender As Object, e As EventArgs) Handles CloseButton.Click

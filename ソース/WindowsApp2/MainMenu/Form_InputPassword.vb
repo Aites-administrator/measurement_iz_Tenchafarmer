@@ -11,7 +11,7 @@ Public Class Form_InputPassword
   Private Sub PW_TextBox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles PW_TextBox.KeyPress
     If e.KeyChar = ChrW(Keys.Enter) Then
       If Password = PW_TextBox.Text Then
-        OpenForm("OTH07")
+        OpenForm("OTH02")
         Close()
       Else
         MessageBox.Show("パスワードに誤りがあります。" & vbCrLf & "正しいパスワードを確認してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
@@ -23,7 +23,7 @@ Public Class Form_InputPassword
 
   Private Sub EnterButton_Click(sender As Object, e As EventArgs) Handles EnterButton.Click
     If Password = PW_TextBox.Text Then
-      OpenForm("OTH07")
+      OpenForm("OTH02")
       Close()
     Else
       MessageBox.Show("パスワードに誤りがあります。" & vbCrLf & "正しいパスワードを確認してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)

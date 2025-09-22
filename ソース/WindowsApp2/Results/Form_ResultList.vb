@@ -493,8 +493,6 @@ Public Class Form_ResultList
     Dim wkToItemCode As String = String.Empty
     Dim wkFromStaffCode As String = String.Empty
     Dim wkToStaffCode As String = String.Empty
-    'Dim wkFromManufacturerCode As String
-    'Dim wkToManufacturerCode As String
 
     ' ComboBoxのテキストから特定の部分を抽出し、条件変数に格納
     ' FromItemCode の範囲を設定
