@@ -52,7 +52,6 @@ Public Class Form_ItemDetail
   Private Sub CloseButton_Click(sender As Object, e As EventArgs) Handles CloseButton.Click
     Me.Dispose()
   End Sub
-
   Private Sub OkButton_Click(sender As Object, e As EventArgs) Handles OkButton.Click
     Select Case InputMode
       Case 1

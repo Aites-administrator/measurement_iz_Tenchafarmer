@@ -121,3 +121,4 @@ D:\remote-repo\measurement_iz_Tenchafarmer\ソース\WindowsApp2\RealtimeConfirm
 D:\remote-repo\measurement_iz_Tenchafarmer\ソース\WindowsApp2\RealtimeConfirmation\obj\Debug\RealtimeConfirmation.exe
 D:\remote-repo\measurement_iz_Tenchafarmer\ソース\WindowsApp2\RealtimeConfirmation\obj\Debug\RealtimeConfirmation.xml
 D:\remote-repo\measurement_iz_Tenchafarmer\ソース\WindowsApp2\RealtimeConfirmation\obj\Debug\RealtimeConfirmation.pdb
+D:\remote-repo\measurement_iz_Tenchafarmer\ソース\WindowsApp2\RealtimeConfirmation\obj\Debug\RealtimeConfirmation.vbproj.AssemblyReference.cache

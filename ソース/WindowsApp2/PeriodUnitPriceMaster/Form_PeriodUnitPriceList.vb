@@ -39,8 +39,14 @@ Public Class Form_PeriodUnitPriceList
         Else
           Dim StartDateTxt As DateTime = tmpDt.Rows(0)("START_DATE")
           StartDateText.Text = StartDateTxt.ToString("yyyy年 M月 d日")
+
+          'StartDateLabel.Text = tmpDt.Rows(0)("START_DAY_OF_WEEK")
+
           Dim EndDateTxt As DateTime = tmpDt.Rows(0)("END_DATE")
           EndDateText.Text = EndDateTxt.ToString("yyyy年 M月 d日")
+
+          'EndDateLabel.Text = tmpDt.Rows(0)("END_DAY_OF_WEEK")
+
           Dim PeriodUnitPriceTxt As Integer = tmpDt.Rows(0)("PERIOD_UNIT_PRICE")
           PeriodRateText.Text = PeriodUnitPriceTxt
           Dim RegularUnitPriceTxt As Integer = tmpDt.Rows(0)("REGULAR_UNIT_PRICE")
@@ -62,11 +68,12 @@ Public Class Form_PeriodUnitPriceList
 
     sql &= " SELECT"
     sql &= "     START_DATE,"
+    sql &= "     LEFT(DATENAME(WEEKDAY, START_DATE), 1) AS START_DAY_OF_WEEK,"
     sql &= "     END_DATE,"
+    sql &= "     LEFT(DATENAME(WEEKDAY, END_DATE), 1) AS END_DAY_OF_WEEK,"
     sql &= "     PERIOD_UNIT_PRICE,"
     sql &= "     REGULAR_UNIT_PRICE"
-    sql &= " FROM"
-    sql &= "     MST_PeriodUnitPrice"
+    sql &= " FROM MST_PeriodUnitPrice"
 
     Call WriteExecuteLog([GetType]().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, sql)
     Return sql
@@ -98,8 +105,6 @@ Public Class Form_PeriodUnitPriceList
                                         CInt(RegularUnitPriceText.Text))
     End With
   End Sub
-
-
 
   Private Sub DeleteButton_Click(sender As Object, e As EventArgs) Handles DeleteButton.Click
     DeletePeriodUnitPriceMaster

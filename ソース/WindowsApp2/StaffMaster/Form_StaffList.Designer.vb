@@ -31,6 +31,7 @@ Partial Class Form_StaffList
         Me.DeleteButton = New System.Windows.Forms.Button()
         Me.UpdateButton = New System.Windows.Forms.Button()
         Me.CreateButton = New System.Windows.Forms.Button()
+        Me.OutputButton = New System.Windows.Forms.Button()
         CType(Me.StaffDetail, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -121,11 +122,22 @@ Partial Class Form_StaffList
         Me.CreateButton.Text = "F5" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "新規"
         Me.CreateButton.UseVisualStyleBackColor = True
         '
+        'OutputButton
+        '
+        Me.OutputButton.Font = New System.Drawing.Font("Segoe UI", 9.75!)
+        Me.OutputButton.Location = New System.Drawing.Point(688, 218)
+        Me.OutputButton.Name = "OutputButton"
+        Me.OutputButton.Size = New System.Drawing.Size(123, 50)
+        Me.OutputButton.TabIndex = 12
+        Me.OutputButton.Text = "F8" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "印刷"
+        Me.OutputButton.UseVisualStyleBackColor = True
+        '
         'Form_StaffList
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(829, 421)
+        Me.Controls.Add(Me.OutputButton)
         Me.Controls.Add(Me.TitleLabel)
         Me.Controls.Add(Me.StaffDetail)
         Me.Controls.Add(Me.CloseButton)
@@ -147,4 +159,5 @@ Partial Class Form_StaffList
     Friend WithEvents DeleteButton As Button
     Friend WithEvents UpdateButton As Button
     Friend WithEvents CreateButton As Button
+    Friend WithEvents OutputButton As Button
 End Class

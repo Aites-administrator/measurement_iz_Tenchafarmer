@@ -23,8 +23,8 @@ Partial Class Form_PeriodUnitPriceDetail
   <System.Diagnostics.DebuggerStepThrough()> _
   Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.EndDateText = New System.Windows.Forms.DateTimePicker()
-        Me.StartDateText = New System.Windows.Forms.DateTimePicker()
+        Me.EndDateTimePicker = New System.Windows.Forms.DateTimePicker()
+        Me.StartDateTimePicker = New System.Windows.Forms.DateTimePicker()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.RegularUnitPriceText = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -40,8 +40,8 @@ Partial Class Form_PeriodUnitPriceDetail
         '
         'GroupBox1
         '
-        Me.GroupBox1.Controls.Add(Me.EndDateText)
-        Me.GroupBox1.Controls.Add(Me.StartDateText)
+        Me.GroupBox1.Controls.Add(Me.EndDateTimePicker)
+        Me.GroupBox1.Controls.Add(Me.StartDateTimePicker)
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.RegularUnitPriceText)
         Me.GroupBox1.Controls.Add(Me.Label2)
@@ -51,31 +51,31 @@ Partial Class Form_PeriodUnitPriceDetail
         Me.GroupBox1.Controls.Add(Me.CodeLabel)
         Me.GroupBox1.Location = New System.Drawing.Point(17, 42)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(494, 289)
+        Me.GroupBox1.Size = New System.Drawing.Size(646, 289)
         Me.GroupBox1.TabIndex = 5
         Me.GroupBox1.TabStop = False
         '
-        'EndDateText
+        'EndDateTimePicker
         '
-        Me.EndDateText.Font = New System.Drawing.Font("Segoe UI", 15.75!)
-        Me.EndDateText.Location = New System.Drawing.Point(235, 57)
-        Me.EndDateText.Name = "EndDateText"
-        Me.EndDateText.Size = New System.Drawing.Size(177, 35)
-        Me.EndDateText.TabIndex = 10
+        Me.EndDateTimePicker.Font = New System.Drawing.Font("Segoe UI", 15.75!)
+        Me.EndDateTimePicker.Location = New System.Drawing.Point(304, 58)
+        Me.EndDateTimePicker.Name = "EndDateTimePicker"
+        Me.EndDateTimePicker.Size = New System.Drawing.Size(251, 35)
+        Me.EndDateTimePicker.TabIndex = 10
         '
-        'StartDateText
+        'StartDateTimePicker
         '
-        Me.StartDateText.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.StartDateText.Location = New System.Drawing.Point(11, 57)
-        Me.StartDateText.Name = "StartDateText"
-        Me.StartDateText.Size = New System.Drawing.Size(177, 35)
-        Me.StartDateText.TabIndex = 9
+        Me.StartDateTimePicker.Font = New System.Drawing.Font("Segoe UI", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.StartDateTimePicker.Location = New System.Drawing.Point(11, 57)
+        Me.StartDateTimePicker.Name = "StartDateTimePicker"
+        Me.StartDateTimePicker.Size = New System.Drawing.Size(251, 35)
+        Me.StartDateTimePicker.TabIndex = 9
         '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Segoe UI", 15.75!)
-        Me.Label3.Location = New System.Drawing.Point(194, 62)
+        Me.Label3.Location = New System.Drawing.Point(268, 62)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(35, 30)
         Me.Label3.TabIndex = 8
@@ -85,9 +85,9 @@ Partial Class Form_PeriodUnitPriceDetail
         '
         Me.RegularUnitPriceText.Font = New System.Drawing.Font("Segoe UI", 14.25!)
         Me.RegularUnitPriceText.Location = New System.Drawing.Point(11, 243)
-        Me.RegularUnitPriceText.MaxLength = 48
+        Me.RegularUnitPriceText.MaxLength = 4
         Me.RegularUnitPriceText.Name = "RegularUnitPriceText"
-        Me.RegularUnitPriceText.Size = New System.Drawing.Size(177, 33)
+        Me.RegularUnitPriceText.Size = New System.Drawing.Size(139, 33)
         Me.RegularUnitPriceText.TabIndex = 7
         '
         'Label2
@@ -104,7 +104,7 @@ Partial Class Form_PeriodUnitPriceDetail
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Segoe UI", 15.75!)
-        Me.Label1.Location = New System.Drawing.Point(230, 23)
+        Me.Label1.Location = New System.Drawing.Point(299, 23)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(79, 30)
         Me.Label1.TabIndex = 5
@@ -113,17 +113,17 @@ Partial Class Form_PeriodUnitPriceDetail
         'PeriodRateText
         '
         Me.PeriodRateText.Font = New System.Drawing.Font("Segoe UI", 14.25!)
-        Me.PeriodRateText.Location = New System.Drawing.Point(11, 128)
-        Me.PeriodRateText.MaxLength = 48
+        Me.PeriodRateText.Location = New System.Drawing.Point(11, 133)
+        Me.PeriodRateText.MaxLength = 4
         Me.PeriodRateText.Name = "PeriodRateText"
-        Me.PeriodRateText.Size = New System.Drawing.Size(177, 33)
+        Me.PeriodRateText.Size = New System.Drawing.Size(139, 33)
         Me.PeriodRateText.TabIndex = 3
         '
         'NameLabel
         '
         Me.NameLabel.AutoSize = True
         Me.NameLabel.Font = New System.Drawing.Font("Segoe UI", 15.75!)
-        Me.NameLabel.Location = New System.Drawing.Point(6, 95)
+        Me.NameLabel.Location = New System.Drawing.Point(6, 100)
         Me.NameLabel.Name = "NameLabel"
         Me.NameLabel.Size = New System.Drawing.Size(101, 30)
         Me.NameLabel.TabIndex = 2
@@ -142,7 +142,7 @@ Partial Class Form_PeriodUnitPriceDetail
         'CloseButton
         '
         Me.CloseButton.Font = New System.Drawing.Font("Segoe UI", 9.75!)
-        Me.CloseButton.Location = New System.Drawing.Point(450, 344)
+        Me.CloseButton.Location = New System.Drawing.Point(540, 344)
         Me.CloseButton.Name = "CloseButton"
         Me.CloseButton.Size = New System.Drawing.Size(123, 50)
         Me.CloseButton.TabIndex = 7
@@ -152,7 +152,7 @@ Partial Class Form_PeriodUnitPriceDetail
         'OkButton
         '
         Me.OkButton.Font = New System.Drawing.Font("Segoe UI", 9.75!)
-        Me.OkButton.Location = New System.Drawing.Point(321, 344)
+        Me.OkButton.Location = New System.Drawing.Point(411, 344)
         Me.OkButton.Name = "OkButton"
         Me.OkButton.Size = New System.Drawing.Size(123, 50)
         Me.OkButton.TabIndex = 6
@@ -173,7 +173,7 @@ Partial Class Form_PeriodUnitPriceDetail
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(585, 406)
+        Me.ClientSize = New System.Drawing.Size(675, 406)
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.CloseButton)
         Me.Controls.Add(Me.OkButton)
@@ -199,6 +199,6 @@ Partial Class Form_PeriodUnitPriceDetail
     Friend WithEvents RegularUnitPriceText As TextBox
     Friend WithEvents Label2 As Label
     Friend WithEvents Label3 As Label
-    Friend WithEvents EndDateText As DateTimePicker
-    Friend WithEvents StartDateText As DateTimePicker
+    Friend WithEvents EndDateTimePicker As DateTimePicker
+    Friend WithEvents StartDateTimePicker As DateTimePicker
 End Class

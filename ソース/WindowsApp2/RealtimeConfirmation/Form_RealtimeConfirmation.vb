@@ -378,9 +378,9 @@ Public Class Form_RealtimeConfirmation
             dr("create_date") = DateTime.Now.ToString("yyyy-MM-dd")
             dr("update_date") = DateTime.Now.ToString("yyyy-MM-dd")
 
-            ' 重複チェック
+            ' 重複のデータはスキップする
             If DuplicateCheck(dr(0), dr(1), dr(2)) Then
-              DuplicateCount += 1
+              'DuplicateCount += 1
               Continue While
             End If
 
@@ -406,34 +406,48 @@ Public Class Form_RealtimeConfirmation
           End With
         Next
 
+        '' 処理結果メッセージ
+        'If InsertCount > 0 Then
+        '  If DuplicateCount > 0 Then
+        '    MessageBox.Show(
+        '    machineNumber & "：" & InsertCount & "件 取り込み完了しました。" & vbCrLf &
+        '    "既に登録されている実績データが" & DuplicateCount & "件存在します。",
+        '    "確認", MessageBoxButtons.OK, MessageBoxIcon.Information
+        ')
+        '  Else
+        '    MessageBox.Show(
+        '    machineNumber & "：" & InsertCount & "件 取り込み完了しました。",
+        '    "完了", MessageBoxButtons.OK, MessageBoxIcon.Information
+        ')
+        '  End If
+        'Else
+        '  If DuplicateCount > 0 Then
+        '    MessageBox.Show(
+        '    machineNumber & "：取り込み失敗しました。" & vbCrLf &
+        '    "既に登録されている実績データが" & DuplicateCount & "件存在します。",
+        '    "確認", MessageBoxButtons.OK, MessageBoxIcon.Error
+        ')
+        '  Else
+        '    MessageBox.Show(
+        '    machineNumber & "：取り込みに失敗しました。データがありません。",
+        '    "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error
+        ')
+        '  End If
+        'End If
+
         ' 処理結果メッセージ
         If InsertCount > 0 Then
-          If DuplicateCount > 0 Then
-            MessageBox.Show(
-            machineNumber & "：" & InsertCount & "件 取り込み完了しました。" & vbCrLf &
-            "既に登録されている実績データが" & DuplicateCount & "件存在します。",
-            "確認", MessageBoxButtons.OK, MessageBoxIcon.Information
-        )
-          Else
-            MessageBox.Show(
-            machineNumber & "：" & InsertCount & "件 取り込み完了しました。",
-            "完了", MessageBoxButtons.OK, MessageBoxIcon.Information
-        )
-          End If
+          MessageBox.Show(
+        machineNumber & "：" & InsertCount & "件 取り込み完了しました。",
+        "完了", MessageBoxButtons.OK, MessageBoxIcon.Information
+    )
         Else
-          If DuplicateCount > 0 Then
-            MessageBox.Show(
-            machineNumber & "：取り込み失敗しました。" & vbCrLf &
-            "既に登録されている実績データが" & DuplicateCount & "件存在します。",
-            "確認", MessageBoxButtons.OK, MessageBoxIcon.Error
-        )
-          Else
-            MessageBox.Show(
-            machineNumber & "：取り込みに失敗しました。データがありません。",
-            "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error
-        )
-          End If
+          MessageBox.Show(
+        machineNumber & "：取り込みに失敗しました。データがありません。",
+        "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error
+    )
         End If
+
 
         ' ----------------------------------------------------
         ' 取り込みが完了した CSVファイルをバックアップ用に

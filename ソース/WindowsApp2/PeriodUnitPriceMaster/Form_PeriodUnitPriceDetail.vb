@@ -26,10 +26,21 @@ Public Class Form_PeriodUnitPriceDetail
     Me.KeyPreview = True
     FormBorderStyle = FormBorderStyle.FixedSingle
     SetInitialProperty()
+
+    With StartDateTimePicker
+      .Format = DateTimePickerFormat.Custom
+      .CustomFormat = "yyyy年 MM月dd日 (ddd)" ' 曜日付き
+    End With
+
+    With EndDateTimePicker
+      .Format = DateTimePickerFormat.Custom
+      .CustomFormat = "yyyy年 MM月dd日 (ddd)" ' 曜日付き
+    End With
+
   End Sub
   Private Sub SetInitialProperty()
-    StartDateText.Text = StartDateTextValue
-    EndDateText.Text = EndDateTextValue
+    StartDateTimePicker.Text = StartDateTextValue
+    EndDateTimePicker.Text = EndDateTextValue
     PeriodRateText.Text = PeriodRateTextValue
     RegularUnitPriceText.Text = RegularUnitPriceTextValue
   End Sub
@@ -94,9 +105,9 @@ Public Class Form_PeriodUnitPriceDetail
     End If
 
     ' ② 開始日 <= 終了日 チェック
-    If StartDateText.Value > EndDateText.Value Then
+    If StartDateTimePicker.Value > EndDateTimePicker.Value Then
       errorMessages.Add("開始日は終了日以前の日付を指定してください。")
-      If focusControl Is Nothing Then focusControl = StartDateText
+      If focusControl Is Nothing Then focusControl = StartDateTimePicker
     End If
 
     ' エラーがある場合
@@ -116,8 +127,8 @@ Public Class Form_PeriodUnitPriceDetail
 
   Private Function GetDeleteInsertSql() As String
     Dim sql As New System.Text.StringBuilder()
-    Dim StartDate As DateTime = StartDateText.Text
-    Dim EndDate As DateTime = EndDateText.Text
+    Dim StartDate As DateTime = StartDateTimePicker.Text
+    Dim EndDate As DateTime = EndDateTimePicker.Text
     Dim PeriodRate As Integer = Integer.Parse(PeriodRateText.Text)
     Dim RegularUnitPrice As Integer = Integer.Parse(RegularUnitPriceText.Text)
     Dim tmpdate As DateTime = CDate(ComGetProcTime())
