@@ -54,7 +54,7 @@ Public Class Form_ResultList
     ResultDetail.AllowUserToAddRows = False
 
     ' DataGridViewの列数を設定
-    ResultDetail.ColumnCount = 50
+    ResultDetail.ColumnCount = 49
 
     ResultDetail.Columns(0).HeaderText = "連番"
     ResultDetail.Columns(1).HeaderText = "日付"
@@ -89,23 +89,22 @@ Public Class Form_ResultList
     ResultDetail.Columns(30).HeaderText = "担当者ｺｰﾄﾞ"
     ResultDetail.Columns(31).HeaderText = "担当者名"
     ResultDetail.Columns(32).HeaderText = "ﾛｯﾄ1"
-    ResultDetail.Columns(33).HeaderText = "ﾛｯﾄ2"
-    ResultDetail.Columns(34).HeaderText = "区分"
-    ResultDetail.Columns(35).HeaderText = "重量"
-    ResultDetail.Columns(36).HeaderText = "単位"
-    ResultDetail.Columns(37).HeaderText = "グロス単位"
-    ResultDetail.Columns(38).HeaderText = "グロス重量単位"
-    ResultDetail.Columns(39).HeaderText = "商品温度"
-    ResultDetail.Columns(40).HeaderText = "商品温度単位"
-    ResultDetail.Columns(41).HeaderText = "加工日"
-    ResultDetail.Columns(42).HeaderText = "加工時刻"
-    ResultDetail.Columns(43).HeaderText = "有効日"
-    ResultDetail.Columns(44).HeaderText = "有効時刻"
-    ResultDetail.Columns(45).HeaderText = "作業指示№"
-    ResultDetail.Columns(46).HeaderText = "明細№"
-    ResultDetail.Columns(47).HeaderText = "指示数"
-    ResultDetail.Columns(48).HeaderText = "実績数"
-    ResultDetail.Columns(49).HeaderText = "作業指示名称"
+    ResultDetail.Columns(33).HeaderText = "区分"
+    ResultDetail.Columns(34).HeaderText = "重量"
+    ResultDetail.Columns(35).HeaderText = "単位"
+    ResultDetail.Columns(36).HeaderText = "グロス単位"
+    ResultDetail.Columns(37).HeaderText = "グロス重量単位"
+    ResultDetail.Columns(38).HeaderText = "商品温度"
+    ResultDetail.Columns(39).HeaderText = "商品温度単位"
+    ResultDetail.Columns(40).HeaderText = "加工日"
+    ResultDetail.Columns(41).HeaderText = "加工時刻"
+    ResultDetail.Columns(42).HeaderText = "有効日"
+    ResultDetail.Columns(43).HeaderText = "有効時刻"
+    ResultDetail.Columns(44).HeaderText = "作業指示№"
+    ResultDetail.Columns(45).HeaderText = "明細№"
+    ResultDetail.Columns(46).HeaderText = "指示数"
+    ResultDetail.Columns(47).HeaderText = "実績数"
+    ResultDetail.Columns(48).HeaderText = "作業指示名称"
 
     ResultDetail.Columns(5).Visible = False
     ResultDetail.Columns(7).Visible = False
@@ -131,7 +130,7 @@ Public Class Form_ResultList
     ResultDetail.Columns(27).Visible = False
     ResultDetail.Columns(28).Visible = False
     ResultDetail.Columns(29).Visible = False
-    ResultDetail.Columns(34).Visible = False
+    ResultDetail.Columns(36).Visible = False
     ResultDetail.Columns(37).Visible = False
     ResultDetail.Columns(38).Visible = False
     ResultDetail.Columns(39).Visible = False
@@ -144,10 +143,9 @@ Public Class Form_ResultList
     ResultDetail.Columns(46).Visible = False
     ResultDetail.Columns(47).Visible = False
     ResultDetail.Columns(48).Visible = False
-    ResultDetail.Columns(49).Visible = False
 
     ' ヘッダーとセルの内容を中央寄せに設定
-    For i As Integer = 0 To 49
+    For i As Integer = 0 To 48
       ResultDetail.Columns(i).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
       ResultDetail.Columns(i).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
     Next
@@ -228,39 +226,6 @@ Public Class Form_ResultList
       Throw New Exception(ex.Message)
     End Try
   End Sub
-  'Private Sub SetManufacturerCodeComboBox()
-  '  Try
-  '    ' 製造者マスタからデータを取得
-  '    Dim ManufacturerCodeData As DataTable = GetDataManufacturerCode()
-
-  '    ' 製造者マスタからデータが取得できなかった場合
-  '    If ManufacturerCodeData.Rows.Count = 0 Then
-  '      ' エラーメッセージを表示して終了
-  '      MessageBox.Show("製造者マスタにデータが登録されていません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
-  '    Else
-  '      ' FromManuCode_ComboBox のアイテムをクリア
-  '      FromManuCode_ComboBox.Items.Clear()
-  '      ' ToManuCode_ComboBox のアイテムをクリア
-  '      ToManuCode_ComboBox.Items.Clear()
-
-  '      ' 空の項目を両方のComboBoxに追加
-  '      FromManuCode_ComboBox.Items.Add("")
-  '      ToManuCode_ComboBox.Items.Add("")
-
-  '      ' 製造者コードデータをループして、それぞれのComboBoxに追加
-  '      For Each row As DataRow In ManufacturerCodeData.Rows
-  '        Dim ManufacturerCode As String = row(0).ToString()
-  '        FromManuCode_ComboBox.Items.Add(ManufacturerCode)
-  '        ToManuCode_ComboBox.Items.Add(ManufacturerCode)
-  '      Next
-  '    End If
-  '  Catch ex As Exception
-  '    ' エラーログを書き込んで例外をスロー
-  '    ComWriteErrLog(Me.GetType().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, ex.Message)
-  '    Throw New Exception(ex.Message)
-  '  End Try
-  'End Sub
-
   Private Sub SetStaffNumberComboBox()
     Try
       ' 担当者マスタからデータを取得
@@ -317,29 +282,6 @@ Public Class Form_ResultList
     End Try
   End Function
 
-  'Private Function GetDataManufacturerCode() As DataTable
-  '  ' データベース接続用の一時的なオブジェクトを作成
-  '  Dim tmpDb As New ClsSqlServer
-
-  '  ' データを格納するための一時的なデータテーブルを作成
-  '  Dim tmpDt As New DataTable
-
-  '  Try
-  '    ' SQLクエリを実行して、製造者マスタからデータをデータテーブルに取得
-  '    SqlServer.GetResult(tmpDt, GetSelectManufacturerMaster)
-
-  '    ' 取得したデータテーブルを返す
-  '    Return tmpDt
-  '  Catch ex As Exception
-  '    ' エラーログを書き込んで例外をスロー
-  '    ComWriteErrLog(Me.GetType().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, ex.Message)
-  '    Throw New Exception(ex.Message)
-  '  Finally
-  '    ' 一時的なデータテーブルを解放
-  '    tmpDt.Dispose()
-  '  End Try
-  'End Function
-
   Private Function GetDataStaffNumber() As DataTable
     ' データベース接続用の一時的なオブジェクトを作成
     Dim tmpDb As New ClsSqlServer
@@ -374,17 +316,6 @@ Public Class Form_ResultList
     Return sql
   End Function
 
-  'Private Function GetSelectManufacturerMaster() As String
-  '  Dim sql As String = String.Empty
-
-  '  sql &= " SELECT CONVERT(VARCHAR, Manufacturer_Code) + ' ' + Manufacturer_Name"
-  '  sql &= " FROM MST_Manufacturer "
-  '  sql &= " ORDER BY Manufacturer_Code "
-
-  '  Call WriteExecuteLog(Me.GetType().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, sql)
-  '  Return sql
-  'End Function
-
   Private Function GetSelectStaffMaster() As String
     Dim sql As String = String.Empty
 
@@ -395,23 +326,6 @@ Public Class Form_ResultList
     Call WriteExecuteLog(Me.GetType().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, sql)
     Return sql
   End Function
-  'Private Sub ChangeComboBoxWidth()
-  '  AdjustComboBoxWidth(FromTenantCode_ComboBox)
-  '  AdjustComboBoxWidth(ToTenantCode_ComboBox)
-  '  AdjustComboBoxWidth(FromItemCode_ComboBox)
-  '  AdjustComboBoxWidth(ToItemCode_ComboBox)
-  'End Sub
-  'Private Sub AdjustComboBoxWidth(comboBox As ComboBox)
-  '  Dim maxSize As Integer = 0
-  '  For Each item As String In comboBox.Items
-  '    maxSize = Math.Max(maxSize, TextRenderer.MeasureText(item, comboBox.Font).Width)
-  '  Next
-  '  maxSize += 20
-
-  '  If comboBox.DropDownWidth < maxSize Then
-  '    comboBox.DropDownWidth = maxSize
-  '  End If
-  'End Sub
 
   Public Sub SelectResults()
     Dim tmpDb As New ClsSqlServer
@@ -559,9 +473,8 @@ Public Class Form_ResultList
     sql &= "     RIGHT('0000' + CAST(staff_number AS VARCHAR), 4) AS staff_number, "
     sql &= "     staff_name, "
     sql &= "     lot1, "
-    sql &= "     lot2, "
     sql &= "     category,   "
-    sql &= "     weight, "
+    sql &= "     CAST(weight As Decimal(12, 2)) As weight, "
     sql &= "     weight_unit, "
     sql &= "     gross_weight, "
     sql &= "     gross_weight_unit, "
@@ -649,8 +562,6 @@ Public Class Form_ResultList
     Dim toItemCode As String = ""
     Dim fromStaffCode As String
     Dim ToStaffCode As String = ""
-    'Dim fromManufacturerCode As String
-    'Dim toManufacturerCode As String = ""
 
     dtFrom = DateTime.Parse(DateTimeFrom.Text)
     dtTo = DateTime.Parse(DateTimeTo.Text)
@@ -679,17 +590,6 @@ Public Class Form_ResultList
       ToStaffCode = ToStaffCode_ComboBox.Text.Substring(0, StaffDigits)
     End If
 
-    'If FromManuCode_ComboBox.SelectedIndex = -1 Or FromManuCode_ComboBox.SelectedIndex = 0 Then
-    '  fromManufacturerCode = 1.ToString("D" & ManufacturerDigits)
-    'Else
-    '  fromManufacturerCode = FromManuCode_ComboBox.Text.Substring(0, ManufacturerDigits)
-    'End If
-
-    'If ToManuCode_ComboBox.SelectedIndex = -1 Or ToManuCode_ComboBox.SelectedIndex = 0 Then
-    '  toManufacturerCode = toManufacturerCode.PadLeft(ManufacturerDigits, "9"c)
-    'Else
-    '  toManufacturerCode = ToManuCode_ComboBox.Text.Substring(0, ManufacturerDigits)
-    'End If
     Dim CheckResult As Boolean = True
 
     '日付の相関チェック
@@ -710,11 +610,6 @@ Public Class Form_ResultList
       CheckResult = False
     End If
 
-    ''製造者の相関チェック
-    'If fromManufacturerCode > toManufacturerCode Then
-    '  MessageBox.Show("製造者コード(開始)は製造者コード(終了)より前のコードを指定してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
-    '  CheckResult = False
-    'End If
     Return CheckResult
   End Function
   Private Sub SetListData()
@@ -755,25 +650,24 @@ Public Class Form_ResultList
     Form_ResultDetail.staffNumberTxTValue = ResultDetail.Rows(i).Cells(30).Value
     Form_ResultDetail.staffNameTxTValue = ResultDetail.Rows(i).Cells(31).Value
     Form_ResultDetail.lot1TxTValue = ResultDetail.Rows(i).Cells(32).Value
-    Form_ResultDetail.lot2TxTValue = ResultDetail.Rows(i).Cells(33).Value
-    Form_ResultDetail.classificationTxTValue = ResultDetail.Rows(i).Cells(34).Value
+    Form_ResultDetail.classificationTxTValue = ResultDetail.Rows(i).Cells(33).Value
 
-    Form_ResultDetail.weightTxTValue = ResultDetail.Rows(i).Cells(35).Value
-    Form_ResultDetail.weightUnitTxTValue = ResultDetail.Rows(i).Cells(36).Value
-    Form_ResultDetail.grossWeightTxTValue = ResultDetail.Rows(i).Cells(37).Value
-    Form_ResultDetail.grossWeightUnitTxTValue = ResultDetail.Rows(i).Cells(38).Value
-    Form_ResultDetail.temperatureTxTValue = ResultDetail.Rows(i).Cells(39).Value
-    Form_ResultDetail.temperatureUnitTxTValue = ResultDetail.Rows(i).Cells(40).Value
+    Form_ResultDetail.weightTxTValue = ResultDetail.Rows(i).Cells(34).Value
+    Form_ResultDetail.weightUnitTxTValue = ResultDetail.Rows(i).Cells(35).Value
+    Form_ResultDetail.grossWeightTxTValue = ResultDetail.Rows(i).Cells(36).Value
+    Form_ResultDetail.grossWeightUnitTxTValue = ResultDetail.Rows(i).Cells(37).Value
+    Form_ResultDetail.temperatureTxTValue = ResultDetail.Rows(i).Cells(38).Value
+    Form_ResultDetail.temperatureUnitTxTValue = ResultDetail.Rows(i).Cells(39).Value
 
-    Form_ResultDetail.processingDateTxTValue = ResultDetail.Rows(i).Cells(41).Value
-    Form_ResultDetail.processingTimeTxTValue = ResultDetail.Rows(i).Cells(42).Value
-    Form_ResultDetail.effectiveDateTxTValue = ResultDetail.Rows(i).Cells(43).Value
-    Form_ResultDetail.effectiveTimeTxTValue = ResultDetail.Rows(i).Cells(44).Value
-    Form_ResultDetail.workOrderNumberTxTValue = ResultDetail.Rows(i).Cells(45).Value
-    Form_ResultDetail.detailNumberTxTValue = ResultDetail.Rows(i).Cells(46).Value
-    Form_ResultDetail.instructionQtyTxTValue = ResultDetail.Rows(i).Cells(47).Value
-    Form_ResultDetail.actualQtyTxTValue = ResultDetail.Rows(i).Cells(48).Value
-    Form_ResultDetail.workOrderNameTxTValue = ResultDetail.Rows(i).Cells(49).Value
+    Form_ResultDetail.processingDateTxTValue = ResultDetail.Rows(i).Cells(40).Value
+    Form_ResultDetail.processingTimeTxTValue = ResultDetail.Rows(i).Cells(41).Value
+    Form_ResultDetail.effectiveDateTxTValue = ResultDetail.Rows(i).Cells(42).Value
+    Form_ResultDetail.effectiveTimeTxTValue = ResultDetail.Rows(i).Cells(43).Value
+    Form_ResultDetail.workOrderNumberTxTValue = ResultDetail.Rows(i).Cells(44).Value
+    Form_ResultDetail.detailNumberTxTValue = ResultDetail.Rows(i).Cells(45).Value
+    Form_ResultDetail.instructionQtyTxTValue = ResultDetail.Rows(i).Cells(46).Value
+    Form_ResultDetail.actualQtyTxTValue = ResultDetail.Rows(i).Cells(47).Value
+    Form_ResultDetail.workOrderNameTxTValue = ResultDetail.Rows(i).Cells(48).Value
   End Sub
 
   Private Sub CsvExportButton_Click(sender As Object, e As EventArgs) Handles CsvExportButton.Click
@@ -791,7 +685,6 @@ Public Class Form_ResultList
     End Try
   End Sub
   Private Sub ExportToCSV(dgv As DataGridView, baseFileName As String, filePath As String)
-    ' タイムスタンプ付きファイル名作成（例：Results_20250606114654.csv）
     Dim timestamp As String = DateTime.Now.ToString("yyyyMMddHHmmss")
     Dim fullFileName As String = Path.Combine(filePath, baseFileName & "_" & timestamp & ".csv")
 

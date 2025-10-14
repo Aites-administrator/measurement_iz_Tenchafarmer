@@ -31,10 +31,12 @@ Public Class Form_MasterMente
     Select Case e.KeyCode
       Case Keys.F1
         ItemMasterButton.PerformClick()
-      Case Keys.F3
+      Case Keys.F2
         StaffMasterButton.PerformClick()
-      Case Keys.F12
+      Case Keys.F3
         PeriodUnitPriceMasterButton.PerformClick()
+      Case Keys.F4
+        RainDayButton.PerformClick()
       Case Keys.Escape
         Me.Close()
     End Select
