@@ -346,22 +346,9 @@ Public Class Form_RealtimeConfirmation
           "processing_date", "processing_time", "valid_date", "valid_time",
           "work_instruction_number", "detail_number", "instruction_quantity", "actual_quantity",
           "work_instruction_name", "product_temperature", "product_temperature_unit",
-          "create_date", "update_date"
+          "delete_flg", "create_date", "update_date"
       }
-        '  Dim columnNames() As String = {
-        '    "addition_date", "addition_time", "terminal_number", "call_code", "item_number",
-        '    "item_name", "packing", "packing_unit", "weight", "weight_unit",
-        '    "manufacturer_code", "manufacturer_name", "lot1", "lot2", "category",
-        '    "gross_weight", "gross_weight_unit", "packing1_weight", "packing1_weight_unit",
-        '    "packing2_weight", "packing2_weight_unit", "packing2_multiplier",
-        '    "packing1_number", "packing1_name", "packing2_number", "packing2_name",
-        '    "staff_number", "staff_name", "free1_number", "free1_name", "free2_number", "free2_name",
-        '    "free3_number", "free3_name", "free4_number", "free4_name", "free5_number", "free5_name",
-        '    "processing_date", "processing_time", "valid_date", "valid_time",
-        '    "work_instruction_number", "detail_number", "instruction_quantity", "actual_quantity",
-        '    "work_instruction_name", "product_temperature", "product_temperature_unit",
-        '    "create_date", "update_date"
-        '}
+
         ' データテーブルにカラム追加
         For Each columnName As String In columnNames
           dt.Columns.Add(New DataColumn(columnName, GetType(String)))
@@ -388,6 +375,7 @@ Public Class Form_RealtimeConfirmation
               dr(i) = csvRow(i)
             Next
 
+            dr("delete_flg") = "0"
             ' 実行時の時刻を追加
             dr("create_date") = DateTime.Now.ToString("yyyy-MM-dd")
             dr("update_date") = DateTime.Now.ToString("yyyy-MM-dd")

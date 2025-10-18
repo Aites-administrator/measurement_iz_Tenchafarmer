@@ -4,7 +4,6 @@ Imports Common.ClsFunction
 Imports Microsoft.Office.Interop
 Imports System.Runtime.InteropServices
 Public Class Form_ResultList
-  Private ReadOnly ItemDigits As Integer = ReadSettingIniFile("ITEM_DIGITS", "VALUE")
   Private ReadOnly StaffDigits As Integer = ReadSettingIniFile("STAFF_DIGITS", "VALUE")
   Private ReadOnly ResultCsvPath As String = ReadSettingIniFile("RESULT_CSV_PATH", "VALUE")
   Private ReadOnly tmpDb As New ClsSqlServer
@@ -22,10 +21,8 @@ Public Class Form_ResultList
     End Get
   End Property
   Private Sub ResultList_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-    ' フォームの最大化ボタンを無効にする
     MaximizeBox = False
 
-    ' アセンブリの最終更新日時を取得し、フォームのタイトルに表示するテキストを設定
     Dim updateTime As DateTime = System.IO.File.GetLastWriteTime(System.Reflection.Assembly.GetExecutingAssembly().Location)
     Text = "実績一覧" & " ( " & updateTime & " ) "
 
@@ -35,26 +32,19 @@ Public Class Form_ResultList
     Dim tmpDb As New ClsSqlServer
     Dim tmpDt As New DataTable
 
-    ' フォームのボーダースタイルを固定サイズに設定
     FormBorderStyle = FormBorderStyle.FixedSingle
 
-    ' 行ヘッダーを非表示にする
     ResultDetail.RowHeadersVisible = False
 
     Dim dtNow As DateTime = DateTime.Now
     DateTimeFrom.Text = New Date(dtNow.Year, dtNow.Month, 1)
     DateTimeTo.Text = New Date(dtNow.Year, dtNow.Month, 1).AddMonths(1).AddDays(-1)
 
-    ' コンボボックスの選択肢を設定する関数を呼び出し
-
-    SetItemCodeComboBox()
     SetStaffNumberComboBox()
 
-    ' ユーザーからのデータ追加を許可しない
     ResultDetail.AllowUserToAddRows = False
 
-    ' DataGridViewの列数を設定
-    ResultDetail.ColumnCount = 49
+    ResultDetail.ColumnCount = 50
 
     ResultDetail.Columns(0).HeaderText = "連番"
     ResultDetail.Columns(1).HeaderText = "日付"
@@ -105,8 +95,12 @@ Public Class Form_ResultList
     ResultDetail.Columns(46).HeaderText = "指示数"
     ResultDetail.Columns(47).HeaderText = "実績数"
     ResultDetail.Columns(48).HeaderText = "作業指示名称"
+    ResultDetail.Columns(49).HeaderText = "削除フラグ"
 
+    ResultDetail.Columns(3).Visible = False
+    ResultDetail.Columns(4).Visible = False
     ResultDetail.Columns(5).Visible = False
+    ResultDetail.Columns(6).Visible = False
     ResultDetail.Columns(7).Visible = False
     ResultDetail.Columns(8).Visible = False
     ResultDetail.Columns(9).Visible = False
@@ -130,6 +124,8 @@ Public Class Form_ResultList
     ResultDetail.Columns(27).Visible = False
     ResultDetail.Columns(28).Visible = False
     ResultDetail.Columns(29).Visible = False
+    ResultDetail.Columns(32).Visible = False
+    ResultDetail.Columns(33).Visible = False
     ResultDetail.Columns(36).Visible = False
     ResultDetail.Columns(37).Visible = False
     ResultDetail.Columns(38).Visible = False
@@ -143,9 +139,10 @@ Public Class Form_ResultList
     ResultDetail.Columns(46).Visible = False
     ResultDetail.Columns(47).Visible = False
     ResultDetail.Columns(48).Visible = False
+    ResultDetail.Columns(49).Visible = False
 
     ' ヘッダーとセルの内容を中央寄せに設定
-    For i As Integer = 0 To 48
+    For i As Integer = 0 To 49
       ResultDetail.Columns(i).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
       ResultDetail.Columns(i).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
     Next
@@ -164,9 +161,6 @@ Public Class Form_ResultList
       ResultDetail.Rows(0).Selected = True
     End If
 
-    ' コンボボックスの幅を調整する関数を呼び出し
-    'ChangeComboBoxWidth()
-
     CustomizeDataGridViewHeader() ' ヘッダーのデザイン変更
 
   End Sub
@@ -175,77 +169,36 @@ Public Class Form_ResultList
     With ResultDetail
       ' ヘッダーの背景色を変更
       .EnableHeadersVisualStyles = False ' デフォルトの Windows スタイルを無効化
+      .ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
+      .ColumnHeadersHeight = 40
       .ColumnHeadersDefaultCellStyle.BackColor = Color.LightGoldenrodYellow ' ヘッダーの背景色
       .ColumnHeadersDefaultCellStyle.ForeColor = Color.Black ' ヘッダーの文字色
-      .ColumnHeadersDefaultCellStyle.Font = New Font("Meiryo", 10, FontStyle.Bold) ' フォント変更
+      .ColumnHeadersDefaultCellStyle.Font = New Font("Meiryo", 16, FontStyle.Regular) ' フォント変更
       .ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter ' ヘッダー中央寄せ
+
+      .AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells)
     End With
-  End Sub
-  Private Sub CreateButton_Click(sender As Object, e As EventArgs) Handles CreateButton.Click
-    Form_ResultDetail.InputMode = 1
-    Form_ResultDetail.ShowDialog()
   End Sub
   Private Sub UpdateButton_Click(sender As Object, e As EventArgs) Handles UpdateButton.Click
     '詳細画面の項目値セット
     SetListData()
-    Form_ResultDetail.InputMode = 2
     Form_ResultDetail.ShowDialog()
   End Sub
 
-  Private Sub SetItemCodeComboBox()
-    Try
-      ' 計量マスタからデータを取得
-      Dim ItemData As DataTable = GetDataItemCode()
-
-      ' 計量マスタからデータが取得できなかった場合
-      If ItemData.Rows.Count = 0 Then
-        ' エラーメッセージを表示して終了
-        MessageBox.Show("商品マスタにデータが登録されていません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
-      Else
-
-        ' FromItemCode_ComboBox のアイテムをクリア
-        FromItemCode_ComboBox.Items.Clear()
-        ' ToItemCode_ComboBox のアイテムをクリア
-        ToItemCode_ComboBox.Items.Clear()
-
-        ' 空の項目を両方のComboBoxに追加
-        FromItemCode_ComboBox.Items.Add("")
-        ToItemCode_ComboBox.Items.Add("")
-
-        ' ゴミコードデータをループして、それぞれのComboBoxに追加
-        For Each row As DataRow In ItemData.Rows
-          Dim ItemCode As String = row(0).ToString()
-          FromItemCode_ComboBox.Items.Add(ItemCode)
-          ToItemCode_ComboBox.Items.Add(ItemCode)
-        Next
-
-      End If
-    Catch ex As Exception
-      ' エラーログを書き込んで例外をスロー
-      ComWriteErrLog(Me.GetType().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, ex.Message)
-      Throw New Exception(ex.Message)
-    End Try
-  End Sub
   Private Sub SetStaffNumberComboBox()
     Try
-      ' 担当者マスタからデータを取得
       Dim StaffNumberData As DataTable = GetDataStaffNumber()
 
-      ' 担当者マスタからデータが取得できなかった場合
       If StaffNumberData.Rows.Count = 0 Then
         ' エラーメッセージを表示して終了
         MessageBox.Show("担当者マスタにデータが登録されていません。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
       Else
-        'FromStaffCode_ComboBox のアイテムをクリア
         FromStaffCode_ComboBox.Items.Clear()
-        ' ToStaffCode_ComboBox のアイテムをクリア
         ToStaffCode_ComboBox.Items.Clear()
 
-        ' 空の項目を両方のComboBoxに追加
         FromStaffCode_ComboBox.Items.Add("")
         ToStaffCode_ComboBox.Items.Add("")
 
-        ' 担当者ｺｰﾄﾞデータをループして、それぞれのComboBoxに追加
         For Each row As DataRow In StaffNumberData.Rows
           Dim StaffNumber As String = row(0).ToString()
           FromStaffCode_ComboBox.Items.Add(StaffNumber)
@@ -253,67 +206,24 @@ Public Class Form_ResultList
         Next
       End If
     Catch ex As Exception
-      ' エラーログを書き込んで例外をスロー
       ComWriteErrLog(Me.GetType().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, ex.Message)
       Throw New Exception(ex.Message)
     End Try
   End Sub
 
-  Private Function GetDataItemCode() As DataTable
-    ' データベース接続用の一時的なオブジェクトを作成
-    Dim tmpDb As New ClsSqlServer
-
-    ' データを格納するための一時的なデータテーブルを作成
-    Dim tmpDt As New DataTable
-
-    Try
-      ' SQLクエリを実行して、計量マスタからデータをデータテーブルに取得
-      SqlServer.GetResult(tmpDt, GetSelectItemMaster)
-
-      ' 取得したデータテーブルを返す
-      Return tmpDt
-    Catch ex As Exception
-      ' エラーログを書き込んで例外をスロー
-      ComWriteErrLog(Me.GetType().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, ex.Message)
-      Throw New Exception(ex.Message)
-    Finally
-      ' 一時的なデータテーブルを解放
-      tmpDt.Dispose()
-    End Try
-  End Function
-
   Private Function GetDataStaffNumber() As DataTable
-    ' データベース接続用の一時的なオブジェクトを作成
     Dim tmpDb As New ClsSqlServer
-
-    ' データを格納するための一時的なデータテーブルを作成
     Dim tmpDt As New DataTable
 
     Try
-      ' SQLクエリを実行して、担当者マスタからデータをデータテーブルに取得
       SqlServer.GetResult(tmpDt, GetSelectStaffMaster)
-
-      ' 取得したデータテーブルを返す
       Return tmpDt
     Catch ex As Exception
-      ' エラーログを書き込んで例外をスロー
       ComWriteErrLog(Me.GetType().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, ex.Message)
       Throw New Exception(ex.Message)
     Finally
-      ' 一時的なデータテーブルを解放
       tmpDt.Dispose()
     End Try
-  End Function
-
-  Private Function GetSelectItemMaster() As String
-    Dim sql As String = String.Empty
-
-    sql &= " SELECT CONVERT(VARCHAR, call_code) + ' ' + item_name"
-    sql &= " FROM MST_Item "
-    sql &= " ORDER BY call_code "
-
-    Call WriteExecuteLog(Me.GetType().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, sql)
-    Return sql
   End Function
 
   Private Function GetSelectStaffMaster() As String
@@ -341,12 +251,18 @@ Public Class Form_ResultList
           WriteDetail(tmpDt, ResultDetail)
           UpdateButton.Enabled = True
           DeleteButton.Enabled = True
+
+          '行色付
+          If ResultDetail.Rows.Count > 0 Then
+            For i As Integer = 0 To ResultDetail.Rows.Count - 1
+              If ResultDetail.Rows(i).Cells(49).Value = True Then
+                ResultDetail.Rows(i).DefaultCellStyle.BackColor = Color.DarkGray
+              End If
+            Next
+          End If
         End If
 
-        ResultDetail.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells)
-        ResultDetail.ColumnHeadersDefaultCellStyle.WrapMode = DataGridViewTriState.False
-        ResultDetail.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing
-        ResultDetail.ColumnHeadersHeight = 20
+        CustomizeDataGridViewHeader
 
       End With
     Catch ex As Exception
@@ -356,6 +272,23 @@ Public Class Form_ResultList
     Finally
       tmpDt.Dispose()
     End Try
+  End Sub
+
+  Private Sub DisPlayDeleteRow(RowDisplayFlg As Boolean)
+    '表示・非表示
+    If ResultDetail.Rows.Count > 0 Then
+      For i As Integer = 0 To ResultDetail.Rows.Count - 1
+        If RowDisplayFlg Then
+          If ResultDetail.Rows(i).Cells(49).Value = "0" Then
+            ResultDetail.Rows(i).Visible = True
+          End If
+        Else
+          If ResultDetail.Rows(i).Cells(49).Value = "1" Then
+            ResultDetail.Rows(i).Visible = False
+          End If
+        End If
+      Next
+    End If
   End Sub
 
   Private Sub AddTotalRow()
@@ -408,22 +341,6 @@ Public Class Form_ResultList
     Dim wkFromStaffCode As String = String.Empty
     Dim wkToStaffCode As String = String.Empty
 
-    ' ComboBoxのテキストから特定の部分を抽出し、条件変数に格納
-    ' FromItemCode の範囲を設定
-    If FromItemCode_ComboBox.Text <> "" Then
-      wkFromItemCode = FromItemCode_ComboBox.Text.Substring(0, FromItemCode_ComboBox.Text.IndexOf(" "))
-    ElseIf FromItemCode_ComboBox.Items.Count > 0 Then
-      wkFromItemCode = FromItemCode_ComboBox.Items(0).ToString().Split(" "c)(0)
-    Else
-      wkFromItemCode = 0
-    End If
-
-    If ToItemCode_ComboBox.Text <> "" Then
-      wkToItemCode = ToItemCode_ComboBox.Text.Substring(0, ToItemCode_ComboBox.Text.IndexOf(" "))
-    ElseIf ToItemCode_ComboBox.Items.Count > 0 Then
-      wkToItemCode = ToItemCode_ComboBox.Items(ToItemCode_ComboBox.Items.Count - 1).ToString().Split(" "c)(0)
-    End If
-
     ' StaffCode の範囲を設定
     If FromStaffCode_ComboBox.Text <> "" Then
       wkFromStaffCode = FromStaffCode_ComboBox.Text.Substring(0, FromStaffCode_ComboBox.Text.IndexOf(" "))
@@ -474,7 +391,7 @@ Public Class Form_ResultList
     sql &= "     staff_name, "
     sql &= "     lot1, "
     sql &= "     category,   "
-    sql &= "     CAST(weight As Decimal(12, 2)) As weight, "
+    sql &= "     FLOOR(CAST(weight AS FLOAT) * 10) / 10.0 AS weight, "
     sql &= "     weight_unit, "
     sql &= "     gross_weight, "
     sql &= "     gross_weight_unit, "
@@ -488,12 +405,12 @@ Public Class Form_ResultList
     sql &= "     detail_number, "
     sql &= "     instruction_quantity, "
     sql &= "     actual_quantity, "
-    sql &= "     work_instruction_name "
+    sql &= "     work_instruction_name, "
+    sql &= "     delete_flg "
     sql &= " FROM "
     sql &= "     TRN_Results "
     sql &= " WHERE "
     sql &= "    addition_date BETWEEN '" & wkFromDate & "' AND '" & wkToDate & "' "
-    sql &= "    AND CAST(call_code AS INT)   BETWEEN  '" & wkFromItemCode & "' AND '" & wkToItemCode & "'"
     sql &= "    AND CAST(staff_number AS INT) BETWEEN '" & wkFromStaffCode & "' AND '" & wkToStaffCode & "'"
     sql &= " ORDER BY "
     sql &= "     CAST(addition_date AS DATETIME) DESC, "
@@ -535,7 +452,7 @@ Public Class Form_ResultList
       If DateTypeCheck(inputText) Then
         DateTimeFrom.Text = DateTxt2DateTxt(inputText)
       Else
-        MessageBox.Show("正しい日付形式を入力してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        MessageBox.Show("正しい日付形式を入力してください。（ YYYY/MM/DD：西暦 ）", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
         DateTimeFrom.SelectAll()
         e.Cancel = True
       End If
@@ -558,25 +475,11 @@ Public Class Form_ResultList
   Private Function CheckValue() As Boolean
     Dim dtFrom As DateTime
     Dim dtTo As DateTime
-    Dim fromItemCode As String
-    Dim toItemCode As String = ""
     Dim fromStaffCode As String
     Dim ToStaffCode As String = ""
 
     dtFrom = DateTime.Parse(DateTimeFrom.Text)
     dtTo = DateTime.Parse(DateTimeTo.Text)
-
-    If FromItemCode_ComboBox.SelectedIndex = -1 Or FromItemCode_ComboBox.SelectedIndex = 0 Then
-      fromItemCode = 1.ToString("D" & ItemDigits)
-    Else
-      fromItemCode = FromItemCode_ComboBox.Text.Substring(0, ItemDigits)
-    End If
-
-    If ToItemCode_ComboBox.SelectedIndex = -1 Or ToItemCode_ComboBox.SelectedIndex = 0 Then
-      toItemCode = toItemCode.PadLeft(ItemDigits, "9"c)
-    Else
-      toItemCode = ToItemCode_ComboBox.Text.Substring(0, ItemDigits)
-    End If
 
     If FromStaffCode_ComboBox.SelectedIndex = -1 Or FromStaffCode_ComboBox.SelectedIndex = 0 Then
       fromStaffCode = 1.ToString("D" & StaffDigits)
@@ -595,12 +498,6 @@ Public Class Form_ResultList
     '日付の相関チェック
     If dtFrom > dtTo Then
       MessageBox.Show("開始日は終了日より前の日付を指定してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
-      CheckResult = False
-    End If
-
-    '商品の相関チェック
-    If fromItemCode > toItemCode Then
-      MessageBox.Show("商品コード(開始)は商品コード(終了)より前のコードを指定してください。", "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error)
       CheckResult = False
     End If
 
@@ -729,52 +626,61 @@ Public Class Form_ResultList
     End Try
   End Sub
   Private Sub DeleteButton_Click(sender As Object, e As EventArgs) Handles DeleteButton.Click
-    Dim message As String = "削除します。" & vbCrLf & "よろしいでしょうか。"
-
-    Dim resultS As DialogResult = MessageBox.Show(message, "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-
-    If resultS = DialogResult.Yes Then
-      DeleteTRNResults()
-    Else
-      MessageBox.Show("処理がキャンセルされました。", "キャンセル", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-      Exit Sub
-    End If
+    DeleteResults()
   End Sub
-  Private Sub DeleteTRNResults()
+
+  Private Sub DeleteResults()
     Dim sql As String = String.Empty
+    Dim DeleteRowFlg As Boolean = ResultDetail.CurrentRow.Cells(49).Value
+    Dim confirmation As String
+    Dim msg1 As String
+    Dim msg2 As String
     With tmpDb
       Try
-        sql = GetDeleteSql()
-        If .Execute(sql) <> 0 Then
-          .TrnCommit()
-          MessageBox.Show("削除処理完了しました。", "完了", MessageBoxButtons.OK, MessageBoxIcon.Information)
-          ' 一覧画面データ更新
-          SelectResults()
+        If DeleteRowFlg Then
+          sql = GetDeleteSql("0")
+          msg1 = "削除取消します。" & vbCrLf & "よろしいでしょうか。"
+          msg2 = "削除取消処理完了しました。"
+        Else
+          sql = GetDeleteSql("1")
+          msg1 = "削除します。" & vbCrLf & "よろしいでしょうか。"
+          msg2 = "削除処理完了しました。"
+        End If
+
+        confirmation = MessageBox.Show(msg1, "確認", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        If confirmation = DialogResult.Yes Then
+          ' SQL実行結果が1件か？
+          If .Execute(sql) = 1 Then
+            ' 更新成功
+            .TrnCommit()
+            MessageBox.Show(msg2, "完了", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            SelectResults()
+          End If
+        Else
+          Exit Sub
         End If
       Catch ex As Exception
         Call ComWriteErrLog([GetType]().Name,
-                                      System.Reflection.MethodBase.GetCurrentMethod().Name, ex.Message)
-        Throw New Exception(ex.Message)
+                      System.Reflection.MethodBase.GetCurrentMethod().Name, ex.Message)
       End Try
     End With
   End Sub
-  Private Function GetDeleteSql() As String
+
+  Private Function GetDeleteSql(DeleteFlg As String) As String
     Dim sql As String = String.Empty
+    Dim tmpdate As DateTime = CDate(ComGetProcTime())
 
     Dim wkAdditionDate As String = ResultDetail.Rows(ResultDetail.CurrentRow.Index).Cells(1).Value
     Dim wkAdditionTime As String = ResultDetail.Rows(ResultDetail.CurrentRow.Index).Cells(2).Value
     Dim wkTerminalNumber As String = ResultDetail.Rows(ResultDetail.CurrentRow.Index).Cells(3).Value
-    Dim wkCallCode As String = ResultDetail.Rows(ResultDetail.CurrentRow.Index).Cells(4).Value
 
-    sql &= " DELETE "
-    sql &= " FROM "
-    sql &= "     TRN_Results "
+    sql &= " UPDATE TRN_Results"
+    sql &= "    SET DELETE_FLG = '" & DeleteFlg & "'"
+    sql &= "       ,UPDATE_DATE = '" & tmpdate & "'"
     sql &= " WHERE "
     sql &= "     addition_date = '" & wkAdditionDate & "'"
     sql &= " AND addition_time = '" & wkAdditionTime & "'"
     sql &= " AND terminal_number = '" & wkTerminalNumber & "'"
-    sql &= " AND call_code = '" & wkCallCode & "'"
-
     Call WriteExecuteLog([GetType]().Name, System.Reflection.MethodBase.GetCurrentMethod().Name, sql)
     Return sql
   End Function
@@ -782,7 +688,6 @@ Public Class Form_ResultList
   Private Sub ResultDetail_CellDoubleClick(sender As Object, e As DataGridViewCellEventArgs) Handles ResultDetail.CellDoubleClick
     '詳細画面の項目値セット
     SetListData()
-    Form_ResultDetail.InputMode = 2
     Form_ResultDetail.ShowDialog()
   End Sub
 
@@ -801,13 +706,6 @@ Public Class Form_ResultList
       Case Keys.Escape
         Me.Close()
     End Select
-  End Sub
-  Private Sub FromItemCode_ComboBox_DropDown(sender As Object, e As EventArgs) Handles FromItemCode_ComboBox.DropDown
-    AdjustDropDownWidth(FromItemCode_ComboBox)
-  End Sub
-
-  Private Sub ToItemCode_ComboBox_DropDown(sender As Object, e As EventArgs) Handles ToItemCode_ComboBox.DropDown
-    AdjustDropDownWidth(ToItemCode_ComboBox)
   End Sub
 
   Private Sub FromStaffCode_ComboBox_DropDown(sender As Object, e As EventArgs) Handles FromStaffCode_ComboBox.DropDown
@@ -834,6 +732,14 @@ Public Class Form_ResultList
       cb.DropDownWidth = maxItemWidth + 10
     Else
       cb.DropDownWidth = cb.Width
+    End If
+  End Sub
+
+  Private Sub ResultDetail_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles ResultDetail.CellClick
+    If ResultDetail.CurrentRow.Cells(49).Value Then
+      DeleteButton.Text = "F7" & vbCrLf & "削除取消"
+    Else
+      DeleteButton.Text = "F7" & vbCrLf & "削除"
     End If
   End Sub
 

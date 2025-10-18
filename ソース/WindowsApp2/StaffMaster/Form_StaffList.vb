@@ -2,6 +2,9 @@
 Imports Common.ClsFunction
 Imports ClosedXML.Excel
 Public Class Form_StaffList
+
+  Private ReadOnly ResultCsvPath As String = ReadSettingIniFile("RESULT_CSV_PATH", "VALUE")
+
   Private CheckboxExistFlg As New Boolean
   ReadOnly tmpDb As New ClsSqlServer
   ReadOnly tmpDt As New DataTable
@@ -36,7 +39,7 @@ Public Class Form_StaffList
 
     ' カラムの幅指定
     StaffDetail.Columns(0).Width = 150
-    StaffDetail.Columns(1).Width = 200
+    StaffDetail.Columns(1).Width = 190
 
     'カラムの整列設定
     For i As Integer = 0 To 1
@@ -223,23 +226,22 @@ Public Class Form_StaffList
   Private Sub OutputButton_Click(sender As Object, e As EventArgs) Handles OutputButton.Click
     Dim sql As String = GetStaffMasterSelectSql()
     Dim OutputDt As New DataTable
-
     Dim currentYear As Integer = DateTime.Now.Year
-    Dim filePath As String = "C:\Temp\担当者一覧_" & currentYear & ".xlsx"
+    Dim filePath As String = ResultCsvPath & "担当者一覧__" & currentYear & ".xlsx"
 
     Try
       SqlServer.GetResult(OutputDt, sql)
 
       Dim wb As New XLWorkbook()
       Dim totalRecords As Integer = OutputDt.Rows.Count
-      Dim pageSize As Integer = 70 ' 1シートに70件（35 × 左右）
+      Dim pageSize As Integer = 20
       Dim pageCount As Integer = Math.Ceiling(totalRecords / pageSize)
 
       For pageIndex As Integer = 0 To pageCount - 1
         Dim ws = wb.Worksheets.Add("担当者一覧（" & (pageIndex + 1).ToString() & "）")
         Dim startRow As Integer = pageIndex * pageSize
         Dim endRow As Integer = Math.Min(startRow + pageSize - 1, totalRecords - 1)
-        CreateSplitSheet(ws, OutputDt, startRow, endRow)
+        CreateSplitSheet(ws, OutputDt, startRow, endRow, pageIndex)
       Next
 
       wb.Worksheet(1).SetTabActive()
@@ -249,136 +251,133 @@ Public Class Form_StaffList
 
     Catch ex As Exception
       MessageBox.Show("担当者一覧の出力エラー:" & ex.Message, "エラー",
-                      MessageBoxButtons.OK, MessageBoxIcon.[Error])
+                        MessageBoxButtons.OK, MessageBoxIcon.[Error])
       Call ComWriteErrLog(Me.GetType().Name, Reflection.MethodBase.GetCurrentMethod().Name, ex.Message)
     Finally
       OutputDt.Dispose()
     End Try
   End Sub
 
-  Private Sub CreateSplitSheet(ws As IXLWorksheet, dt As DataTable, startIndex As Integer, endIndex As Integer)
-    ' === タイトル（1行目）===
-    Dim titleRange = ws.Range(1, 1, 1, 9)
+  Private Sub CreateSplitSheet(ws As IXLWorksheet, dt As DataTable, startIndex As Integer, endIndex As Integer, pageIndex As Integer)
+
+    Dim titleText As String = "担当者リスト" & GetCircledNumber(pageIndex + 1)
+    Dim titleRange = ws.Range(1, 1, 1, 6)
     titleRange.Merge()
     With titleRange
-      .Value = "担当者リスト（※ あ・い・う・え・お順）"
+      .Value = titleText
       .Style.Font.Bold = True
-      .Style.Font.FontSize = 28
+      .Style.Font.FontSize = 72
       .Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center
       .Style.Alignment.Vertical = XLAlignmentVerticalValues.Center
     End With
-    ws.Row(1).Height = 35
+    ws.Row(1).Height = 150
 
-    ' === ヘッダー（3行目）===
     ws.Cell(3, 1).Value = "コード"
     ws.Cell(3, 2).Value = "名前"
     ws.Range(3, 3, 3, 4).Merge().Value = "バーコード"
+    ws.Range(3, 5, 3, 6).Merge().Value = "バーコード"
 
-    ws.Cell(3, 6).Value = "コード"
-    ws.Cell(3, 7).Value = "名前"
-    ws.Range(3, 8, 3, 9).Merge().Value = "バーコード"
-
-    With ws.Range(3, 1, 3, 9).Style
+    With ws.Range(3, 1, 3, 6).Style
       .Font.Bold = True
-      .Font.FontSize = 26
+      .Font.FontSize = 28
       .Fill.BackgroundColor = XLColor.LightSteelBlue
       .Alignment.Horizontal = XLAlignmentHorizontalValues.Center
       .Alignment.Vertical = XLAlignmentVerticalValues.Center
       .Border.OutsideBorder = XLBorderStyleValues.Thin
       .Border.InsideBorder = XLBorderStyleValues.Thin
     End With
-    ws.Row(3).Height = 45
+    ws.Row(3).Height = 60
 
-    ' === データ（4行～38行）===
-    Dim dataPerSide As Integer = 35
-    Dim rowOffsetL As Integer = 4
-    Dim rowOffsetR As Integer = 4
-
+    Dim rowOffset As Integer = 4
     For i As Integer = startIndex To endIndex
-      Dim localIndex = i - startIndex
+      Dim row = rowOffset + (i - startIndex)
       Dim code = dt.Rows(i)("担当者コード").ToString()
       Dim name = dt.Rows(i)("担当者名").ToString()
       Dim barcode = "*" & code & "*"
 
-      If localIndex < dataPerSide Then
-        ' 左側
-        Dim row = rowOffsetL + localIndex
-        ws.Cell(row, 1).Value = code
-        ws.Cell(row, 2).Value = name
+      With ws.Cell(row, 1)
+        .Value = code
+        .Style.Font.FontSize = 48
+        .Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center
+        .Style.Alignment.Vertical = XLAlignmentVerticalValues.Center
+      End With
 
-        Dim barcodeCol = If(localIndex Mod 2 = 0, 3, 4)
-        ws.Cell(row, barcodeCol).Value = barcode
-        ws.Cell(row, 1).Style.Font.FontSize = 24
-        ws.Cell(row, 2).Style.Font.FontSize = 24
+      With ws.Cell(row, 2)
+        .Value = name
+        .Style.Font.FontSize = 70
+        .Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center
+        .Style.Alignment.Vertical = XLAlignmentVerticalValues.Center
+      End With
 
-        With ws.Cell(row, barcodeCol).Style
-          .Font.FontName = "Code39"
-          .Font.FontSize = 72
-          .Alignment.Horizontal = XLAlignmentHorizontalValues.Center
-          .Alignment.Vertical = XLAlignmentVerticalValues.Center
-        End With
+      Dim isOdd As Boolean = ((row - rowOffset) Mod 2 = 0)
+      ws.Range(row, 3, row, 4).Merge()
+      ws.Range(row, 5, row, 6).Merge()
 
-        ' 行の共通設定
-        ws.Row(row).Height = 75
-        With ws.Range(row, 1, row, 4).Style
-          .Alignment.Horizontal = XLAlignmentHorizontalValues.Center
-          .Alignment.Vertical = XLAlignmentVerticalValues.Center
-          .Border.OutsideBorder = XLBorderStyleValues.Thin
-          .Border.InsideBorder = XLBorderStyleValues.Thin
+      If isOdd Then
 
-          If (i - startIndex) Mod 2 = 1 Then
-            .Fill.BackgroundColor = XLColor.AliceBlue
-          End If
+        With ws.Cell(row, 3)
+          .Value = barcode
+          .Style.Font.FontName = "Code39"
+          .Style.Font.FontSize = 100
+          .Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center
+          .Style.Alignment.Vertical = XLAlignmentVerticalValues.Center
         End With
       Else
-        ' 右側
-        Dim row = rowOffsetR + (localIndex - dataPerSide)
-        ws.Cell(row, 6).Value = code
-        ws.Cell(row, 7).Value = name
 
-        Dim barcodeCol = If(localIndex Mod 2 = 0, 8, 9)
-        ws.Cell(row, barcodeCol).Value = barcode
-        ws.Cell(row, 6).Style.Font.FontSize = 24
-        ws.Cell(row, 7).Style.Font.FontSize = 24
-
-        With ws.Cell(row, barcodeCol).Style
-          .Font.FontName = "Code39"
-          .Font.FontSize = 72
-          .Alignment.Horizontal = XLAlignmentHorizontalValues.Center
-          .Alignment.Vertical = XLAlignmentVerticalValues.Center
-        End With
-
-        ws.Row(row).Height = 75
-        With ws.Range(row, 6, row, 9).Style
-          .Alignment.Horizontal = XLAlignmentHorizontalValues.Center
-          .Alignment.Vertical = XLAlignmentVerticalValues.Center
-          .Border.OutsideBorder = XLBorderStyleValues.Thin
-          .Border.InsideBorder = XLBorderStyleValues.Thin
-
-          If (i - startIndex) Mod 2 = 1 Then
-            .Fill.BackgroundColor = XLColor.AliceBlue
-          End If
+        With ws.Cell(row, 5)
+          .Value = barcode
+          .Style.Font.FontName = "Code39"
+          .Style.Font.FontSize = 100
+          .Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center
+          .Style.Alignment.Vertical = XLAlignmentVerticalValues.Center
         End With
       End If
+
+      ws.Row(row).Height = 200
+
+      If (i - startIndex) Mod 2 = 1 Then
+        ws.Range(row, 1, row, 6).Style.Fill.BackgroundColor = XLColor.AliceBlue
+      End If
+
+      With ws.Range(row, 1, row, 6).Style.Border
+        .OutsideBorder = XLBorderStyleValues.Thin
+        .InsideBorder = XLBorderStyleValues.Thin
+      End With
     Next
 
-    ' === 列幅調整 ===
-    Dim widths = New Dictionary(Of Integer, Double) From {
-        {1, 20}, {2, 40}, {3, 45}, {4, 45}, {5, 5},
-        {6, 20}, {7, 40}, {8, 45}, {9, 45}
-    }
-    For Each kvp In widths
-      ws.Column(kvp.Key).Width = kvp.Value
-    Next
+    ws.Column(1).Width = 30
+    ws.Column(2).Width = 100
+    ws.Column(3).Width = 70
+    ws.Column(4).Width = 70
+    ws.Column(5).Width = 70
+    ws.Column(6).Width = 70
 
-    ' === 印刷設定 ===
     With ws.PageSetup
       .PagesWide = 1
       .PagesTall = 1
       .CenterHorizontally = True
       .PageOrientation = XLPageOrientation.Portrait
+      .PaperSize = XLPaperSize.A4Paper
+    End With
+
+    With ws.PageSetup.Margins
+      .Top = 0.39
+      .Bottom = 0.39
+      .Left = 0.39
+      .Right = 0.39
+      .Header = 0.39
+      .Footer = 0.39
     End With
   End Sub
+
+  Private Function GetCircledNumber(n As Integer) As String
+    If n >= 1 AndAlso n <= 20 Then
+      Return ChrW(&H2460 + (n - 1))
+    Else
+      Return n.ToString()
+    End If
+  End Function
+
 
   Private Function EncloseDoubleQuotes(field As String) As String
     Return "" & field & ""
@@ -392,7 +391,7 @@ Public Class Form_StaffList
     sql &= " FROM"
     sql &= "     MST_Staff"
     sql &= " ORDER BY"
-    sql &= "     Staff_Name COLLATE Japanese_XJIS_100_CI_AS"
+    sql &= "     Staff_Number Asc"
 
     Call WriteExecuteLog("Form_GarbageTypeList", System.Reflection.MethodBase.GetCurrentMethod().Name, sql)
     Return sql

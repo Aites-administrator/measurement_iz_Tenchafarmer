@@ -4,8 +4,6 @@ Public Class Form_InputPassword
   Private Sub Form_InputPassword_Load(sender As Object, e As EventArgs) Handles MyBase.Load
     MaximizeBox = False
     ClearTextBox(Me)
-
-    PW_TextBox.Text = "495344"
     FormBorderStyle = FormBorderStyle.FixedSingle
   End Sub
   Private Sub PW_TextBox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles PW_TextBox.KeyPress
