@@ -146,6 +146,7 @@ Public Class Form_ResultList
       ResultDetail.Columns(i).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
       ResultDetail.Columns(i).HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter
     Next
+    ResultDetail.Columns(34).DefaultCellStyle.Format = "0.0"
 
     ' マルチ選択を無効にする
     ResultDetail.MultiSelect = False
@@ -391,7 +392,7 @@ Public Class Form_ResultList
     sql &= "     staff_name, "
     sql &= "     lot1, "
     sql &= "     category,   "
-    sql &= "     FLOOR(CAST(weight AS FLOAT) * 10) / 10.0 AS weight, "
+    sql &= "     CAST(FLOOR(CAST(weight AS DECIMAL(18,3)) * 10) / 10.0 AS DECIMAL(18,1)) AS weight, "
     sql &= "     weight_unit, "
     sql &= "     gross_weight, "
     sql &= "     gross_weight_unit, "

@@ -98,17 +98,17 @@ Public Class Form_RealtimeConfirmation
 
     ScaleNumber = "01"
 
-        ' ファイルの保存処理
-        CreateItemMasterCSV(ScaleNumber, UsbPath)
-        CreateStaffMasterCSV(ScaleNumber, UsbPath)
+    ' ファイルの保存処理
+    CreateItemMasterCSV(ScaleNumber, UsbPath)
+    CreateStaffMasterCSV(ScaleNumber, UsbPath)
 
     ' エクスプローラーでフォルダを開く
     Try
-        Process.Start("explorer.exe", UsbPath)
-        MessageBox.Show("データを保存しました。" & vbCrLf & "保存先: " & UsbPath, "完了", MessageBoxButtons.OK, MessageBoxIcon.Information)
-      Catch ex As Exception
-        MessageBox.Show("フォルダを開く際にエラーが発生しました。")
-      End Try
+      Process.Start("explorer.exe", UsbPath)
+      MessageBox.Show("データを保存しました。" & vbCrLf & "保存先: " & UsbPath, "完了", MessageBoxButtons.OK, MessageBoxIcon.Information)
+    Catch ex As Exception
+      MessageBox.Show("フォルダを開く際にエラーが発生しました。")
+    End Try
 
 
   End Sub
@@ -138,6 +138,11 @@ Public Class Form_RealtimeConfirmation
       ' freeX_numberの場合は先頭に000を付与
       If columnNames(i) Like "free?_number" Then
         value = "000" & value
+      End If
+
+      ' 重量(weight)の場合は小数点第二位切り捨て
+      If columnNames(i) Like "weight" Then
+        value = RoundDown2Twodecimalplaces(value)
       End If
 
       sql &= columnNames(i)
@@ -500,4 +505,23 @@ Public Class Form_RealtimeConfirmation
         Me.Close()
     End Select
   End Sub
+
+  ''' <summary>
+  ''' 小数点第二位以下切り捨て（小数点第一位までを有効とする）
+  ''' </summary>
+  ''' <param name="prmTargetText">対象の文字列</param>
+  ''' <returns>小数点第二位以下を切り捨てた文字列</returns>
+  Private Function RoundDown2Twodecimalplaces(prmTargetText As String) As String
+    Dim weight As Decimal
+
+    If Not Decimal.TryParse(prmTargetText, weight) Then
+      Return prmTargetText
+    End If
+
+    Dim roundedDown As Decimal = Math.Floor(weight * 10D) / 10D
+    Return roundedDown.ToString("0.0", System.Globalization.CultureInfo.InvariantCulture)
+  End Function
+
 End Class
+
+

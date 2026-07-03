@@ -174,9 +174,9 @@ Partial Class Form_Top
         'PictureBox1
         '
         Me.PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), System.Drawing.Image)
-        Me.PictureBox1.Location = New System.Drawing.Point(525, 114)
+        Me.PictureBox1.Location = New System.Drawing.Point(517, 194)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(392, 378)
+        Me.PictureBox1.Size = New System.Drawing.Size(400, 267)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.PictureBox1.TabIndex = 27
         Me.PictureBox1.TabStop = False
@@ -196,7 +196,7 @@ Partial Class Form_Top
         'PictureBox_Close
         '
         Me.PictureBox_Close.Image = CType(resources.GetObject("PictureBox_Close.Image"), System.Drawing.Image)
-        Me.PictureBox_Close.Location = New System.Drawing.Point(525, 513)
+        Me.PictureBox_Close.Location = New System.Drawing.Point(517, 513)
         Me.PictureBox_Close.Name = "PictureBox_Close"
         Me.PictureBox_Close.Size = New System.Drawing.Size(78, 70)
         Me.PictureBox_Close.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom

@@ -22,17 +22,17 @@ Common
   現在のスレッドの CurrentUICulture プロパティをオーバーライドします。
 </summary>
 </member>
-<member name="F:Common.ClsComDatabase.typProvider.sqlServer">
+<member name="F:Common.ClsComDatabase.TypProvider.sqlServer">
  <summary>
  SQL-Server
  </summary>
 </member>
-<member name="F:Common.ClsComDatabase.typProvider.Mdb">
+<member name="F:Common.ClsComDatabase.TypProvider.Mdb">
  <summary>
  Access(MDB)
  </summary>
 </member>
-<member name="F:Common.ClsComDatabase.typProvider.Accdb">
+<member name="F:Common.ClsComDatabase.TypProvider.Accdb">
  <summary>
  Access(Accdb)
  </summary>
@@ -49,20 +49,6 @@ Common
  </summary>
  <param name="sql">実行するSQL文</param>
  <returns></returns>
-</member>
-<member name="M:Common.ClsFunction.DateTxt2DateTxt(System.String)">
- <summary>
- スラッシュを含む文字列を日付形式の文字列に変換する
- </summary>
- <param name="prmTargetText">変換対象の文字列</param>
- <returns>yyyy/MM/dd 形式に変換された文字列</returns>
-</member>
-<member name="M:Common.ClsFunction.NumTxt2Date(System.String)">
- <summary>
- 数値文字列を日付文字列に変換する
- </summary>
- <param name="prmTargetText">変換対象の文字列</param>
- <returns>yyyy/MM/dd 形式に変換された文字列</returns>
 </member>
 <member name="M:Common.ClsFunction.GetIniString(System.String,System.String,System.String)">
  <summary>

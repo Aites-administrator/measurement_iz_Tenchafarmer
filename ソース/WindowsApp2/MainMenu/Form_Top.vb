@@ -163,4 +163,8 @@ Public Class Form_Top
       MessageBox.Show("バックアップはキャンセルされました。", "キャンセル", MessageBoxButtons.OK, MessageBoxIcon.Information)
     End If
   End Sub
+
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+
+    End Sub
 End Class

@@ -1,0 +1,7 @@
+D:\remote-repo\measurement_iz_Tenchafarmer\ソース\WindowsApp2\WorkerReport\obj\Debug\PersonalExport.vbproj.AssemblyReference.cache
+D:\remote-repo\measurement_iz_Tenchafarmer\ソース\WindowsApp2\WorkerReport\obj\Debug\WorkerReport.Resources.resources
+D:\remote-repo\measurement_iz_Tenchafarmer\ソース\WindowsApp2\WorkerReport\obj\Debug\PersonalExport.vbproj.GenerateResource.cache
+D:\remote-repo\measurement_iz_Tenchafarmer\ソース\WindowsApp2\WorkerReport\obj\Debug\PersonalExport.vbproj.CoreCompileInputs.cache
+D:\remote-repo\measurement_iz_Tenchafarmer\ソース\WindowsApp2\WorkerReport\obj\Debug\WorkerReport.exe
+D:\remote-repo\measurement_iz_Tenchafarmer\ソース\WindowsApp2\WorkerReport\obj\Debug\WorkerReport.xml
+D:\remote-repo\measurement_iz_Tenchafarmer\ソース\WindowsApp2\WorkerReport\obj\Debug\WorkerReport.pdb
